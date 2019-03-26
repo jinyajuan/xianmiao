@@ -1,16 +1,18 @@
 <template>
   <div>
     <home-header></home-header>
-    <router-link to="/list">11</router-link>
+    <home-swiper></home-swiper>
   </div>
 </template>
 
 <script>
 import HomeHeader from '@/pages/buyer/home/components/Header'
+import HomeSwiper from '@/pages/buyer/home/components/Swiper'
 export default {
   name: 'Home',
   components: {
-    HomeHeader
+    HomeHeader,
+    HomeSwiper
   }
 }
 </script>
