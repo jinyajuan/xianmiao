@@ -4,13 +4,13 @@
       <div class="recommond-title-left"></div>
       <div class="recommond-title-center">
         <p class="recommond-title-center-top">每日掌柜推荐</p>
-        <p class="recommond-title-center-bottom">————便宜又好货————</p>
+        <p class="recommond-title-center-bottom">————健康不容错过————</p>
       </div>
       <div class="recommond-title-right"></div>
     </div>
     <div class="recommond-content">
       <ul>
-        <li  class="item border-bottom" v-for="item of RecommondItemList" :key="item.id">
+        <li class="item border-bottom" v-for="item of RecommondItemList" :key="item.id">
           <img class="item-img" :src="item.imgUrl" alt="">
           <div class="item-info">
             <div class="item-desc">{{item.desc}}</div>
