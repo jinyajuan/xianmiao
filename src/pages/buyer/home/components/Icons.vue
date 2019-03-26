@@ -44,13 +44,13 @@ export default {
   .icons{
     width: 100%;
     height: 0;
-    padding-bottom: 20%;
+    padding-bottom: 25%;
     /*background-color: #55a532;*/
   }
   .icon{
     width: 20%;
     height: 0;
-    padding-bottom: 20%;
+    padding-bottom: 25%;
     float: left;
     /*background-color: red;*/
   }

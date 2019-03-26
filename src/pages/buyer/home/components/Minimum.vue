@@ -54,7 +54,7 @@ export default {
           desc: '壹农壹果 南非红心西柚 4个 单果250g-320g 葡萄柚 柚子水果 ',
           price: '￥34.00'
         }, {
-          id: '0005',
+          id: '0006',
           imgUrl: 'https://img10.360buyimg.com/n2/jfs/t27556/260/2108512160/465739/73f83982/5bf79780N414fe121.jpg',
           desc: '壹农壹果 南非红心西柚 4个 单果250g-320g 葡萄柚 柚子水果 ',
           price: '￥34.00'
@@ -79,10 +79,10 @@ export default {
   }
   .minimum-title-center{
     position: absolute;
-    top: .3rem;
-    bottom: .3rem;
-    left: 2rem;
-    right: 2rem;
+    top: .15rem;
+    bottom: .15rem;
+    left: 1.2rem;
+    right: 1.2rem;
     border-radius: .1rem;
     background-color: white;
   }

@@ -4,7 +4,7 @@
       <div class="recommond-title-left"></div>
       <div class="recommond-title-center">
         <p class="recommond-title-center-top">每日掌柜推荐</p>
-        <p class="recommond-title-center-bottom">————健康不容错过————</p>
+        <p class="recommond-title-center-bottom">——健康不容错过——</p>
       </div>
       <div class="recommond-title-right"></div>
     </div>
@@ -67,10 +67,10 @@ export default {
   }
   .recommond-title-center{
     position: absolute;
-    top: .3rem;
-    bottom: .3rem;
-    left: 2rem;
-    right: 2rem;
+    top: .15rem;
+    bottom: .15rem;
+    left:1.2rem;
+    right: 1.2rem;
     border-radius: .1rem;
     background-color: white;
   }

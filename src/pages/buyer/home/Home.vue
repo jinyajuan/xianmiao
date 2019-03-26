@@ -5,6 +5,7 @@
     <home-icons></home-icons>
     <home-recommond></home-recommond>
     <home-minimum></home-minimum>
+    <home-footer></home-footer>
   </div>
 </template>
 
@@ -13,7 +14,8 @@ import HomeHeader from '@/pages/buyer/home/components/Header'
 import HomeSwiper from '@/pages/buyer/home/components/Swiper'
 import HomeIcons from '@/pages/buyer/home/components/Icons'
 import HomeRecommond from '@/pages/buyer/home/components/Recommond'
-import HomeMinimum from '@/pages/buyer/home/components/minimum'
+import HomeMinimum from '@/pages/buyer/home/components/Minimum'
+import HomeFooter from '@/pages/buyer/home/components/Footer'
 export default {
   name: 'Home',
   components: {
@@ -21,7 +23,8 @@ export default {
     HomeSwiper,
     HomeIcons,
     HomeRecommond,
-    HomeMinimum
+    HomeMinimum,
+    HomeFooter
   }
 }
 </script>
