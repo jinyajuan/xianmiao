@@ -4,6 +4,7 @@ import Home from '@/pages/buyer/home/Home'
 import Goods from '@/pages/buyer/goods/Goods'
 import Me from '@/pages/buyer/me/Me'
 import Login from '@/pages/buyer/login/Login'
+import Reg from '@/pages/buyer/reg/Reg'
 
 Vue.use(Router)
 
@@ -25,6 +26,10 @@ export default new Router({
       path: '/login',
       name: 'Login',
       component: Login
+    }, {
+      path: '/reg',
+      name: 'Reg',
+      component: Reg
     }
   ]
 })

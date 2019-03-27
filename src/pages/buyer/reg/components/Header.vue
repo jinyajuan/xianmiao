@@ -1,13 +1,13 @@
 <template>
   <div class="header">
     <span class="iconfont header-icon">&#xe64e;</span>
-    <span class="header-title">登录</span>
+    <span class="header-title">注册</span>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'LoginHeader'
+  name: 'RegHeader'
 }
 </script>
 
