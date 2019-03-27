@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import ListHeader from '@/pages/buyer/list/components/Header'
+import ListHeader from '@/pages/buyer/goods/components/Header'
 export default {
   name: 'List',
   components: {
