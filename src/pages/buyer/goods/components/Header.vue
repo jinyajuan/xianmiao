@@ -14,6 +14,7 @@ export default {
 <style scoped>
   .header{
     position: fixed;
+    z-index: 99;
     left: 0;
     top: 0;
     right: 0;

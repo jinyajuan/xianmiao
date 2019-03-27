@@ -1,13 +1,21 @@
 <template>
-  <list-header></list-header>
+  <div>
+    <goods-header></goods-header>
+    <goods-list></goods-list>
+    <home-footer></home-footer>
+  </div>
 </template>
 
 <script>
-import ListHeader from '@/pages/buyer/goods/components/Header'
+import GoodsHeader from '@/pages/buyer/goods/components/Header'
+import GoodsList from '@/pages/buyer/goods/components/List'
+import HomeFooter from '@/pages/buyer/home/components/Footer'
 export default {
   name: 'List',
   components: {
-    ListHeader
+    GoodsHeader,
+    GoodsList,
+    HomeFooter
   }
 }
 </script>
