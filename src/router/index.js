@@ -6,6 +6,7 @@ import Me from '@/pages/buyer/me/Me'
 import Login from '@/pages/buyer/login/Login'
 import Reg from '@/pages/buyer/reg/Reg'
 import Detail from '@/pages/buyer/detail/Detail'
+import Cart from '@/pages/buyer/cart/Cart'
 
 Vue.use(Router)
 
@@ -35,6 +36,10 @@ export default new Router({
       path: '/detail',
       name: 'Detail',
       component: Detail
+    }, {
+      path: '/cart',
+      name: 'Cart',
+      component: Cart
     }
   ]
 })

@@ -1,5 +1,5 @@
 <template>
-    <div class="banner" @click="handleGallaryClick">
+    <div class="banner">
       <img class="banner-img" src="https://img10.360buyimg.com/n2/jfs/t27556/260/2108512160/465739/73f83982/5bf79780N414fe121.jpg" alt="">
       <div class="banner-info">
         <div class="banner-title"></div>
