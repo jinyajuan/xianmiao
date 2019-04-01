@@ -7,6 +7,7 @@ import Login from '@/pages/buyer/login/Login'
 import Reg from '@/pages/buyer/reg/Reg'
 import Detail from '@/pages/buyer/detail/Detail'
 import Cart from '@/pages/buyer/cart/Cart'
+import Cart1 from '@/pages/buyer/cart1/Cart'
 
 Vue.use(Router)
 
@@ -40,6 +41,10 @@ export default new Router({
       path: '/cart',
       name: 'Cart',
       component: Cart
+    }, {
+      path: '/cart1',
+      name: 'Cart1',
+      component: Cart1
     }
   ]
 })

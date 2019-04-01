@@ -1,18 +1,18 @@
 <template>
   <div class="list">
       <ul>
-        <li class="item border-bottom" v-for="item of CartItemList" :key="item.id">
-          <input type="checkbox">
+        <li class="item border-bottom" v-for="(item, index) of CartItemList" :key="item.id">
+          <a href="javascript:;" class="cart_check_box" :checked="item.checked" @click="isSelectSingle(item.checked,index)"></a>
           <img class="item-img" :src="item.imgUrl" alt="">
           <div class="item-info">
             <div class="item-desc">{{item.desc}}</div>
-            <div class="item-count">成交量：{{item.count}}</div>
+            <div class="item-count">成交量：{{item.volume}}</div>
             <div class="item-detail">
-              <div class="item-price">{{item.price}}</div>
+              <div class="item-price">￥{{item.price * item.count}}</div>
               <div class="item-count-change">
-                <button class="item-button">-</button>
-                <span class="item-button-counter">1</span>
-                <button class="item-button">+</button>
+                <button class="item-button" @click="countMinusOrAdd(false,index)">-</button>
+                <span class="item-button-counter">{{item.count}}</span>
+                <button class="item-button" @click="countMinusOrAdd(true,index)">+</button>
               </div>
             </div>
           </div>
@@ -25,47 +25,19 @@
 <script>
 export default {
   name: 'CartList',
+  props: {
+    CartItemList: Array
+  },
   data () {
     return {
-      CartItemList: [
-        {
-          id: '0001',
-          imgUrl: 'https://img14.360buyimg.com/babel/s180x180_jfs/t1/15492/22/10575/256417/5c8875d3Ecc98b5ce/d102b1ac792d19a8.jpg!q80.webp',
-          desc: '壹农壹果 南非红心西柚 4个 单果250g-320g 葡萄柚 柚子水果 ',
-          count: '10029',
-          price: '￥34.00'
-        }, {
-          id: '0002',
-          imgUrl: 'https://img14.360buyimg.com/babel/s180x180_jfs/t1/15492/22/10575/256417/5c8875d3Ecc98b5ce/d102b1ac792d19a8.jpg!q80.webp',
-          desc: '壹农壹果 南非红心西柚 4个 单果250g-320g 葡萄柚 柚子水果 ',
-          count: '10029',
-          price: '￥34.00'
-        }, {
-          id: '0003',
-          imgUrl: 'https://img14.360buyimg.com/babel/s180x180_jfs/t1/15492/22/10575/256417/5c8875d3Ecc98b5ce/d102b1ac792d19a8.jpg!q80.webp',
-          desc: '壹农壹果 南非红心西柚 4个 单果250g-320g 葡萄柚 柚子水果 ',
-          count: '10029',
-          price: '￥34.00'
-        }, {
-          id: '0004',
-          imgUrl: 'https://img14.360buyimg.com/babel/s180x180_jfs/t1/15492/22/10575/256417/5c8875d3Ecc98b5ce/d102b1ac792d19a8.jpg!q80.webp',
-          desc: '壹农壹果 南非红心西柚 4个 单果250g-320g 葡萄柚 柚子水果 ',
-          count: '10029',
-          price: '￥34.00'
-        }, {
-          id: '0005',
-          imgUrl: 'https://img14.360buyimg.com/babel/s180x180_jfs/t1/15492/22/10575/256417/5c8875d3Ecc98b5ce/d102b1ac792d19a8.jpg!q80.webp',
-          desc: '壹农壹果 南非红心西柚 4个 单果250g-320g 葡萄柚 柚子水果 ',
-          count: '10029',
-          price: '￥34.00'
-        }, {
-          id: '0006',
-          imgUrl: 'https://img14.360buyimg.com/babel/s180x180_jfs/t1/15492/22/10575/256417/5c8875d3Ecc98b5ce/d102b1ac792d19a8.jpg!q80.webp',
-          desc: '壹农壹果 南非红心西柚 4个 单果250g-320g 葡萄柚 柚子水果 ',
-          count: '10029',
-          price: '￥34.00'
-        }
-      ]
+    }
+  },
+  methods: {
+    countMinusOrAdd (flag, index) {
+      this.$emit('countMinusOrAdd', flag, index)
+    },
+    isSelectSingle (flag, index) {
+      this.$emit('isSelectSingle', flag, index)
     }
   }
 }
@@ -117,6 +89,19 @@ export default {
     line-height: .6rem;
     color: #ccc;
     /*background-color: fuchsia;*/
+  }
+  .cart_check_box[checked] {
+    background-position: -24px 0;
+  }
+  .cart_check_box {
+    float: left;
+    background: url(shop-icon.png) no-repeat;
+    -webkit-background-size: 50px 100px;
+    /* background-size: 50px 100px; */
+    width: 20px;
+    height: 20px;
+    margin-top: 10px;
+    margin-left: 5px;
   }
   .item-price{
     line-height: .44rem;

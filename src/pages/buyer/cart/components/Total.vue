@@ -1,7 +1,7 @@
 <template>
   <div class="total border-top">
     <div class="choose-all">
-      <input type="radio">
+      <a href="javascript:;" class="cart_check_box" :checked="isSelectAll" @click="handleIsSelectAll(isSelectAll)"></a>
       <span class="choose-all-word">全选</span>
     </div>
     <div class="sum">
@@ -16,7 +16,19 @@
 
 <script>
 export default {
-  name: 'CartTotal'
+  name: 'CartTotal',
+  data () {
+    return {
+      isSelectAll: false
+    }
+  },
+  methods: {
+    // 处理全选
+    handleIsSelectAll (flag) {
+      this.isSelectAll = !flag
+      this.$emit('handleIsSelectAll', !flag)
+    }
+  }
 }
 </script>
 
@@ -36,6 +48,23 @@ export default {
   }
   .choose-all{
     margin-left: .3rem;
+  }
+  .cart_check_box[checked] {
+    background-position: -24px 0;
+  }
+  .cart_check_box {
+    float: left;
+    background: url(shop-icon.png) no-repeat;
+    -webkit-background-size: 50px 100px;
+    /* background-size: 50px 100px; */
+    width: 20px;
+    height: 20px;
+    margin-top: 10px;
+    margin-left: -10px;
+  }
+  a {
+    text-decoration: none;
+    color: #666;
   }
   .choose-all-word, .sum{
     color: red;
