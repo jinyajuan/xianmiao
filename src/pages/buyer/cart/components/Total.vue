@@ -5,8 +5,8 @@
       <span class="choose-all-word">全选</span>
     </div>
     <div class="sum">
-      <span>合计：</span>
-      <span class="sum-price"></span>
+      <span class="sum-word">合计：￥</span>
+      <span class="sum-price">{{parseFloat(totalPrice).toFixed(2)}}</span>
     </div>
     <div class="buy-btn">
       <button>结算</button>
@@ -17,15 +17,17 @@
 <script>
 export default {
   name: 'CartTotal',
+  props: {
+    totalPrice: Number,
+    isSelectAll: Boolean
+  },
   data () {
     return {
-      isSelectAll: false
     }
   },
   methods: {
     // 处理全选
     handleIsSelectAll (flag) {
-      this.isSelectAll = !flag
       this.$emit('handleIsSelectAll', !flag)
     }
   }
@@ -47,7 +49,8 @@ export default {
     background-color: #eeeeee;
   }
   .choose-all{
-    margin-left: .3rem;
+    width: 1.3rem;
+    /*background-color: #55a532;*/
   }
   .cart_check_box[checked] {
     background-position: -24px 0;
@@ -60,18 +63,34 @@ export default {
     width: 20px;
     height: 20px;
     margin-top: 10px;
-    margin-left: -10px;
+    margin-left: 5px;
   }
   a {
     text-decoration: none;
     color: #666;
+  }
+  .sum{
+    /*background-color: #25a4bb;*/
+    width: 3.4rem;
+  }
+  .sum-word{
+    display: block;
+    width: 1.3rem;
+    float: left;
+    /*background-color: #8f4fa5;*/
+  }
+  .sum-price{
+    display: block;
+    min-width: 2rem;
+    float: left;
+    /*background-color: #5a7ea5;*/
   }
   .choose-all-word, .sum{
     color: red;
     font-size: .32rem;
   }
   .buy-btn{
-    margin-right: .3rem;
+    margin-right: .15rem;
   }
   .buy-btn button{
     width: 1.2rem;

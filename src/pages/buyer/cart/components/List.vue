@@ -8,7 +8,7 @@
             <div class="item-desc">{{item.desc}}</div>
             <div class="item-count">成交量：{{item.volume}}</div>
             <div class="item-detail">
-              <div class="item-price">￥{{item.price * item.count}}</div>
+              <div class="item-price">￥{{((item.price).toFixed(2) * parseInt(item.count)).toFixed(2)}}</div>
               <div class="item-count-change">
                 <button class="item-button" @click="countMinusOrAdd(false,index)">-</button>
                 <span class="item-button-counter">{{item.count}}</span>
@@ -16,6 +16,7 @@
               </div>
             </div>
           </div>
+          <span class="iconfont" @click="deleteGoods(index)">&#xe615;</span>
         </li>
         <li class="list-bottom">已经到购物车的底部了</li>
       </ul>
@@ -38,6 +39,9 @@ export default {
     },
     isSelectSingle (flag, index) {
       this.$emit('isSelectSingle', flag, index)
+    },
+    deleteGoods (index) {
+      this.$emit('deleteGoods', index)
     }
   }
 }
@@ -139,5 +143,11 @@ export default {
     text-align: center;
     line-height: .4rem;
     color: #333333;
+  }
+  .iconfont{
+    display: block;
+    width: .5rem;
+    text-align: center;
+    margin-top: .1rem;
   }
 </style>
