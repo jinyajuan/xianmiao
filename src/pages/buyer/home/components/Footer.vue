@@ -1,20 +1,28 @@
 <template>
   <div class="footer">
     <div class="icons">
-      <span class="iconfont">&#xe607;</span>
-      <span class="iconfont-desc">首页</span>
+      <router-link to="/">
+        <span class="iconfont">&#xe607;</span>
+        <span class="iconfont-desc">首页</span>
+      </router-link>
     </div>
     <div class="icons">
-      <span class="iconfont">&#xe689;</span>
-      <span class="iconfont-desc">商品</span>
+      <router-link to="/goods">
+          <span class="iconfont">&#xe689;</span>
+          <span class="iconfont-desc">商品</span>
+      </router-link>
     </div>
     <div class="icons">
-      <span class="iconfont">&#xe61b;</span>
-      <span class="iconfont-desc">购物车</span>
+      <router-link to="/cart">
+        <span class="iconfont">&#xe61b;</span>
+        <span class="iconfont-desc">购物车</span>
+      </router-link>
     </div>
     <div class="icons">
-      <span class="iconfont">&#xe658;</span>
-      <span class="iconfont-desc">我的</span>
+      <router-link to="/me">
+        <span class="iconfont">&#xe658;</span>
+        <span class="iconfont-desc">我的</span>
+      </router-link>
     </div>
   </div>
 </template>

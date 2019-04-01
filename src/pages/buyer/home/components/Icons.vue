@@ -1,9 +1,11 @@
 <template>
   <div class="icons">
-    <div class="icon" v-for="item of IconsList" :key="item.id">
-      <span class="iconfont" v-html="item.iconUrl"></span>
-      <span class="desc">{{item.iconDesc}}</span>
-    </div>
+    <router-link to="/goods">
+      <div class="icon" v-for="item of IconsList" :key="item.id">
+        <span class="iconfont" v-html="item.iconUrl"></span>
+        <span class="desc">{{item.iconDesc}}</span>
+      </div>
+      </router-link>
   </div>
 </template>
 
@@ -52,7 +54,7 @@ export default {
     height: 0;
     padding-bottom: 25%;
     float: left;
-    /*background-color: red;*/
+    color: #666666;
   }
   .iconfont{
     display: block;

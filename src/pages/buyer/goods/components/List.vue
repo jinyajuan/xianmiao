@@ -1,16 +1,18 @@
 <template>
   <div class="list">
     <ul>
-      <li class="item border-bottom border-rightbottom" v-for="item of GoodsListItem" :key="item.id">
-        <div class="item-img">
-          <img :src="item.imgUrl" alt="">
-        </div>
-        <p class="item-desc">{{item.desc}}</p>
-        <div>
-          <p class="item-price">{{item.price}}</p>
-          <p class="item-count">{{item.count}}份</p>
-        </div>
-      </li>
+      <router-link to="/detail">
+        <li class="item border-bottom border-rightbottom" v-for="item of GoodsListItem" :key="item.id">
+          <div class="item-img">
+            <img :src="item.imgUrl" alt="">
+          </div>
+          <p class="item-desc">{{item.desc}}</p>
+          <div>
+            <p class="item-price">{{item.price}}</p>
+            <p class="item-count">{{item.count}}份</p>
+          </div>
+        </li>
+      </router-link>
     </ul>
   </div>
 </template>

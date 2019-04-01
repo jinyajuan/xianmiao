@@ -10,17 +10,19 @@
     </div>
     <div class="recommond-content">
       <ul>
-        <li class="item border-bottom" v-for="item of RecommondItemList" :key="item.id">
-          <img class="item-img" :src="item.imgUrl" alt="">
-          <div class="item-info">
-            <div class="item-desc">{{item.desc}}</div>
-            <div class="item-count">成交量：{{item.count}}</div>
-            <div class="item-detail">
-              <div class="item-price">{{item.price}}</div>
-              <button class="item-button">查看详情</button>
+        <router-link to="/detail">
+          <li class="item border-bottom" v-for="item of RecommondItemList" :key="item.id">
+            <img class="item-img" :src="item.imgUrl" alt="">
+            <div class="item-info">
+              <div class="item-desc">{{item.desc}}</div>
+              <div class="item-count">成交量：{{item.count}}</div>
+              <div class="item-detail">
+                <div class="item-price">{{item.price}}</div>
+                <button class="item-button">查看详情</button>
+              </div>
             </div>
-          </div>
-        </li>
+          </li>
+        </router-link>
       </ul>
     </div>
   </div>

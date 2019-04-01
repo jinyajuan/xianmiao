@@ -1,13 +1,19 @@
 <template>
   <div class="footer border-top">
     <div class="icons-icon border-right">
-      <span class="iconfont">&#xe607;</span>
+      <router-link to="/">
+       <span class="iconfont">&#xe607;</span>
+      </router-link>
     </div>
     <div class="icons-icon border-right">
-      <span class="iconfont">&#xe689;</span>
+      <router-link to="/goods">
+        <span class="iconfont">&#xe689;</span>
+      </router-link>
     </div>
     <div class="icons-buyer border-right add">
-      <span class="iconfont-desc">加入购物车</span>
+      <router-link to="/cart">
+        <span class="iconfont-desc">加入购物车</span>
+      </router-link>
     </div>
     <div class="icons-buyer buy">
       <span class="iconfont-desc">立即购买</span>

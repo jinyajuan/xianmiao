@@ -1,8 +1,10 @@
 <template>
   <div class="login border-bottom">
-    <div class="login-entry">
-      点击登录
-    </div>
+    <router-link to="login">
+      <div class="login-entry">
+        点击登录
+      </div>
+    </router-link>
   </div>
 </template>
 

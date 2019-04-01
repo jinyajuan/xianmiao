@@ -4,7 +4,7 @@
       <input class="border-bottom" type="text" placeholder="请输入用户名">
       <input class="border-bottom" type="password" placeholder="请输入密码">
       <button>登录</button>
-      <a href="">没有账号？立即注册</a>
+      <router-link to="/reg">没有账号？立即注册</router-link>
     </form>
   </div>
 </template>

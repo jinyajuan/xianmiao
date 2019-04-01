@@ -10,13 +10,15 @@
     </div>
     <div class="minimum-content">
       <ul>
-        <li class="item border-bottom" v-for="item of minimumPriceList" :key="item.id">
-          <div class="item-img">
-            <img :src="item.imgUrl" alt="">
-          </div>
-          <p class="item-desc">{{item.desc}}</p>
-          <p class="item-price">{{item.price}}</p>
-        </li>
+        <router-link to="/detail">
+          <li class="item border-bottom" v-for="item of minimumPriceList" :key="item.id">
+            <div class="item-img">
+              <img :src="item.imgUrl" alt="">
+            </div>
+            <p class="item-desc">{{item.desc}}</p>
+            <p class="item-price">{{item.price}}</p>
+          </li>
+        </router-link>
       </ul>
     </div>
   </div>
