@@ -1,6 +1,6 @@
 <template>
   <div class="login border-bottom">
-    <router-link to="login">
+    <router-link to="/buyer/login">
       <div class="login-entry">
         点击登录
       </div>

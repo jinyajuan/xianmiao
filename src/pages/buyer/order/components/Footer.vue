@@ -5,7 +5,7 @@
       <span class="sum-price">123.00</span>
     </div>
     <div class="buy-btn">
-      <router-link to="/pay">
+      <router-link to="/buyer/pay">
         <button>付款</button>
       </router-link>
     </div>

@@ -1,7 +1,7 @@
 <template>
   <div class="list">
     <ul>
-      <router-link to="/detail">
+      <router-link to="/buyer/detail">
         <li class="item border-bottom border-rightbottom" v-for="item of GoodsListItem" :key="item.id">
           <div class="item-img">
             <img :src="item.imgUrl" alt="">

@@ -16,10 +16,12 @@
     <home-footer></home-footer>
     <cart-delete-panel
       :isDeleteGoods="isDeleteGoods"
-      @delGood="handleDeleteGood"
-    >
+      @delGood="handleDeleteGood">
     </cart-delete-panel>
-    <cart-prompt :hasNoGoodsToPay="hasNoGoodsToPay" @delNoGoodsToPay="handleDelNoGoodsToPay"></cart-prompt>
+    <cart-prompt
+      :hasNoGoodsToPay="hasNoGoodsToPay"
+      @delNoGoodsToPay="handleDelNoGoodsToPay">
+    </cart-prompt>
   </div>
 </template>
 
@@ -31,7 +33,7 @@ import HomeFooter from '@/pages/buyer/home/components/Footer'
 import CartDeletePanel from '@/pages/buyer/cart/components/Panel'
 import CartPrompt from '@/pages/buyer/cart/components/Prompt'
 export default {
-  name: 'Cart',
+  name: 'BuyerCart',
   data () {
     return {
       CartItemList: [
@@ -171,7 +173,7 @@ export default {
       if (this.totalPrice === 0) {
         this.hasNoGoodsToPay = false
       } else {
-        this.$router.push('/order')
+        this.$router.push('/buyer/order')
       }
     },
     // 9.点击确定的时候去除面板

@@ -17,7 +17,7 @@ import HomeRecommond from '@/pages/buyer/home/components/Recommond'
 import HomeMinimum from '@/pages/buyer/home/components/Minimum'
 import HomeFooter from '@/pages/buyer/home/components/Footer'
 export default {
-  name: 'Home',
+  name: 'BuyerHome',
   components: {
     HomeHeader,
     HomeSwiper,

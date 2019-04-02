@@ -1,12 +1,17 @@
 <template>
-  <div class="panel " v-bind:class="{'panel-is-hide': isDeleteGoods}">
+  <div class="panel " v-bind:class="{'switch-hide': switchPanel}">
+    <div class="close">
+      <span class="iconfont" @click="closeSwitchPanel">&#xe606;</span>
+    </div>
     <div class="panel_content">
       <div class="panel_title">
-        您确认要删除该商品吗？
+        请选择一下身份切换
       </div>
       <div class="panel_footer">
-        <button class="cancel" @click="delGood(false)">取消</button>
-        <button class="submit" @click="delGood(true)">确认</button>
+        <button class="cancel">管理员</button>
+        <router-link to="/seller/login">
+          <button class="submit">卖家</button>
+        </router-link>
       </div>
     </div>
   </div>
@@ -14,20 +19,20 @@
 
 <script>
 export default {
-  name: 'CartDeletePanel',
+  name: 'MeSwitch',
   props: {
-    isDeleteGoods: Boolean
+    switchPanel: Boolean
   },
   methods: {
-    delGood (flag) {
-      this.$emit('delGood', flag)
+    closeSwitchPanel () {
+      this.$emit('closeSwitchPanel')
     }
   }
 }
 </script>
 
 <style scoped>
-  .panel-is-hide {
+  .switch-hide {
     display: none;
   }
   .panel {
@@ -48,6 +53,15 @@ export default {
     border: .01rem solid #e0e0e0;
     border-radius: .05rem;
     padding: .15rem;
+  }
+  .close{
+    /*background-color: #55a532;*/
+    margin-top: 1.1rem;
+    text-align: right;
+    margin-right: .2rem;
+  }
+  .iconfont{
+    color: red;
   }
   .panel_title {
     text-align: center;

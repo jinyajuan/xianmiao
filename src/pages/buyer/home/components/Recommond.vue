@@ -10,7 +10,7 @@
     </div>
     <div class="recommond-content">
       <ul>
-        <router-link to="/detail">
+        <router-link to="/buyer/detail">
           <li class="item border-bottom" v-for="item of RecommondItemList" :key="item.id">
             <img class="item-img" :src="item.imgUrl" alt="">
             <div class="item-info">

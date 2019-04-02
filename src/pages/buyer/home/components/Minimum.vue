@@ -10,7 +10,7 @@
     </div>
     <div class="minimum-content">
       <ul>
-        <router-link to="/detail">
+        <router-link to="/buyer/detail">
           <li class="item border-bottom border-right" v-for="item of minimumPriceList" :key="item.id">
             <div class="item-img">
               <img :src="item.imgUrl" alt="">

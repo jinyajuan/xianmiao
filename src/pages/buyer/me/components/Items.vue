@@ -8,7 +8,7 @@
       <span class="iconfont pj">&#xe664;</span>
       <span class="item-desc">评价</span>
     </li>
-    <li class="item border-bottom">
+    <li class="item border-bottom" @click="goSwitch">
       <span class="iconfont zh">&#xe621;</span>
       <span class="item-desc">身份转换至卖家</span>
     </li>
@@ -17,7 +17,12 @@
 
 <script>
 export default {
-  name: 'MeItems'
+  name: 'MeItems',
+  methods: {
+    goSwitch () {
+      this.$emit('goSwitch')
+    }
+  }
 }
 </script>
 

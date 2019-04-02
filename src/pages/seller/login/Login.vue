@@ -6,10 +6,10 @@
 </template>
 
 <script>
-import LoginHeader from '@/pages/buyer/login/components/Header'
-import LoginCenter from '@/pages/buyer/login/components/Center'
+import LoginHeader from '@/pages/seller/login/components/Header'
+import LoginCenter from '@/pages/seller/login/components/Center'
 export default {
-  name: 'BuyerLogin',
+  name: 'SellerLogin',
   components: {
     LoginHeader,
     LoginCenter

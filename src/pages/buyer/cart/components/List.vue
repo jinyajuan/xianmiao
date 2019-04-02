@@ -3,7 +3,7 @@
       <ul>
         <li class="item border-bottom" v-for="(item, index) of CartItemList" :key="item.id">
           <a href="javascript:;" class="cart_check_box" :checked="item.checked" @click="isSelectSingle(item.checked,index)"></a>
-          <router-link to="/detail">
+          <router-link to="/buyer/detail">
             <img class="item-img" :src="item.imgUrl" alt="">
           </router-link>
           <div class="item-info">

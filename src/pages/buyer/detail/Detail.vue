@@ -20,7 +20,7 @@ import DetailPrice from '@/pages/buyer/detail/components/Price'
 import DetailDesc from '@/pages/buyer/detail/components/Desc'
 import DetailFooter from '@/pages/buyer/detail/components/Footer'
 export default {
-  name: 'Detail',
+  name: 'BuyerDetail',
   components: {
     DetailHeader,
     DetailBanner,

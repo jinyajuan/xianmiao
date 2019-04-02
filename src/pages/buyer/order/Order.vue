@@ -17,7 +17,7 @@ import OrderGoods from '@/pages/buyer/order/components/Goods'
 import OrderRemake from '@/pages/buyer/order/components/Remake'
 import OrderFooter from '@/pages/buyer/order/components/Footer'
 export default {
-  name: 'Order',
+  name: 'BuyerOrder',
   components: {
     OrderHeader,
     OrderPersonal,

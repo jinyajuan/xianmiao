@@ -3,7 +3,7 @@
     <swiper :options="swiperOption">
       <!-- slides -->
       <swiper-slide v-for="item of swiperList" :key="item.id">
-        <router-link to="/detail">
+        <router-link to="/buyer/detail">
           <img class="swiper-img" :src="item.imgUrl" alt="">
         </router-link>
       </swiper-slide>

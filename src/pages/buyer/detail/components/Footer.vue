@@ -6,17 +6,17 @@
       </router-link>
     </div>
     <div class="icons-icon border-right">
-      <router-link to="/goods">
+      <router-link to="/buyer/goods">
         <span class="iconfont">&#xe689;</span>
       </router-link>
     </div>
     <div class="icons-buyer border-right add">
-      <router-link to="/cart">
+      <router-link to="/buyer/cart">
         <span class="iconfont-desc">加入购物车</span>
       </router-link>
     </div>
     <div class="icons-buyer buy">
-      <router-link to="/order">
+      <router-link to="/buyer/order">
         <span class="iconfont-desc">立即购买</span>
       </router-link>
     </div>

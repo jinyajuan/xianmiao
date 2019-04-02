@@ -7,19 +7,19 @@
       </router-link>
     </div>
     <div class="icons">
-      <router-link to="/goods">
+      <router-link to="/buyer/goods">
           <span class="iconfont">&#xe689;</span>
           <span class="iconfont-desc">商品</span>
       </router-link>
     </div>
     <div class="icons">
-      <router-link to="/cart">
+      <router-link to="/buyer/cart">
         <span class="iconfont">&#xe61b;</span>
         <span class="iconfont-desc">购物车</span>
       </router-link>
     </div>
     <div class="icons">
-      <router-link to="/me">
+      <router-link to="/buyer/me">
         <span class="iconfont">&#xe658;</span>
         <span class="iconfont-desc">我的</span>
       </router-link>

@@ -1,6 +1,6 @@
 <template>
   <div class="icons">
-    <router-link to="/goods">
+    <router-link to="/buyer/goods">
       <div class="icon" v-for="item of IconsList" :key="item.id">
         <span class="iconfont" v-html="item.iconUrl"></span>
         <span class="desc">{{item.iconDesc}}</span>

@@ -11,7 +11,7 @@ import PayHeader from '@/pages/buyer/pay/components/Header'
 import PaySuccess from '@/pages/buyer/pay/components/Success'
 import HomeFooter from '@/pages/buyer/home/components/Footer'
 export default {
-  name: 'Pay',
+  name: 'BuyerPay',
   components: {
     PayHeader,
     PaySuccess,

@@ -6,10 +6,10 @@
 </template>
 
 <script>
-import RegHeader from '@/pages/buyer/reg/components/Header'
-import RegCenter from '@/pages/buyer/reg/components/Center'
+import RegHeader from '@/pages/seller/reg/components/Header'
+import RegCenter from '@/pages/seller/reg/components/Center'
 export default {
-  name: 'BuyerReg',
+  name: 'SellerReg',
   components: {
     RegHeader,
     RegCenter
