@@ -11,6 +11,7 @@
       :totalPrice="totalPrice"
       :isSelectAll="isSelectAll"
       @handleIsSelectAll="handleIsSelectAll"
+      @goPay="handleGoPay"
     ></cart-total>
     <home-footer></home-footer>
     <cart-delete-panel
@@ -18,6 +19,7 @@
       @delGood="handleDeleteGood"
     >
     </cart-delete-panel>
+    <cart-prompt :hasNoGoodsToPay="hasNoGoodsToPay" @delNoGoodsToPay="handleDelNoGoodsToPay"></cart-prompt>
   </div>
 </template>
 
@@ -27,6 +29,7 @@ import CartList from '@/pages/buyer/cart/components/List'
 import CartTotal from '@/pages/buyer/cart/components/Total'
 import HomeFooter from '@/pages/buyer/home/components/Footer'
 import CartDeletePanel from '@/pages/buyer/cart/components/Panel'
+import CartPrompt from '@/pages/buyer/cart/components/Prompt'
 export default {
   name: 'Cart',
   data () {
@@ -77,6 +80,7 @@ export default {
       isSelectAll: false,
       totalPrice: 0,
       isDeleteGoods: true,
+      hasNoGoodsToPay: true,
       currentDeleteGoodIndex: {}
     }
   },
@@ -85,7 +89,8 @@ export default {
     CartList,
     CartTotal,
     HomeFooter,
-    CartDeletePanel
+    CartDeletePanel,
+    CartPrompt
   },
   methods: {
     // 1.单个商品的加减
@@ -160,6 +165,18 @@ export default {
       } else { // 取消删除
         this.isDeleteGoods = true
       }
+    },
+    //  8.处理付款
+    handleGoPay () {
+      if (this.totalPrice === 0) {
+        this.hasNoGoodsToPay = false
+      } else {
+        this.$router.push('/order')
+      }
+    },
+    // 9.点击确定的时候去除面板
+    handleDelNoGoodsToPay () {
+      this.hasNoGoodsToPay = true
     }
   }
 }

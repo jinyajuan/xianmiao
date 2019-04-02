@@ -1,6 +1,6 @@
 <template>
   <div>
-    <reg-header></reg-header>
+    <reg-header @goBack="handleGoBack"></reg-header>
     <reg-center></reg-center>
   </div>
 </template>
@@ -13,6 +13,11 @@ export default {
   components: {
     RegHeader,
     RegCenter
+  },
+  methods: {
+    handleGoBack () {
+      this.$router.go(-1)
+    }
   }
 }
 </script>

@@ -9,7 +9,7 @@
       <span class="sum-price">{{parseFloat(totalPrice).toFixed(2)}}</span>
     </div>
     <div class="buy-btn">
-      <button>结算</button>
+      <button @click="goPay">结算</button>
     </div>
   </div>
 </template>
@@ -29,6 +29,9 @@ export default {
     // 处理全选
     handleIsSelectAll (flag) {
       this.$emit('handleIsSelectAll', !flag)
+    },
+    goPay () {
+      this.$emit('goPay')
     }
   }
 }

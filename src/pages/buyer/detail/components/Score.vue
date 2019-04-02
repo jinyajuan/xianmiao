@@ -9,7 +9,7 @@
             v-html="item"
       >
       </span>
-      <span class="iconfont score-center-icon">4.9分</span>
+      <span class="iconfont score-center-icon">{{detailGoods[0].score}}分</span>
     </div>
     <div class="score-right">
       <div class="iconfont score-right-icon">&#xe604;</div>
@@ -20,13 +20,16 @@
 <script>
 export default {
   name: 'DetailScore',
+  props: {
+    detailGoods: Array
+  },
   data () {
     return {
       starList: []
     }
   },
   mounted () {
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < Math.round(this.detailGoods[0].score); i++) {
       this.starList.push('&#xe610;')
     }
   }

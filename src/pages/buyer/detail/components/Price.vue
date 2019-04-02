@@ -1,18 +1,19 @@
 <template>
   <div class="goods-detail">
-    <div class="name">
-      壹农壹果 南非红心西柚 4个 单果250g-320g 葡萄柚 柚子水果
-    </div>
+    <div class="name">{{detailGoods[0].name}}</div>
     <div class="detail">
-      <p class="price">￥67.99</p>
-      <p class="count">销量：111111</p>
+      <p class="price">￥{{(detailGoods[0].price).toFixed(2)}}</p>
+      <p class="count">销量：{{detailGoods[0].sale}}</p>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'DetailPrice'
+  name: 'DetailPrice',
+  props: {
+    detailGoods: Array
+  }
 }
 </script>
 

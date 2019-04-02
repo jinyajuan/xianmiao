@@ -1,20 +1,16 @@
 <template>
   <div class="goods">
-    <ul class="list">
+    <ul class="list" v-for="item of orderList" :key="item.id">
       <li class="item border-bottom">
         <router-link to="/detail">
-          <img class="item-img" src="https://img14.360buyimg.com/babel/s180x180_jfs/t1/15492/22/10575/256417/5c8875d3Ecc98b5ce/d102b1ac792d19a8.jpg!q80.webp" alt="">
+          <img class="item-img" :src="item.imgUrl" alt="">
         </router-link>
         <div class="item-info">
-          <div class="item-desc">壹农壹果 南非红心西柚 4个 单果250g-320g 葡萄柚 柚子水果 </div>
-          <div class="item-count">成交量：1111111</div>
+          <div class="item-name">{{item.name}}</div>
+          <div class="item-sale">成交量：{{item.sale}}份</div>
           <div class="item-detail">
-            <div class="item-price">￥112.00</div>
-            <div class="item-count-change">
-              <button class="item-button" >-</button>
-              <span class="item-button-counter">1</span>
-              <button class="item-button" >+</button>
-            </div>
+            <div class="item-price">￥{{item.price.toFixed(2)}}</div>
+            <div class="item-count">X{{item.count}}</div>
           </div>
         </div>
       </li>
@@ -25,6 +21,9 @@
 <script>
 export default {
   name: 'OrderGoods',
+  props: {
+    orderList: Array
+  },
   data () {
     return {
     }
@@ -65,7 +64,7 @@ export default {
     min-width: 0;
     /*background-color: green;*/
   }
-  .item-desc{
+  .item-name{
     line-height: .6rem;
     color: #666666;
     /*background-color: #9a6e3a;*/
@@ -73,7 +72,7 @@ export default {
     text-overflow: ellipsis;
     white-space: nowrap;
   }
-  .item-count{
+  .item-sale{
     line-height: .5rem;
     font-size: .28rem;
     color: #cccccc;
@@ -93,38 +92,11 @@ export default {
     font-weight: bolder;
     float: left;
   }
-  .item-count-change{
+  .item-count{
     line-height: .44rem;
     margin-top: .16rem;
     /*background-color: darkblue;*/
-    font-size: .34rem;
-    font-weight: bolder;
+    font-size: .3rem;
     float: right;
-  }
-  .item-button{
-    line-height: .44rem;
-    width: .5rem;
-    /*margin-top: .16rem;*/
-    background-color: red;
-    padding: 0 .1rem;
-    border-radius: .06rem;
-    color: #fff;
-    /*float: right;*/
-  }
-  .item-button-counter{
-    width: .5rem;
-    line-height: .44rem;
-    color: #666666;
-  }
-  .list-bottom{
-    text-align: center;
-    line-height: .4rem;
-    color: #333333;
-  }
-  .iconfont{
-    display: block;
-    width: .5rem;
-    text-align: center;
-    margin-top: .1rem;
   }
 </style>

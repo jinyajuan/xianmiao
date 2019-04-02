@@ -1,16 +1,19 @@
 <template>
   <div class="person">
-    <div class="personal">
-      <div class="personal-info name">王昭君</div>
-      <div class="personal-info phone">13899076580</div>
-      <div class="personal-info address">广东省深圳市龙岗区坂田街道和成世纪名园小区22栋A单元702室</div>
+    <div class="personal" v-for="item of personalInfo" :key="item.id">
+      <div class="personal-info name">{{item.name}}</div>
+      <div class="personal-info phone">{{item.phone}}</div>
+      <div class="personal-info address">{{item.address}}</div>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'OrderPersonal'
+  name: 'OrderPersonal',
+  props: {
+    personalInfo: Array
+  }
 }
 </script>
 

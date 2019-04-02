@@ -12,31 +12,11 @@
 <script>
 export default {
   name: 'HomeIcons',
+  props: {
+    IconsList: Array
+  },
   data () {
     return {
-      IconsList: [
-        {
-          id: '0001',
-          iconUrl: '&#xe60e;',
-          iconDesc: '掌柜推荐'
-        }, {
-          id: '0002',
-          iconUrl: '&#xe60c;',
-          iconDesc: '热销水果'
-        }, {
-          id: '0003',
-          iconUrl: '&#xe780;',
-          iconDesc: '应季蔬菜'
-        }, {
-          id: '0004',
-          iconUrl: '&#xe611;',
-          iconDesc: '特产干货'
-        }, {
-          id: '0005',
-          iconUrl: '&#xe783;',
-          iconDesc: '特价专卖'
-        }
-      ]
     }
   }
 }

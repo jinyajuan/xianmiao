@@ -16,7 +16,9 @@
       </router-link>
     </div>
     <div class="icons-buyer buy">
-      <span class="iconfont-desc">立即购买</span>
+      <router-link to="/order">
+        <span class="iconfont-desc">立即购买</span>
+      </router-link>
     </div>
   </div>
 </template>
