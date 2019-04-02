@@ -7,6 +7,8 @@ import Login from '@/pages/buyer/login/Login'
 import Reg from '@/pages/buyer/reg/Reg'
 import Detail from '@/pages/buyer/detail/Detail'
 import Cart from '@/pages/buyer/cart/Cart'
+import Order from '@/pages/buyer/order/Order'
+import Pay from '@/pages/buyer/pay/Pay'
 
 Vue.use(Router)
 
@@ -40,6 +42,14 @@ export default new Router({
       path: '/cart',
       name: 'Cart',
       component: Cart
+    }, {
+      path: '/order',
+      name: 'Order',
+      component: Order
+    }, {
+      path: '/pay',
+      name: 'Pay',
+      component: Pay
     }
   ],
   scrollBehavior: function (to, from, savedPosition) {
