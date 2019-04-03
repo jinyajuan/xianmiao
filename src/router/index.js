@@ -12,6 +12,7 @@ import BuyerPay from '@/pages/buyer/pay/Pay'
 import SellerLogin from '@/pages/seller/login/Login'
 import SellerReg from '@/pages/seller/reg/Reg'
 import SellerHome from '@/pages/seller/home/Home'
+import SellerUpload from '@/pages/seller/upload/Upload'
 
 Vue.use(Router)
 
@@ -65,6 +66,10 @@ export default new Router({
       path: '/seller/home',
       name: 'SellerHome',
       component: SellerHome
+    }, {
+      path: '/seller/upload',
+      name: 'SellerUpload',
+      component: SellerUpload
     }
   ],
   scrollBehavior: function (to, from, savedPosition) {
