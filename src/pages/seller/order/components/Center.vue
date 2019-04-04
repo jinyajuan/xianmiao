@@ -9,28 +9,33 @@
     </div>
     <div class="tab-con">
       <ul class="all" style="display: block">
-        <li class="order-item border-bottom"
-            v-for="(item) in tabContents" :key="item.id">
-          <span>订单编号:{{item.order_id}},</span>
-          <span>商品名称:{{item.goods_name}}</span>
-          <span class="iconfont" v-show="item.order_state">&#xe631;</span>
+        <li class="order-item border-bottom" v-for="(item) in tabContents" :key="item.id">
+          <router-link :to="{path:'/seller/detail',query: {state: item.order_state}}">
+            <span>订单编号:{{item.order_id}},</span>
+            <span>商品名称:{{item.goods_name}}</span>
+            <span class="iconfont" v-show="item.order_state">&#xe631;</span>
+          </router-link>
         </li>
       </ul>
       <ul class="hasNoHandle" style="display: none">
         <li class="order-item border-bottom"
-            v-for="(item) in tabContentsHasNo" :key="item.id">
-          <span>订单编号:{{item.order_id}},</span>
-          <span>商品名称:{{item.goods_name}}</span>
-          <span class="iconfont" v-show="item.order_state">&#xe631;</span>
+              v-for="(item) in tabContentsHasNo" :key="item.id">
+            <router-link :to="{path:'/seller/detail',query: {state: item.order_state}}">
+              <span>订单编号:{{item.order_id}},</span>
+              <span>商品名称:{{item.goods_name}}</span>
+              <span class="iconfont" v-show="item.order_state">&#xe631;</span>
+            </router-link>
         </li>
       </ul>
       <ul class="hasHandled" style="display: none">
-        <li class="order-item border-bottom"
-            v-for="(item) in tabContentsHasAlready" :key="item.id">
-          <span>订单编号:{{item.order_id}},</span>
-          <span>商品名称:{{item.goods_name}}</span>
-          <span class="iconfont" v-show="item.order_state">&#xe631;</span>
-        </li>
+          <li class="order-item border-bottom"
+              v-for="(item) in tabContentsHasAlready" :key="item.id">
+            <router-link :to="{path:'/seller/detail',query: {state: item.order_state}}">
+              <span>订单编号:{{item.order_id}},</span>
+              <span>商品名称:{{item.goods_name}}</span>
+              <span class="iconfont" v-show="item.order_state">&#xe631;</span>
+            </router-link>
+          </li>
       </ul>
     </div>
   </div>

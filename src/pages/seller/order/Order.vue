@@ -30,7 +30,8 @@ export default {
           buyer_id: 'a12321d',
           buyer_name: '杨紫',
           buyer_phone: 1338909192,
-          buyer_address: '湖南省湘潭市湘潭大学南苑13栋'
+          buyer_address: '湖南省湘潭市湘潭大学南苑13栋',
+          buyer_remark: '圆通快递，谢谢~'
         }, {
           order_id: '0002',
           order_state: false,
@@ -41,7 +42,8 @@ export default {
           buyer_id: 'a12321d',
           buyer_name: '杨紫',
           buyer_phone: 1338909192,
-          buyer_address: '湖南省湘潭市湘潭大学南苑13栋'
+          buyer_address: '湖南省湘潭市湘潭大学南苑13栋',
+          buyer_remark: '圆通快递，谢谢~'
         }, {
           order_id: '0003',
           order_state: false,
@@ -52,7 +54,8 @@ export default {
           buyer_id: 'a12321d',
           buyer_name: '杨紫',
           buyer_phone: 1338909192,
-          buyer_address: '湖南省湘潭市湘潭大学南苑13栋'
+          buyer_address: '湖南省湘潭市湘潭大学南苑13栋',
+          buyer_remark: '圆通快递，谢谢~'
         }
       ],
       tabContentsHasNo: [],
