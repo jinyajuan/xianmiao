@@ -1,5 +1,5 @@
 <template>
-  <div class="today border">
+  <div class="weekend border">
     <p class="title border-bottom">一周内上新</p>
     <ul>
       <li class="item border-bottom" v-for="item of WeekendList" :key="item.id">
@@ -9,7 +9,16 @@
           <div class="item-count">成交量：{{item.sale}}份</div>
           <div class="item-detail">
             <div class="item-price">￥{{item.price.toFixed(2)}}</div>
-            <button class="item-button">点击修改</button>
+            <button class="item-button">
+              <router-link :to="{path:'/seller/change/',
+              query: {id: item.id,
+              name:item.name,
+              price: item.price,
+              notice: item.notice,
+              desc: item.desc}}">
+                点击修改
+              </router-link>
+            </button>
           </div>
         </div>
       </li>
@@ -38,7 +47,7 @@ export default {
 </script>
 
 <style scoped>
-  .today{
+  .weekend{
     width: 100%;
   }
   .title{
@@ -117,5 +126,8 @@ export default {
   }
   .hide{
     display: none;
+  }
+  a{
+    color: #ffffff;
   }
 </style>

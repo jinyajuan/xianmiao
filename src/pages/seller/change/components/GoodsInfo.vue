@@ -1,40 +1,49 @@
 <template>
   <div class="center">
-    <div>
-      <form action="">
+    <form action="">
       <div class="session">
         <label for="img">上传图片:</label>
         <input id="img" type="file">
+        <!--<input id="img" type="file" :value="this.$route.query.imgUrl">-->
       </div>
       <div class="session">
         <label for="name">名称:</label>
-        <input id="name" type="text" placeholder="请输入商品名称...">
+        <input id="name" type="text" :value="this.$route.query.name">
       </div>
       <div class="session">
         <label for="price">单价:</label>
-        <input id="price" type="text" placeholder="请输入商品的单价...">
+        <input id="price" type="text" :value="this.$route.query.price">
       </div>
       <div class="session">
         <label for="desc">详细描述:</label>
-        <input id="desc" type="text" placeholder="请输入商品的详细描述...">
+        <input id="desc" type="text" :value="this.$route.query.desc">
       </div>
       <div class="session">
         <label for="notice">活动公告:</label>
-        <input id="notice" type="text" placeholder="请输入商品的活动公告...">
+        <input id="notice" type="text" :value="this.$route.query.notice">
       </div>
       <div class="btn-session">
         <router-link to="/seller/home">
-          <input class="btn" type="submit" value="提交">
+          <input class="btn" type="submit" value="确认修改">
         </router-link>
       </div>
     </form>
-    </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'UploadGoodsInfo'
+  name: 'ChangeGoodsInfo',
+  data () {
+    return {
+      name: ''
+    }
+  },
+  mounted () {
+    console.log(this.$route.query)
+    this.name = this.$route.query.name
+    console.log(this.name)
+  }
 }
 </script>
 

@@ -7,8 +7,8 @@
     <div class="item border-bottom">
       <span class="title">订单状态：</span>
       <span class="hanNo" v-if="this.$route.query.state">
-        <span class="content">未接单</span>
-        <button class="btn">确认接单</button>
+        <span class="content" id="orderState">未接单</span>
+        <button class="btn" v-if="orderToken" @click="handleOrderToken">确认接单</button>
       </span>
       <span class="hanYes" v-else>
         <span class="content">已接单</span>
@@ -60,8 +60,16 @@
 <script>
 export default {
   name: 'DetailCenter',
-  mounted () {
-    console.log(this.$route.query.state)
+  data () {
+    return {
+      orderToken: true
+    }
+  },
+  methods: {
+    handleOrderToken () {
+      this.orderToken = false
+      document.getElementById('orderState').innerText = '已接单'
+    }
   }
 }
 </script>

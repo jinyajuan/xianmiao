@@ -1,25 +1,25 @@
 <template>
   <div class="footer">
     <div class="icons">
-      <router-link to="/">
+      <router-link to="/seller/home">
         <span class="iconfont">&#xe607;</span>
         <span class="iconfont-desc">全部商品</span>
       </router-link>
     </div>
     <div class="icons">
-      <router-link to="/buyer/goods">
+      <router-link to="/seller/order">
         <span class="iconfont">&#xe689;</span>
         <span class="iconfont-desc">我的订单</span>
       </router-link>
     </div>
     <div class="icons">
-      <router-link to="/buyer/cart">
+      <router-link to="/seller/upload">
         <span class="iconfont">&#xe61b;</span>
         <span class="iconfont-desc">今日上新</span>
       </router-link>
     </div>
     <div class="icons">
-      <router-link to="/buyer/me">
+      <router-link to="/seller/info">
         <span class="iconfont">&#xe658;</span>
         <span class="iconfont-desc">信息管理</span>
       </router-link>

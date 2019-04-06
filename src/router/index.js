@@ -16,6 +16,7 @@ import SellerUpload from '@/pages/seller/upload/Upload'
 import SellerInfo from '@/pages/seller/info/Info'
 import SellerOrder from '@/pages/seller/order/Order'
 import SellerDetail from '@/pages/seller/detail/Detail'
+import SellerChange from '@/pages/seller/change/Change'
 
 Vue.use(Router)
 
@@ -85,6 +86,10 @@ export default new Router({
       path: '/seller/detail',
       name: 'SellerDetail',
       component: SellerDetail
+    }, {
+      path: '/seller/change',
+      name: 'SellerChange',
+      component: SellerChange
     }
   ],
   scrollBehavior: function (to, from, savedPosition) {

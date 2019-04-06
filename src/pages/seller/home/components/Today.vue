@@ -2,18 +2,28 @@
   <div class="today border">
     <p class="title border-bottom">今日上新</p>
     <ul>
-        <li class="item border-bottom" v-for="item of TodayList" :key="item.id">
-          <img class="item-img" :src="item.imgUrl" alt="">
-          <div class="item-info">
-            <div class="item-desc">{{item.name}}</div>
-            <div class="item-count">成交量：{{item.sale}}份</div>
-            <div class="item-detail">
-              <div class="item-price">￥{{item.price.toFixed(2)}}</div>
-              <button class="item-button">点击修改</button>
-            </div>
+      <li class="item border-bottom" v-for="item of TodayList" :key="item.id">
+        <img class="item-img" :src="item.imgUrl" alt="">
+        <div class="item-info">
+          <div class="item-desc">{{item.name}}</div>
+          <div class="item-count">成交量：{{item.sale}}份</div>
+          <div class="item-detail">
+            <div class="item-price">￥{{item.price.toFixed(2)}}</div>
+            <button class="item-button">
+              <router-link :to="{path:'/seller/change/',
+              query: {id: item.id,
+              imgUrl: item.imgUrl,
+              name:item.name,
+              price: item.price,
+              notice: item.notice,
+              desc: item.desc}}">
+                点击修改
+              </router-link>
+            </button>
           </div>
-        </li>
-        <li class="hasNoGoods" :class="{hide: isHide}">暂无上新</li>
+        </div>
+      </li>
+      <li class="hasNoGoods" :class="{hide: isHide}">暂无上新</li>
     </ul>
   </div>
 </template>
@@ -120,5 +130,8 @@ export default {
   }
   .hide{
     display: none;
+  }
+  a{
+    color: white;
   }
 </style>
