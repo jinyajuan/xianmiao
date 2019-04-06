@@ -6,14 +6,12 @@
       </router-link>
     </div>
     <div class="icons-icon border-right">
-      <router-link to="/buyer/goods">
-        <span class="iconfont">&#xe689;</span>
+      <router-link to="/buyer/cart">
+        <span class="iconfont">&#xe61b;</span>
       </router-link>
     </div>
     <div class="icons-buyer border-right add">
-      <router-link to="/buyer/cart">
-        <span class="iconfont-desc">加入购物车</span>
-      </router-link>
+      <span class="iconfont-desc" @click="addCartItemList">加入购物车</span>
     </div>
     <div class="icons-buyer buy">
       <router-link to="/buyer/order">
@@ -25,7 +23,12 @@
 
 <script>
 export default {
-  name: 'DetailFooter'
+  name: 'DetailFooter',
+  methods: {
+    addCartItemList () {
+      this.$store.state.CartItemList.push(this.$route.query)
+    }
+  }
 }
 </script>
 

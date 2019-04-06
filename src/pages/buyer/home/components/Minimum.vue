@@ -10,15 +10,23 @@
     </div>
     <div class="minimum-content">
       <ul>
-        <router-link to="/buyer/detail">
-          <li class="item border-bottom border-right" v-for="item of minimumPriceList" :key="item.id">
+        <li class="item border-bottom border-right" v-for="item of minimumPriceList" :key="item.id">
+          <router-link :to="{path:'/buyer/detail',
+                    query: {id: item.id,
+                    imgUrl: item.imgUrl,
+                    name:item.name,
+                    price: item.price,
+                    sale: item.sale,
+                    notice: item.notice,
+                    score: item.score,
+                    desc: item.desc}}">
             <div class="item-img">
               <img :src="item.imgUrl" alt="">
             </div>
             <p class="item-desc">{{item.name}}</p>
             <p class="item-price">￥{{item.price.toFixed(2)}}</p>
-          </li>
-        </router-link>
+          </router-link>
+        </li>
       </ul>
     </div>
   </div>

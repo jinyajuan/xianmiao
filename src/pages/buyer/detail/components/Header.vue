@@ -10,7 +10,7 @@ export default {
   name: 'DetailHeader',
   methods: {
     goBack () {
-      this.$emit('goBack')
+      this.$router.go(-1)
     }
   }
 }

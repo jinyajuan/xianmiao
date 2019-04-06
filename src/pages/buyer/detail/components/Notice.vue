@@ -4,7 +4,7 @@
       <div class="iconfont notice-left-icon">&#xe613;</div>
     </div>
     <div class="notice-center">
-      <marquee behavior="" direction="">{{detailGoods[0].notice}}</marquee>
+      <marquee behavior="" direction="">{{this.$route.query.notice}}</marquee>
     </div>
     <div class="notice-right">
       <div class="iconfont notice-right-icon">&#xe604;</div>
@@ -14,10 +14,7 @@
 
 <script>
 export default {
-  name: 'DetailNotice',
-  props: {
-    detailGoods: Array
-  }
+  name: 'DetailNotice'
 }
 </script>
 

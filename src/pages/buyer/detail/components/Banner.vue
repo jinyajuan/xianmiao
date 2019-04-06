@@ -1,6 +1,6 @@
 <template>
     <div class="banner">
-        <img class="banner-img" :src="detailGoods[0].imgSrc" alt="">
+        <img class="banner-img" :src="this.$route.query.imgUrl" alt="">
         <div class="banner-info">
           <div class="banner-title"></div>
           <div class="banner-number"></div>
@@ -10,10 +10,7 @@
 
 <script>
 export default {
-  name: 'DetailBanner',
-  props: {
-    detailGoods: Array
-  }
+  name: 'DetailBanner'
 }
 </script>
 
@@ -27,6 +24,7 @@ export default {
   }
   .banner-img{
     width: 100%;
+    margin-top: -1rem;
   }
   .banner-info{
     display: flex;

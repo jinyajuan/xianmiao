@@ -10,19 +10,29 @@
     </div>
     <div class="recommond-content">
       <ul>
-        <router-link to="/buyer/detail">
           <li class="item border-bottom" v-for="item of RecommondItemList" :key="item.id">
             <img class="item-img" :src="item.imgUrl" alt="">
             <div class="item-info">
               <div class="item-desc">{{item.name}}</div>
               <div class="item-count">成交量：{{item.sale}}份</div>
               <div class="item-detail">
-                <div class="item-price">{{item.price.toFixed(2)}}</div>
-                <button class="item-button">查看详情</button>
+                <div class="item-price">{{item.price}}</div>
+                <button class="item-button">
+                  <router-link :to="{path:'/buyer/detail',
+                    query: {id: item.id,
+                    imgUrl: item.imgUrl,
+                    name:item.name,
+                    price: item.price,
+                    sale: item.sale,
+                    notice: item.notice,
+                    score: item.score,
+                    desc: item.desc}}">
+                    查看详情
+                  </router-link>
+                </button>
               </div>
             </div>
           </li>
-        </router-link>
       </ul>
     </div>
   </div>
@@ -122,5 +132,8 @@ export default {
     border-radius: .06rem;
     color: #fff;
     float: right;
+  }
+  a{
+    color: white;
   }
 </style>

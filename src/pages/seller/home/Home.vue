@@ -32,7 +32,7 @@ export default {
       WeekendList: [
         {
           id: '0001',
-          imgUrl: require('@/assets/Images/goodsImg/0e9fac4765fa5609.jpg'),
+          imgUrl: require('@/assets/Images/goodsImg/1c1990dce60a9139.jpg'),
           name: '壹农壹果 南非红心西柚 4个 单果250g-320g 葡萄柚 柚子水果 ',
           desc: '壹农壹果 南非红心西柚 4个 单果250g-320g 葡萄柚 柚子水果',
           notice: '现场抽100位送当地有机农产品2000g,赠运费',
@@ -40,7 +40,7 @@ export default {
           price: 324.1
         }, {
           id: '0002',
-          imgUrl: require('@/assets/Images/goodsImg/1c1990dce60a9139.jpg'),
+          imgUrl: require('@/assets/Images/goodsImg/1d5507025be86115.jpg'),
           name: '壹农壹果 南非红心西柚 4个 单果250g-320g 葡萄柚 柚子水果 ',
           desc: '壹农壹果 南非红心西柚 4个 单果250g-320g 葡萄柚 柚子水果',
           notice: '现场抽100位送当地有机农产品2000g,赠运费',
@@ -51,7 +51,7 @@ export default {
       LastList: [
         {
           id: '0001',
-          imgUrl: require('@/assets/Images/goodsImg/1d5507025be86115.jpg'),
+          imgUrl: require('@/assets/Images/goodsImg/1ed00eb400f6b6f3.jpg'),
           name: '壹农壹果 南非红心西柚 4个 单果250g-320g 葡萄柚 柚子水果 ',
           desc: '壹农壹果 南非红心西柚 4个 单果250g-320g 葡萄柚 柚子水果',
           notice: '现场抽100位送当地有机农产品2000g,赠运费',
@@ -59,7 +59,7 @@ export default {
           price: 17.1
         }, {
           id: '0002',
-          imgUrl: require('@/assets/Images/goodsImg/2ffeed726882486c.jpg'),
+          imgUrl: require('@/assets/Images/goodsImg/1f37e84831c20cc9.jpg'),
           name: '壹农壹果 南非红心西柚 4个 单果250g-320g 葡萄柚 柚子水果 ',
           desc: '壹农壹果 南非红心西柚 4个 单果250g-320g 葡萄柚 柚子水果',
           notice: '现场抽100位送当地有机农产品2000g,赠运费',
@@ -67,7 +67,7 @@ export default {
           price: 224.1
         }, {
           id: '0003',
-          imgUrl: require('@/assets/Images/goodsImg/0e9fac4765fa5609.jpg'),
+          imgUrl: require('@/assets/Images/goodsImg/1ed00eb400f6b6f3.jpg'),
           name: '壹农壹果 南非红心西柚 4个 单果250g-320g 葡萄柚 柚子水果 ',
           desc: '壹农壹果 南非红心西柚 4个 单果250g-320g 葡萄柚 柚子水果',
           notice: '现场抽100位送当地有机农产品2000g,赠运费',
@@ -75,7 +75,7 @@ export default {
           price: 90.12
         }, {
           id: '0004',
-          imgUrl: require('@/assets/Images/goodsImg/0e9fac4765fa5609.jpg'),
+          imgUrl: require('@/assets/Images/goodsImg/1ed00eb400f6b6f3.jpg'),
           name: '壹农壹果 南非红心西柚 4个 单果250g-320g 葡萄柚 柚子水果 ',
           desc: '壹农壹果 南非红心西柚 4个 单果250g-320g 葡萄柚 柚子水果',
           notice: '现场抽100位送当地有机农产品2000g,赠运费',

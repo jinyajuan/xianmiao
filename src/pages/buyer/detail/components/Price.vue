@@ -1,19 +1,16 @@
 <template>
   <div class="goods-detail">
-    <div class="name">{{detailGoods[0].name}}</div>
+    <div class="name">{{this.$route.query.name}}</div>
     <div class="detail">
-      <p class="price">￥{{(detailGoods[0].price).toFixed(2)}}</p>
-      <p class="count">销量：{{detailGoods[0].sale}}</p>
+      <p class="price">￥{{this.$route.query.price}}</p>
+      <p class="count">销量：{{this.$route.query.sale}}</p>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'DetailPrice',
-  props: {
-    detailGoods: Array
-  }
+  name: 'DetailPrice'
 }
 </script>
 

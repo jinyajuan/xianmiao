@@ -1,16 +1,13 @@
 <template>
   <div class="desc">
     <div class="desc-title border-bottom">详情展示</div>
-    <div class="desc-content">{{detailGoods[0].desc}}</div>
+    <div class="desc-content">{{this.$route.query.desc}}</div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'DetailDesc',
-  props: {
-    detailGoods: Array
-  }
+  name: 'DetailDesc'
 }
 </script>
 
