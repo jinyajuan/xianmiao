@@ -8,6 +8,8 @@
     <div class="icons-icon border-right">
       <router-link to="/buyer/cart">
         <span class="iconfont">&#xe61b;</span>
+        <span class="goodsCount">{{this.$store.state.CartItemList.length}}</span>
+        <!--<span class="goodsCount">12</span>-->
       </router-link>
     </div>
     <div class="icons-buyer border-right add">
@@ -27,6 +29,7 @@ export default {
   methods: {
     addCartItemList () {
       this.$store.state.CartItemList.push(this.$route.query)
+      console.log(this.$store.state.CartItemList)
     }
   }
 }
@@ -71,4 +74,17 @@ export default {
   line-height: 1rem;
   color: #ffffff;
 }
+  .goodsCount{
+    z-index: 99;
+    position: absolute;
+    top: 0.1rem;
+    right: 0.2rem;
+    border-radius: 50%;
+    background: red;
+    color: white;
+    width: .4rem;
+    height: .4rem;
+    text-align: center;
+    line-height: .4rem;
+  }
 </style>

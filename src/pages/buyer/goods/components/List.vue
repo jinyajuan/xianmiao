@@ -1,8 +1,18 @@
 <template>
   <div class="list">
     <ul>
-      <router-link to="/buyer/detail">
-        <li class="item border-bottom border-rightbottom" v-for="item of GoodsListItem" :key="item.id">
+      <li class="item border-bottom border-rightbottom" v-for="item of GoodsListItem" :key="item.id">
+        <router-link :to="{path:'/buyer/detail',
+                    query: {id: item.id,
+                    imgUrl: item.imgUrl,
+                    name:item.name,
+                    price: item.price,
+                    sale: item.sale,
+                    notice: item.notice,
+                    score: item.score,
+                    checked: item.checked,
+                    count: item.count,
+                    desc: item.desc}}">
           <div class="item-img">
             <img :src="item.imgUrl" alt="">
           </div>
@@ -11,8 +21,8 @@
             <p class="item-price">￥{{item.price.toFixed(2)}}</p>
             <p class="item-count">{{item.sale}}份</p>
           </div>
-        </li>
-      </router-link>
+        </router-link>
+      </li>
     </ul>
   </div>
 </template>

@@ -2,7 +2,7 @@
   <div class="footer">
     <div class="sum">
       <span class="sum-word">合计：￥</span>
-      <span class="sum-price">123.00</span>
+      <span class="sum-price">{{this.totalMoney.toFixed(2)}}</span>
     </div>
     <div class="buy-btn">
       <router-link to="/buyer/pay">
@@ -14,7 +14,17 @@
 
 <script>
 export default {
-  name: 'OrderFooter'
+  name: 'OrderFooter',
+  data () {
+    return {
+      totalMoney: 0
+    }
+  },
+  mounted () {
+    this.$store.state.CartItemListGoPay.forEach((item) => {
+      this.totalMoney += item.price * item.count
+    })
+  }
 }
 </script>
 

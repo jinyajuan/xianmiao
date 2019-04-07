@@ -6,7 +6,7 @@
     </div>
     <div class="sum">
       <span class="sum-word">合计：￥</span>
-      <span class="sum-price">{{parseFloat(totalPrice).toFixed(2)}}</span>
+      <span class="sum-price">{{totalPrice}}</span>
     </div>
     <div class="buy-btn">
       <button @click="goPay">结算</button>

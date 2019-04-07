@@ -22,40 +22,48 @@ export default {
       GoodsListItem: [
         {
           id: '0001',
-          imgUrl: 'https://img14.360buyimg.com/babel/s180x180_jfs/t1/15492/22/10575/256417/5c8875d3Ecc98b5ce/d102b1ac792d19a8.jpg!q80.webp',
+          imgUrl: require('@/assets/Images/goodsImg/02a68370ac63938b.jpg'),
           name: '壹农壹果 南非红心西柚 4个 单果250g-320g 葡萄柚 柚子水果 ',
-          price: 34.02,
-          sale: 123212
+          sale: 10029,
+          price: 12.1,
+          desc: '壹农壹果 南非红心西柚 4个 单果250g-320g 葡萄柚 柚子水果壹农壹果 南非红心西柚 4个 单果250g-320g 葡萄柚 柚子水果壹农壹果 南非红心西柚 4个 单果250g-320g 葡萄柚 柚子水果',
+          notice: '注意：02.01~02.28 [08:00~22:00]内前来购买，可享受买一赠一活动的；数量有限，售完为止。',
+          score: 4.9,
+          count: 1,
+          checked: false
         }, {
           id: '0002',
-          imgUrl: 'https://img10.360buyimg.com/n7/jfs/t23566/321/2459019300/418458/bf23226e/5b7fad2cN7961426f.jpg',
+          imgUrl: require('@/assets/Images/goodsImg/4a8ca21834ebd25d.jpg'),
           name: '壹农壹果 南非红心西柚 4个 单果250g-320g 葡萄柚 柚子水果 ',
-          price: 34.02,
-          sale: 21232
+          sale: 129,
+          price: 30.02,
+          desc: '壹农壹果 南非红心西柚 4个 单果250g-320g 葡萄柚 柚子水果壹农壹果 南非红心西柚 4个 单果250g-320g 葡萄柚 柚子水果壹农壹果 南非红心西柚 4个 单果250g-320g 葡萄柚 柚子水果',
+          notice: '注意：02.01~02.28 [08:00~22:00]内前来购买，可享受买一赠一活动的；数量有限，售完为止。',
+          score: 3.2,
+          count: 1,
+          checked: false
         }, {
           id: '0003',
-          imgUrl: 'https://img14.360buyimg.com/n7/jfs/t1/28473/39/11517/753149/5c90b4acE86a5662c/ab810b9167736079.png',
+          imgUrl: require('@/assets/Images/goodsImg/4a8ca21834ebd25d.jpg'),
           name: '壹农壹果 南非红心西柚 4个 单果250g-320g 葡萄柚 柚子水果 ',
-          price: 34.012,
-          sale: 32
+          sale: 999,
+          price: 42.00,
+          desc: '壹农壹果 南非红心西柚 4个 单果250g-320g 葡萄柚 柚子水果壹农壹果 南非红心西柚 4个 单果250g-320g 葡萄柚 柚子水果壹农壹果 南非红心西柚 4个 单果250g-320g 葡萄柚 柚子水果',
+          notice: '注意：02.01~02.28 [08:00~22:00]内前来购买，可享受买一赠一活动的；数量有限，售完为止。',
+          score: 4.4,
+          count: 1,
+          checked: false
         }, {
           id: '0004',
-          imgUrl: 'https://img12.360buyimg.com/n7/jfs/t24637/296/923948809/749862/6eb9a861/5b82b3c0N779a24cc.png',
+          imgUrl: require('@/assets/Images/goodsImg/4a8ca21834ebd25d.jpg'),
           name: '壹农壹果 南非红心西柚 4个 单果250g-320g 葡萄柚 柚子水果 ',
-          price: 34.102,
-          sale: 1222232
-        }, {
-          id: '0005',
-          imgUrl: 'https://img10.360buyimg.com/n2/jfs/t27556/260/2108512160/465739/73f83982/5bf79780N414fe121.jpg',
-          name: '壹农壹果 南非红心西柚 4个 单果250g-320g 葡萄柚 柚子水果 ',
-          price: 34.021,
-          sale: 12
-        }, {
-          id: '0006',
-          imgUrl: 'https://img10.360buyimg.com/n2/jfs/t27556/260/2108512160/465739/73f83982/5bf79780N414fe121.jpg',
-          name: '壹农壹果 南非红心西柚 4个 单果250g-320g 葡萄柚 柚子水果 ',
-          price: 34.02,
-          sale: 100
+          sale: 10,
+          price: 88.909,
+          desc: '壹农壹果 南非红心西柚 4个 单果250g-320g 葡萄柚 柚子水果壹农壹果 南非红心西柚 4个 单果250g-320g 葡萄柚 柚子水果壹农壹果 南非红心西柚 4个 单果250g-320g 葡萄柚 柚子水果',
+          notice: '注意：02.01~02.28 [08:00~22:00]内前来购买，可享受买一赠一活动的；数量有限，售完为止。',
+          score: 5.0,
+          count: 1,
+          checked: false
         }
       ]
     }

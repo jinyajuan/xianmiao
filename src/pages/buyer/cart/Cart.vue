@@ -36,49 +36,6 @@ export default {
   name: 'Cart',
   data () {
     return {
-      // CartItemList: [
-      //   {
-      //     id: '0001',
-      //     imgUrl: 'https://img14.360buyimg.com/babel/s180x180_jfs/t1/15492/22/10575/256417/5c8875d3Ecc98b5ce/d102b1ac792d19a8.jpg!q80.webp',
-      //     desc: '壹农壹果 南非红心西柚 4个 单果250g-320g 葡萄柚 柚子水果 ',
-      //     count: 1,
-      //     volume: '12343',
-      //     price: 1,
-      //     checked: false
-      //   }, {
-      //     id: '0002',
-      //     imgUrl: 'https://img14.360buyimg.com/babel/s180x180_jfs/t1/15492/22/10575/256417/5c8875d3Ecc98b5ce/d102b1ac792d19a8.jpg!q80.webp',
-      //     desc: '壹农壹果 南非红心西柚 4个 单果250g-320g 葡萄柚 柚子水果 ',
-      //     count: 1,
-      //     volume: '12343',
-      //     price: 2.01,
-      //     checked: false
-      //   }, {
-      //     id: '0003',
-      //     imgUrl: 'https://img14.360buyimg.com/babel/s180x180_jfs/t1/15492/22/10575/256417/5c8875d3Ecc98b5ce/d102b1ac792d19a8.jpg!q80.webp',
-      //     desc: '壹农壹果 南非红心西柚 4个 单果250g-320g 葡萄柚 柚子水果 ',
-      //     count: 1,
-      //     checked: false,
-      //     volume: '12343',
-      //     price: 3.00
-      //   }, {
-      //     id: '0004',
-      //     imgUrl: 'https://img14.360buyimg.com/babel/s180x180_jfs/t1/15492/22/10575/256417/5c8875d3Ecc98b5ce/d102b1ac792d19a8.jpg!q80.webp',
-      //     desc: '壹农壹果 南非红心西柚 4个 单果250g-320g 葡萄柚 柚子水果 ',
-      //     count: 1,
-      //     volume: '12343',
-      //     price: 4,
-      //     checked: false
-      //   }, {
-      //     id: '0006',
-      //     imgUrl: 'https://img14.360buyimg.com/babel/s180x180_jfs/t1/15492/22/10575/256417/5c8875d3Ecc98b5ce/d102b1ac792d19a8.jpg!q80.webp',
-      //     desc: '壹农壹果 南非红心西柚 4个 单果250g-320g 葡萄柚 柚子水果 ',
-      //     count: 1,
-      //     volume: '12343',
-      //     price: 5,
-      //     checked: false
-      //   }
-      // ],
       isSelectAll: false,
       totalPrice: 0,
       isDeleteGoods: true,
@@ -134,7 +91,7 @@ export default {
       // 遍历每一项，当选中的状态下进行计算
       this.$store.state.CartItemList.forEach((item) => {
         if (item.checked) {
-          totalPrice += (parseInt(item.count) * (parseFloat(item.price).toFixed(2)))
+          totalPrice += parseInt(item.count) * parseFloat(item.price)
         }
       })
       this.totalPrice = parseFloat(totalPrice.toFixed(2))
@@ -183,13 +140,23 @@ export default {
       if (this.$store.state.CartItemListGoPay.length === 0) {
         this.hasNoGoodsToPay = false
       } else {
-        this.$router.push(path: '/buyer/order)
+        this.$router.push('/buyer/order')
       }
     },
     //  9. 处理弹出面板的消失
     handleDelNoGoodsToPay () {
       this.hasNoGoodsToPay = true
     }
+  },
+  mounted () {
+    let totalPrice = 0
+    // 遍历每一项，当选中的状态下进行计算
+    this.$store.state.CartItemList.forEach((item) => {
+      if (item.checked) {
+        totalPrice += parseInt(item.count) * parseFloat(item.price)
+      }
+    })
+    this.totalPrice = parseFloat(totalPrice.toFixed(2))
   }
 }
 </script>

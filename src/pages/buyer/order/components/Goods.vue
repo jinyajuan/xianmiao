@@ -1,6 +1,6 @@
 <template>
   <div class="goods">
-    <ul class="list" v-for="item of orderList" :key="item.id">
+    <ul class="list" v-for="item of this.$store.state.CartItemListGoPay" :key="item.id">
       <li class="item border-bottom">
         <router-link to="/buyer/detail">
           <img class="item-img" :src="item.imgUrl" alt="">
@@ -21,9 +21,6 @@
 <script>
 export default {
   name: 'OrderGoods',
-  props: {
-    orderList: Array
-  },
   data () {
     return {
     }

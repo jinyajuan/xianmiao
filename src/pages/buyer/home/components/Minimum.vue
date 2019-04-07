@@ -19,6 +19,8 @@
                     sale: item.sale,
                     notice: item.notice,
                     score: item.score,
+                    checked: item.checked,
+                    count: item.count,
                     desc: item.desc}}">
             <div class="item-img">
               <img :src="item.imgUrl" alt="">
