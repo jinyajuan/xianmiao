@@ -1,11 +1,9 @@
 <template>
   <div class="goods-detail">
-    <div class="name">
-      壹农壹果 南非红心西柚 4个 单果250g-320g 葡萄柚 柚子水果
-    </div>
+    <div class="name">{{this.$route.query.name}}</div>
     <div class="detail">
-      <p class="price">￥67.99</p>
-      <p class="count">销量：111111</p>
+      <p class="price">￥{{this.$route.query.price}}</p>
+      <p class="count">销量：{{this.$route.query.sale}}</p>
     </div>
   </div>
 </template>

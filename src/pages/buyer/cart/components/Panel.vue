@@ -14,7 +14,7 @@
 
 <script>
 export default {
-  name: 'isDeleteGoods',
+  name: 'CartDeletePanel',
   props: {
     isDeleteGoods: Boolean
   },

@@ -1,13 +1,18 @@
 <template>
     <div class="header">
-      <span class="iconfont header-icon">&#xe64e;</span>
+      <span class="iconfont header-icon" @click="goBack">&#xe64e;</span>
       <span class="header-title">全部商品</span>
     </div>
 </template>
 
 <script>
 export default {
-  name: 'GoodsHeader'
+  name: 'GoodsHeader',
+  methods: {
+    goBack () {
+      this.$router.go(-1)
+    }
+  }
 }
 </script>
 

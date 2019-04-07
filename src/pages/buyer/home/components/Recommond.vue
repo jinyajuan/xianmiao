@@ -10,19 +10,31 @@
     </div>
     <div class="recommond-content">
       <ul>
-        <router-link to="/detail">
           <li class="item border-bottom" v-for="item of RecommondItemList" :key="item.id">
             <img class="item-img" :src="item.imgUrl" alt="">
             <div class="item-info">
-              <div class="item-desc">{{item.desc}}</div>
-              <div class="item-count">成交量：{{item.count}}</div>
+              <div class="item-desc">{{item.name}}</div>
+              <div class="item-count">成交量：{{item.sale}}份</div>
               <div class="item-detail">
                 <div class="item-price">{{item.price}}</div>
-                <button class="item-button">查看详情</button>
+                <button class="item-button">
+                  <router-link :to="{path:'/buyer/detail',
+                    query: {id: item.id,
+                    imgUrl: item.imgUrl,
+                    name:item.name,
+                    price: item.price,
+                    sale: item.sale,
+                    notice: item.notice,
+                    count: item.count,
+                    checked: item.checked,
+                    score: item.score,
+                    desc: item.desc}}">
+                    查看详情
+                  </router-link>
+                </button>
               </div>
             </div>
           </li>
-        </router-link>
       </ul>
     </div>
   </div>
@@ -31,30 +43,8 @@
 <script>
 export default {
   name: 'HomeRecommond',
-  data () {
-    return {
-      RecommondItemList: [
-        {
-          id: '0001',
-          imgUrl: 'https://img14.360buyimg.com/babel/s180x180_jfs/t1/15492/22/10575/256417/5c8875d3Ecc98b5ce/d102b1ac792d19a8.jpg!q80.webp',
-          desc: '壹农壹果 南非红心西柚 4个 单果250g-320g 葡萄柚 柚子水果 ',
-          count: '10029',
-          price: '￥34.00'
-        }, {
-          id: '0002',
-          imgUrl: 'https://img14.360buyimg.com/babel/s180x180_jfs/t1/15492/22/10575/256417/5c8875d3Ecc98b5ce/d102b1ac792d19a8.jpg!q80.webp',
-          desc: '壹农壹果 南非红心西柚 4个 单果250g-320g 葡萄柚 柚子水果 ',
-          count: '10029',
-          price: '￥34.00'
-        }, {
-          id: '0003',
-          imgUrl: 'https://img14.360buyimg.com/babel/s180x180_jfs/t1/15492/22/10575/256417/5c8875d3Ecc98b5ce/d102b1ac792d19a8.jpg!q80.webp',
-          desc: '壹农壹果 南非红心西柚 4个 单果250g-320g 葡萄柚 柚子水果 ',
-          count: '10029',
-          price: '￥34.00'
-        }
-      ]
-    }
+  props: {
+    RecommondItemList: Array
   }
 }
 </script>
@@ -144,5 +134,8 @@ export default {
     border-radius: .06rem;
     color: #fff;
     float: right;
+  }
+  a{
+    color: white;
   }
 </style>

@@ -1,11 +1,10 @@
 <template>
     <div class="banner">
-      <img class="banner-img" src="https://img10.360buyimg.com/n2/jfs/t27556/260/2108512160/465739/73f83982/5bf79780N414fe121.jpg" alt="">
-      <div class="banner-info">
-        <div class="banner-title"></div>
-        <div class="banner-number">
+        <img class="banner-img" :src="this.$route.query.imgUrl" alt="">
+        <div class="banner-info">
+          <div class="banner-title"></div>
+          <div class="banner-number"></div>
         </div>
-      </div>
     </div>
 </template>
 
@@ -25,6 +24,7 @@ export default {
   }
   .banner-img{
     width: 100%;
+    margin-top: -1rem;
   }
   .banner-info{
     display: flex;

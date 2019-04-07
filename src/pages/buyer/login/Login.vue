@@ -1,6 +1,6 @@
 <template>
   <div>
-    <login-header></login-header>
+    <login-header @goBack="handleGoBack"></login-header>
     <login-center></login-center>
   </div>
 </template>
@@ -9,10 +9,15 @@
 import LoginHeader from '@/pages/buyer/login/components/Header'
 import LoginCenter from '@/pages/buyer/login/components/Center'
 export default {
-  name: 'Login',
+  name: 'BuyerLogin',
   components: {
     LoginHeader,
     LoginCenter
+  },
+  methods: {
+    handleGoBack () {
+      this.$router.go(-1)
+    }
   }
 }
 </script>

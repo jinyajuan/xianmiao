@@ -1,16 +1,16 @@
 <template>
   <div class="list">
       <ul>
-        <li class="item border-bottom" v-for="(item, index) of CartItemList" :key="item.id">
+        <li class="item border-bottom" v-for="(item, index) of this.$store.state.CartItemList" :key="item.id">
           <a href="javascript:;" class="cart_check_box" :checked="item.checked" @click="isSelectSingle(item.checked,index)"></a>
-          <router-link to="/detail">
+          <router-link to="/buyer/detail">
             <img class="item-img" :src="item.imgUrl" alt="">
           </router-link>
           <div class="item-info">
             <div class="item-desc">{{item.desc}}</div>
-            <div class="item-count">成交量：{{item.volume}}</div>
+            <div class="item-count">成交量：{{item.sale}}</div>
             <div class="item-detail">
-              <div class="item-price">￥{{((item.price).toFixed(2) * parseInt(item.count)).toFixed(2)}}</div>
+              <div class="item-price">￥{{(item.price * parseInt(item.count)).toFixed(2)}}</div>
               <div class="item-count-change">
                 <button class="item-button" @click="countMinusOrAdd(false,index)">-</button>
                 <span class="item-button-counter">{{item.count}}</span>

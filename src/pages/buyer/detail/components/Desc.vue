@@ -1,17 +1,7 @@
 <template>
   <div class="desc">
     <div class="desc-title border-bottom">详情展示</div>
-    <div class="desc-content">
-      壹农壹果 南非红心西柚 4个 单果250g-320g 葡萄柚 柚子水果
-      壹农壹果 南非红心西柚 4个 单果250g-320g 葡萄柚 柚子水果
-      壹农壹果 南非红心西柚 4个 单果250g-320g 葡萄柚 柚子水果
-      壹农壹果 南非红心西柚 4个 单果250g-320g 葡萄柚 柚子水果
-      壹农壹果 南非红心西柚 4个 单果250g-320g 葡萄柚 柚子水果
-      壹农壹果 南非红心西柚 4个 单果250g-320g 葡萄柚 柚子水果
-      壹农壹果 南非红心西柚 4个 单果250g-320g 葡萄柚 柚子水果
-      壹农壹果 南非红心西柚 4个 单果250g-320g 葡萄柚 柚子水果
-      壹农壹果 南非红心西柚 4个 单果250g-320g 葡萄柚 柚子水果
-    </div>
+    <div class="desc-content">{{this.$route.query.desc}}</div>
   </div>
 </template>
 

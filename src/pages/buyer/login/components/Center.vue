@@ -3,8 +3,10 @@
     <form action="">
       <input class="border-bottom" type="text" placeholder="请输入用户名">
       <input class="border-bottom" type="password" placeholder="请输入密码">
-      <button>登录</button>
-      <router-link to="/reg">没有账号？立即注册</router-link>
+      <router-link to="/">
+        <button>登录</button>
+      </router-link>
+      <router-link to="/buyer/reg">没有账号？立即注册</router-link>
     </form>
   </div>
 </template>

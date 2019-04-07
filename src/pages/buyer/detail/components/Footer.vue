@@ -6,24 +6,29 @@
       </router-link>
     </div>
     <div class="icons-icon border-right">
-      <router-link to="/goods">
-        <span class="iconfont">&#xe689;</span>
+      <router-link to="/buyer/cart">
+        <span class="iconfont">&#xe61b;</span>
       </router-link>
     </div>
     <div class="icons-buyer border-right add">
-      <router-link to="/cart">
-        <span class="iconfont-desc">加入购物车</span>
-      </router-link>
+      <span class="iconfont-desc" @click="addCartItemList">加入购物车</span>
     </div>
     <div class="icons-buyer buy">
-      <span class="iconfont-desc">立即购买</span>
+      <router-link to="/buyer/order">
+        <span class="iconfont-desc">立即购买</span>
+      </router-link>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'DetailFooter'
+  name: 'DetailFooter',
+  methods: {
+    addCartItemList () {
+      this.$store.state.CartItemList.push(this.$route.query)
+    }
+  }
 }
 </script>
 

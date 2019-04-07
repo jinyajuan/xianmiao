@@ -4,8 +4,7 @@
       <div class="iconfont notice-left-icon">&#xe613;</div>
     </div>
     <div class="notice-center">
-      <marquee behavior="" direction="">注意：02.01~02.28 [08:00~22:00]内前来购买，
-        可享受买一赠一活动的；数量有限，售完为止。</marquee>
+      <marquee behavior="" direction="">{{this.$route.query.notice}}</marquee>
     </div>
     <div class="notice-right">
       <div class="iconfont notice-right-icon">&#xe604;</div>
