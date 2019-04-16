@@ -1,0 +1,146 @@
+let express = require('express')
+let mysql = require('mysql')
+let dbConfig = require('../db/dbConfig')
+let user = require('../db/userSQL')
+
+let router = express.Router()
+
+// 使用DBConfig.js的配置信息创建一个MySql链接池
+// let connection = mysql.createConnection(dbConfig.mysql)
+// connection.connect()
+dbConfig.connect()
+
+router.post('/reg', function (req, res) {
+  let params = req.body
+
+  dbConfig.query(user.queryById, [params.user_id], (err, result) => {
+    console.log(result);
+    if (err) throw err
+    else {
+      // 从数据库查询该用户id是否是被注册
+      if( result.length !== 0) {
+        res.send({
+          status: 1,
+          msg: '该用户名已经被注册了'
+        })
+        res.end()
+      } else if (result.length === 0) {
+        let userInfo = [
+          params.user_id,
+          params.user_pwd,
+          params.user_name,
+          params.user_identify,
+          params.user_phone,
+          params.shop_name,
+          params.shop_address
+        ];
+        dbConfig.query(user.insert, userInfo, (err, result) => {
+          console.log(result);
+          if(err) throw err
+          else {
+            res.send({
+              params,
+              status:0,
+              message: '注册成功',
+              result
+            })
+            res.end()
+          }
+        })
+      }
+    }
+  })
+})
+
+router.post('/login', function (req, res) {
+  let params = req.body
+  // console.log(params);
+  dbConfig.query(user.queryById, [params.user_id], (err, result) => {
+    if (err) throw err
+    else {
+      // 从数据库查询该用户id是否是被注册
+      if( result.length === 0) {
+        res.send({
+          status: 2,
+          msg: '该用户名未被注册！'
+        })
+        res.end()
+      } else {  // 存在该用户名
+        let aa = result[0]
+
+        if(aa.user_id === params.user_id && aa.user_pwd === params.user_pwd) {
+          res.send({
+            status:0,
+            msg: '登录成功~'
+          })
+          res.end()
+        } else {
+          res.send({
+            status:1,
+            msg: '用户名或者密码错误！',
+          })
+          res.end()
+        }
+      }
+    }
+  })
+})
+
+router.post('/uploadGoods',function (req, res) {
+  let params = req.body
+
+  let goodsInfo= [
+    params.user_id,
+    params.goods_id,
+    params.goods_img,
+    params.goods_name,
+    params.goods_price,
+    params.goods_desc,
+    params.goods_notice,
+    params.goods_count,
+    params.goods_score,
+    params.goods_sale,
+    params.goods_checked
+  ]
+
+  dbConfig.query(user.uploadGoods, goodsInfo, (err, result) => {
+    console.log(result)
+    if(err) throw err
+    else {
+      res.send({
+        status: 0,
+        msg: '商品上传成功！'
+      })
+      res.end()
+    }
+  })
+})
+
+router.post('/sellerHomeGoods',function (req, res) {
+  let params = req.body
+  console.log(params)
+
+  dbConfig.query(user.getSellerHomeGoods, [params.user_id], (err, result) => {
+    console.log(result)
+    if(err) throw err
+    else {
+      if(result.length === 0) {
+        res.send({
+          status: 1,
+          msg: '没有找到数据！'
+        })
+        res.end()
+      } else {
+        res.send({
+          status: 0,
+          result,
+          msg: '数据查找成功！'
+        })
+        res.end()
+      }
+
+    }
+  })
+})
+
+module.exports = router

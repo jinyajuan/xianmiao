@@ -1,20 +1,50 @@
 <template>
   <div class="login">
     <div class="welcome">欢迎来到卖家板块~</div>
-    <form action="">
-      <input class="border-bottom" type="text" placeholder="请输入用户名">
-      <input class="border-bottom" type="password" placeholder="请输入密码">
-      <router-link to="/seller/home">
-        <button>登录</button>
-      </router-link>
+    <div>
+      <input class="border-bottom" v-model="user_id" type="text" placeholder="请输入用户名">
+      <input class="border-bottom" v-model="user_pwd" type="password" placeholder="请输入密码">
+      <button @click="sellerLogin">登录</button>
       <router-link to="/seller/reg">没有账号？立即注册</router-link>
-    </form>
+    </div>
   </div>
 </template>
 
 <script>
+import axios from 'axios'
 export default {
-  name: 'LoginCenter'
+  name: 'LoginCenter',
+  data () {
+    return {
+      user_id: '',
+      user_pwd: ''
+    }
+  },
+  methods: {
+    sellerLogin () {
+      axios.post('/users/login', {
+        user_id: this.user_id,
+        user_pwd: this.user_pwd
+      }).then((response) => {
+        let res = response.data
+        if (res.status === 0) {
+          alert(res.msg)
+          this.$router.push({
+            path: '/seller/home',
+            query: {
+              user_id: this.user_id
+            }
+          })
+        } else if (res.status === 1) {
+          // console.log('密码错误')
+          alert(res.msg)
+        } else {
+          // console.log('未被注册')
+          alert(res.msg)
+        }
+      })
+    }
+  }
 }
 </script>
 
@@ -25,6 +55,9 @@ export default {
     padding-bottom: 100%;
     margin: 2rem auto;
     /*background-color: #ee9900;*/
+  }
+  .error{
+    color: red;
   }
   .welcome{
     width: 100%;

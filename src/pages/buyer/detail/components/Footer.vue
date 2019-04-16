@@ -9,7 +9,6 @@
       <router-link to="/buyer/cart">
         <span class="iconfont">&#xe61b;</span>
         <span class="goodsCount">{{this.$store.state.CartItemList.length}}</span>
-        <!--<span class="goodsCount">12</span>-->
       </router-link>
     </div>
     <div class="icons-buyer border-right add">
@@ -17,7 +16,7 @@
     </div>
     <div class="icons-buyer buy">
       <router-link to="/buyer/order">
-        <span class="iconfont-desc">立即购买</span>
+        <span class="iconfont-desc" @click="buyImmediately">立即购买</span>
       </router-link>
     </div>
   </div>
@@ -30,6 +29,10 @@ export default {
     addCartItemList () {
       this.$store.state.CartItemList.push(this.$route.query)
       console.log(this.$store.state.CartItemList)
+    },
+    buyImmediately () {
+      this.$store.state.CartItemListGoPay.push(this.$route.query)
+      this.$router.push('/buyer/order')
     }
   }
 }

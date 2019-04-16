@@ -14,21 +14,24 @@ import HomeToday from '@/pages/seller/home/components/Today'
 import HomeWeekend from '@/pages/seller/home/components/Weekend'
 import HomeLast from '@/pages/seller/home/components/Last'
 import HomeFooter from '@/pages/seller/home/components/Footer'
+import axios from 'axios'
 export default {
   name: 'SellerHome',
   data () {
     return {
-      TodayList: [
-        {
-          id: '0001',
-          imgUrl: require('@/assets/Images/goodsImg/0e9fac4765fa5609.jpg'),
-          name: '壹农壹果 南非红心西柚 4个 单果250g-320g 葡萄柚 柚子水果 ',
-          desc: '壹农壹果 南非红心西柚 4个 单果250g-320g 葡萄柚 柚子水果',
-          notice: '现场抽100位送当地有机农产品2000g,赠运费',
-          sale: 0,
-          price: 23.11
-        }
-      ],
+      user_id: '',
+      TodayList: {},
+      // TodayList: [
+      //   {
+      //     id: '0001',
+      //     imgUrl: require('@/assets/Images/goodsImg/0e9fac4765fa5609.jpg'),
+      //     name: '壹农壹果 南非红心西柚 4个 单果250g-320g 葡萄柚 柚子水果 ',
+      //     desc: '壹农壹果 南非红心西柚 4个 单果250g-320g 葡萄柚 柚子水果',
+      //     notice: '现场抽100位送当地有机农产品2000g,赠运费',
+      //     sale: 0,
+      //     price: 23.11
+      //   }
+      // ],
       WeekendList: [
         {
           id: '0001',
@@ -91,6 +94,23 @@ export default {
     HomeWeekend,
     HomeLast,
     HomeFooter
+  },
+  mounted () {
+    console.log('mounted')
+    axios.post('/users/sellerHomeGoods', {
+      user_id: this.$route.query.user_id
+    }).then((response) => {
+      let res = response.data
+      if (res.status === 0) {
+        alert(res.msg)
+        console.log('获取成功')
+        this.TodayList = res.result
+        console.log(this.TodayList)
+      } else {
+
+        console.log('获取失败')
+      }
+    })
   }
 }
 </script>

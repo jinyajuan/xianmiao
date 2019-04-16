@@ -1,42 +1,77 @@
 <template>
   <div class="reg">
-      <form action="">
+      <!--<form action="">-->
+    <div>
         <div :class="{'hide': isHide}">
           <div class="title">欢迎来到卖家注册模块~</div>
-          <input class="border-bottom" type="text" placeholder="请输入用户名">
-          <input class="border-bottom" type="password" placeholder="请输入密码">
-          <input class="border-bottom" type="password" placeholder="请再次输入密码">
+          <input class="border-bottom" type="text"     v-model="user_id" placeholder="请输入用户名">
+          <input class="border-bottom" type="password" v-model="user_pwd" user_pwd="user_pwd" placeholder="请输入密码">
+          <input class="border-bottom" type="password" v-model="user_pwd_again" placeholder="请再次输入密码">
           <input class="btn" type="button" @click="handleNextOne" value="下一步">
         </div>
         <div :class="{'hide': !isHide, 'hide1': isHide1}">
           <div class="title">请完善个人信息</div>
-          <input class="border-bottom" type="text" placeholder="请输入您的姓名">
-          <input class="border-bottom" type="text" placeholder="请输入您的证件号码(身份证)">
-          <input class="border-bottom" type="tel" placeholder="请输入您的电话号码">
+          <input class="border-bottom" type="text" v-model="user_name" placeholder="请输入您的姓名">
+          <input class="border-bottom" type="text" v-model="user_identify" placeholder="请输入您的证件号码(身份证)">
+          <input class="border-bottom" type="tel"  v-model="user_phone" placeholder="请输入您的电话号码">
           <input class="btn" type="button" @click="handleNextTwo" value="下一步">
         </div>
         <div :class="{'hide': !isHide1}">
           <div class="title">请完善店铺信息~</div>
-          <input class="border-bottom" type="text" placeholder="请输入您的店铺名称">
-          <input class="border-bottom" type="password" placeholder="请输入您的店铺地址">
-          <router-link to="/seller/login">
-            <input class="btn" type="submit" value="注册">
-          </router-link>
+          <input class="border-bottom" type="text" v-model="shop_name" placeholder="请输入您的店铺名称">
+          <input class="border-bottom" type="text" v-model="shop_address" placeholder="请输入您的店铺地址">
+          <!--<router-link to="/seller/login">-->
+          <input class="btn" type="submit" value="注册" @click="sellerReg">
+          <!--</router-link>-->
         </div>
-      </form>
+      <!--</form>-->
+    </div>
   </div>
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   name: 'RegCenter',
   data () {
     return {
+      user_id: '',
+      user_pwd: '',
+      user_pwd_again: '',
+      user_name: '',
+      user_identify: '',
+      user_phone: '',
+      shop_name: '',
+      shop_address: '',
       isHide: false,
       isHide1: false
     }
   },
   methods: {
+    sellerReg () {
+      axios.post('/users/reg', {
+        user_id: this.user_id,
+        user_pwd: this.user_pwd,
+        user_name: this.user_name,
+        user_identify: this.user_identify,
+        user_phone: this.user_phone,
+        shop_name: this.shop_name,
+        shop_address: this.shop_address
+      }).then((response) => {
+        let res = response.data
+        if (res.status === 0) {
+          alert(res.message)
+          this.$router.push({
+            path: '/seller/home',
+            query: {
+              user_id: this.user_id
+            }
+          })
+        } else {
+          alert(res.message)
+        }
+      })
+    },
     handleNextOne () {
       this.isHide = !this.isHide
     },
