@@ -2,21 +2,21 @@
   <div class="today border">
     <p class="title border-bottom">今日上新</p>
     <ul>
-      <li class="item border-bottom" v-for="item of TodayList" :key="item.id">
-        <img class="item-img" :src="item.imgUrl" alt="">
+      <li class="item border-bottom" v-for="item of this.TodayList" :key="item.goods_id">
+        <img class="item-img" :src="item.goods_img" alt="">
         <div class="item-info">
-          <div class="item-desc">{{item.name}}</div>
-          <div class="item-count">成交量：{{item.sale}}份</div>
+          <div class="item-desc">{{item.goods_name}}</div>
+          <div class="item-count">成交量：{{item.goods_sale}}份</div>
           <div class="item-detail">
-            <div class="item-price">￥{{item.price.toFixed(2)}}</div>
+            <div class="item-price">￥{{item.goods_price}}</div>
             <button class="item-button">
               <router-link :to="{path:'/seller/change/',
-              query: {id: item.id,
-              imgUrl: item.imgUrl,
-              name:item.name,
-              price: item.price,
-              notice: item.notice,
-              desc: item.desc}}">
+              query: {goods_id: item.goods_id,
+              goods_img: item.goods_img,
+              goods_name:item.goods_name,
+              goods_price: item.goods_price,
+              goods_notice: item.goods_notice,
+              goods_desc: item.goods_desc}}">
                 点击修改
               </router-link>
             </button>
@@ -33,15 +33,15 @@ export default {
   name: 'HomeToday',
   data () {
     return {
-      isHide: true
+      isHide: false
     }
   },
   props: {
     TodayList: Array
   },
-  mounted () {
-    if (this.TodayList.length === 0) {
-      this.isHide = !this.isHide
+  updated () {
+    if (this.TodayList.length !== 0) {
+      this.isHide = true
     }
   }
 }

@@ -118,10 +118,10 @@ router.post('/uploadGoods',function (req, res) {
 
 router.post('/sellerHomeGoods',function (req, res) {
   let params = req.body
-  console.log(params)
+  // console.log(params)
 
   dbConfig.query(user.getSellerHomeGoods, [params.user_id], (err, result) => {
-    console.log(result)
+    // console.log(result)
     if(err) throw err
     else {
       if(result.length === 0) {
@@ -139,6 +139,31 @@ router.post('/sellerHomeGoods',function (req, res) {
         res.end()
       }
 
+    }
+  })
+})
+
+router.post('/changeGoodsInfo',function (req, res) {
+  let params = req.body
+  let changedInfo = [
+    params.goods_img,
+    params.goods_price,
+    params.goods_name,
+    params.goods_desc,
+    params.goods_notice,
+    params.goods_id
+  ]
+
+  dbConfig.query(user.changeGoodsInfo, changedInfo, (err, result) => {
+    console.log(result)
+    if (err) throw err
+    else {
+      res.send({
+        status: 0,
+        result,
+        msg: '商品信息修改成功~'
+      })
+      res.end()
     }
   })
 })

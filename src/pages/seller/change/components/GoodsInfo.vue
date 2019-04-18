@@ -1,48 +1,66 @@
 <template>
   <div class="center">
-    <form action="">
+    <div>
       <div class="session">
-        <label for="img">上传图片:</label>
-        <input id="img" type="file">
-        <!--<input id="img" type="file" :value="this.$route.query.imgUrl">-->
+        <label for="img">图片地址:</label>
+        <input id="img" type="text" :value="this.$route.query.goods_img" ref="goods_img">
       </div>
       <div class="session">
         <label for="name">名称:</label>
-        <input id="name" type="text" :value="this.$route.query.name">
+        <input id="name" type="text" :value="this.$route.query.goods_name" ref="goods_name">
       </div>
       <div class="session">
         <label for="price">单价:</label>
-        <input id="price" type="text" :value="this.$route.query.price">
+        <input id="price" type="text" :value="this.$route.query.goods_price" ref="goods_price">
       </div>
       <div class="session">
         <label for="desc">详细描述:</label>
-        <input id="desc" type="text" :value="this.$route.query.desc">
+        <input id="desc" type="text" :value="this.$route.query.goods_desc" ref="goods_desc">
       </div>
       <div class="session">
         <label for="notice">活动公告:</label>
-        <input id="notice" type="text" :value="this.$route.query.notice">
+        <input id="notice" type="text" :value="this.$route.query.goods_notice" ref="goods_notice">
       </div>
       <div class="btn-session">
-        <router-link to="/seller/home">
-          <input class="btn" type="submit" value="确认修改">
-        </router-link>
+        <input class="btn" type="submit" value="确认修改" @click="changeGoodsInfo">
       </div>
-    </form>
+    </div>
   </div>
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   name: 'ChangeGoodsInfo',
   data () {
     return {
-      name: ''
+      goods_id: '',
+      goods_img: '',
+      goods_name: '',
+      goods_price: '',
+      goods_desc: '',
+      goods_notice: ''
     }
   },
-  mounted () {
-    console.log(this.$route.query)
-    this.name = this.$route.query.name
-    console.log(this.name)
+  methods: {
+    changeGoodsInfo () {
+      axios.post('/users/changeGoodsInfo', {
+        goods_id: this.$route.query.goods_id,
+        goods_img: this.$refs.goods_img.value,
+        goods_name: this.$refs.goods_name.value,
+        goods_price: this.$refs.goods_price.value,
+        goods_desc: this.$refs.goods_desc.value,
+        goods_notice: this.$refs.goods_notice.value
+      }).then((response) => {
+        let res = response.data
+        if (res.status === 0) {
+          alert(res.msg)
+          this.$router.go(-1)
+        } else {
+          alert(res.msg)
+        }
+      })
+    }
   }
 }
 </script>

@@ -2,7 +2,7 @@
   <div class="last border">
     <p class="title border-bottom">一周以前上新</p>
     <ul>
-      <li class="item border-bottom" v-for="item of LastList" :key="item.id">
+      <li class="item border-bottom" v-for="item of this.LastList" :key="item.id">
         <img class="item-img" :src="item.imgUrl" alt="">
         <div class="item-info">
           <div class="item-desc">{{item.name}}</div>
@@ -11,11 +11,12 @@
             <div class="item-price">￥{{item.price.toFixed(2)}}</div>
             <button class="item-button">
               <router-link :to="{path:'/seller/change/',
-              query: {id: item.id,
-              name:item.name,
-              price: item.price,
-              notice: item.notice,
-              desc: item.desc}}">
+              query: {goods_id: item.goods_id,
+              goods_img: item.goods_img,
+              goods_name:item.goods_name,
+              goods_price: item.goods_price,
+              goods_notice: item.goods_notice,
+              goods_desc: item.goods_desc}}">
                 点击修改
               </router-link>
             </button>
@@ -32,15 +33,15 @@ export default {
   name: 'HomeLast',
   data () {
     return {
-      isHide: true
+      isHide: false
     }
   },
   props: {
     LastList: Array
   },
-  mounted () {
-    if (this.LastList.length === 0) {
-      this.isHide = !this.isHide
+  updated () {
+    if (this.LastList.length !== 0) {
+      this.isHide = true
     }
   }
 }
