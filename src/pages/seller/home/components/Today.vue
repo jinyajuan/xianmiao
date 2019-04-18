@@ -14,6 +14,7 @@
               query: {goods_id: item.goods_id,
               goods_img: item.goods_img,
               goods_name:item.goods_name,
+              goods_type:item.goods_type,
               goods_price: item.goods_price,
               goods_notice: item.goods_notice,
               goods_desc: item.goods_desc}}">

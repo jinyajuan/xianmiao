@@ -51,11 +51,11 @@
     <div class="change-phone info-session" v-bind:class="{active:isActive}">
      <div>
        <div class="session">
-         <label for="shop_name">店名:</label>
+         <label for="shop_name">店铺名称</label>
          <input id="shop_name" type="tel" placeholder="请输入新的店铺名称..." ref="change_shop_name">
        </div>
        <div class="session">
-         <label for="shop_address">地址:</label>
+         <label for="shop_address">店铺地址</label>
          <input id="shop_address" type="tel" placeholder="请输入新的店铺地址..." ref="change_shop_address">
        </div>
         <div class="session">

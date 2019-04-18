@@ -14,7 +14,7 @@ router.post('/reg', function (req, res) {
   let params = req.body
 
   dbConfig.query(user.queryById, [params.user_id], (err, result) => {
-    console.log(result);
+    // console.log(result);
     if (err) throw err
     else {
       // 从数据库查询该用户id是否是被注册
@@ -100,11 +100,12 @@ router.post('/uploadGoods',function (req, res) {
     params.goods_count,
     params.goods_score,
     params.goods_sale,
-    params.goods_checked
+    params.goods_checked,
+    params.goods_type
   ]
 
   dbConfig.query(user.uploadGoods, goodsInfo, (err, result) => {
-    console.log(result)
+    // console.log(result)
     if(err) throw err
     else {
       res.send({
@@ -151,11 +152,12 @@ router.post('/changeGoodsInfo',function (req, res) {
     params.goods_name,
     params.goods_desc,
     params.goods_notice,
+    params.goods_type,
     params.goods_id
   ]
 
   dbConfig.query(user.changeGoodsInfo, changedInfo, (err, result) => {
-    console.log(result)
+    // console.log(result)
     if (err) throw err
     else {
       res.send({
@@ -204,7 +206,7 @@ router.post('/selectPassword', function (req, res) {
 
 router.post('/changePassword', function (req, res) {
   let params = req.body
-  console.log(params)
+  // console.log(params)
 
   dbConfig.query(user.changePassword, [params.user_pwd, params.user_id], (err, result) => {
     console.log(result)
@@ -222,10 +224,10 @@ router.post('/changePassword', function (req, res) {
 
 router.post('/changePhone', function (req, res) {
   let params = req.body
-  console.log(params)
+  // console.log(params)
 
   dbConfig.query(user.changePhone, [params.user_phone,params.shop_name,params.shop_address, params.user_id], (err, result) => {
-    console.log(result)
+    // console.log(result)
     if (err) throw err
     else {
       res.send({
