@@ -168,4 +168,74 @@ router.post('/changeGoodsInfo',function (req, res) {
   })
 })
 
+router.post('/baseInfo',function (req, res) {
+  let params = req.body
+
+  dbConfig.query(user.getBaseInfo, [params.user_id], (err, result) => {
+    // console.log(result)
+    if (err) throw err
+    else {
+      res.send({
+        status: 0,
+        result,
+        msg: '找到卖家基本信息'
+      })
+      res.end()
+    }
+  })
+})
+
+router.post('/selectPassword', function (req, res) {
+  let params = req.body
+
+  dbConfig.query(user.selectPassword, [params.user_id], (err, result) => {
+    console.log(result)
+    if (err) throw err
+    else {
+      res.send({
+        status: 0,
+        result,
+        msg: '密码寻找成功~'
+      })
+      res.end()
+    }
+  })
+})
+
+router.post('/changePassword', function (req, res) {
+  let params = req.body
+  console.log(params)
+
+  dbConfig.query(user.changePassword, [params.user_pwd, params.user_id], (err, result) => {
+    console.log(result)
+    if (err) throw err
+    else {
+      res.send({
+        status: 0,
+        result,
+        msg: '密码修改成功~'
+      })
+      res.end()
+    }
+  })
+})
+
+router.post('/changePhone', function (req, res) {
+  let params = req.body
+  console.log(params)
+
+  dbConfig.query(user.changePhone, [params.user_phone,params.shop_name,params.shop_address, params.user_id], (err, result) => {
+    console.log(result)
+    if (err) throw err
+    else {
+      res.send({
+        status: 0,
+        result,
+        msg: '其他信息修改成功~'
+      })
+      res.end()
+    }
+  })
+})
+
 module.exports = router
