@@ -1,19 +1,51 @@
 <template>
   <div class="login">
-    <form action="">
-      <input class="border-bottom" type="text" placeholder="请输入用户名">
-      <input class="border-bottom" type="password" placeholder="请输入密码">
-      <router-link to="/">
-        <button>登录</button>
-      </router-link>
+    <div>
+      <input class="border-bottom" type="text" placeholder="请输入用户名" v-model="buyer_id">
+      <input class="border-bottom" type="password" placeholder="请输入密码" v-model="buyer_pwd">
+      <button @click="buyerLogin">登录</button>
       <router-link to="/buyer/reg">没有账号？立即注册</router-link>
-    </form>
+    </div>
   </div>
 </template>
 
 <script>
+import axios from 'axios'
 export default {
-  name: 'LoginCenter'
+  name: 'LoginCenter',
+  data () {
+    return {
+      buyer_id: '',
+      buyer_pwd: ''
+    }
+  },
+  methods: {
+    buyerLogin () {
+      axios.post('/buyer/login', {
+        buyer_id: this.buyer_id,
+        buyer_pwd: this.buyer_pwd
+      }).then((response) => {
+        let res = response.data
+        if (res.status === 0) {
+          alert(res.msg)
+          this.$router.push({
+            path: '/',
+            query: {
+              buyer_id: this.buyer_id
+            }
+          })
+        } else if (res.status === 1) {
+          alert(res.msg)
+          this.buyer_id = ''
+          this.buyer_pwd = ''
+        } else {
+          alert(res.msg)
+          this.buyer_id = ''
+          this.buyer_pwd = ''
+        }
+      })
+    }
+  }
 }
 </script>
 

@@ -2,11 +2,11 @@
   <ul class="items">
     <li class="item border-bottom">
       <span class="iconfont sc">&#xe62a;</span>
-      <span class="item-desc">收藏</span>
+      <span class="item-desc" @click="handleCollect">收藏</span>
     </li>
     <li class="item border-bottom">
       <span class="iconfont pj">&#xe664;</span>
-      <span class="item-desc">评价</span>
+      <span class="item-desc" @click="handleComment">评价</span>
     </li>
     <li class="item border-bottom" @click="goSwitch">
       <span class="iconfont zh">&#xe621;</span>
@@ -21,6 +21,16 @@ export default {
   methods: {
     goSwitch () {
       this.$emit('goSwitch')
+    },
+    handleCollect () {
+      if (location.hash === '#/buyer/me') {
+        alert('请先登录')
+      }
+    },
+    handleComment () {
+      if (location.hash === '#/buyer/me') {
+        alert('请先登录')
+      }
     }
   }
 }

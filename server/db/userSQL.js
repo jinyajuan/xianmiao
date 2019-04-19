@@ -10,7 +10,12 @@ var user = {
   getBaseInfo: 'select user_name,user_identify,shop_name,shop_address,user_phone from seller_reg where user_id=?',
   selectPassword: 'select user_pwd from seller_reg where user_id=?',
   changePassword: 'update seller_reg set user_pwd = ? where user_id=?',
-  changePhone: 'update seller_reg set user_phone = ?,shop_name=?,shop_address=? where user_id=?'
+  changePhone: 'update seller_reg set user_phone = ?,shop_name=?,shop_address=? where user_id=?',
+
+  buyerReg_insert: 'insert into buyer_reg (buyer_id,buyer_pwd,buyer_name,buyer_phone,buyer_address) values (?,?,?,?,?)',
+  buyer_queryById: 'select * from buyer_reg where buyer_id = ?',
+  buyer_login_step2: 'select * from buyer_reg where buyer_id=? and buyer_pwd =?',
+  buyer_login_step1: 'select * from buyer_reg where buyer_id =?'
 }
 
 module.exports = user

@@ -5,7 +5,7 @@
         <div :class="{'hide': isHide}">
           <div class="title">欢迎来到卖家注册模块~</div>
           <input class="border-bottom" type="text"     v-model="user_id" placeholder="请使用电话号码或者邮箱" ref="user_id">
-          <input class="border-bottom" type="password" v-model="user_pwd" user_pwd="user_pwd" placeholder="请输入密码">
+          <input class="border-bottom" type="password" v-model="user_pwd"  placeholder="请输入密码">
           <input class="border-bottom" type="password" v-model="user_pwd_again" placeholder="请再次输入密码">
           <input class="btn" type="button" @click="handleNextOne" value="下一步">
         </div>

@@ -1,35 +1,57 @@
 <template>
   <div class="reg">
-      <form action="">
+      <div>
         <div :class="{'hide': isHide}">
-          <input class="border-bottom" type="text" placeholder="请输入用户名">
-          <input class="border-bottom" type="password" placeholder="请输入密码">
-          <input class="border-bottom" type="password" placeholder="请再次输入密码">
+          <input class="border-bottom" type="text" placeholder="请输入用户名" v-model="buyer_id">
+          <input class="border-bottom" type="password" placeholder="请输入密码" v-model="buyer_pwd">
+          <input class="border-bottom" type="password" placeholder="请再次输入密码" v-model="buyer_pwd_again">
           <input class="btn" type="button" @click="handleNext" value="下一步">
         </div>
         <div :class="{'hide': (!isHide)}">
-          <input class="border-bottom" type="text" placeholder="请输入收件人姓名">
-          <input class="border-bottom" type="tel" placeholder="请输入收件人电话号码">
-          <input class="border-bottom" type="text" placeholder="请输入收件人地址">
-          <router-link to="/buyer/login">
-            <input class="btn" type="submit" value="注册">
-          </router-link>
+          <input class="border-bottom" type="text" placeholder="请输入收件人姓名" v-model="buyer_name">
+          <input class="border-bottom" type="tel" placeholder="请输入收件人电话号码" v-model="buyer_phone">
+          <input class="border-bottom" type="text" placeholder="请输入收件人地址" v-model="buyer_address">
+          <input class="btn" type="submit" value="注册" @click="buyerReg">
         </div>
-      </form>
+      </div>
   </div>
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   name: 'LoginCenter',
   data () {
     return {
-      isHide: false
+      isHide: false,
+      buyer_id: '',
+      buyer_pwd: '',
+      buyer_pwd_again: '',
+      buyer_phone: '',
+      buyer_name: '',
+      buyer_address: ''
     }
   },
   methods: {
     handleNext () {
       this.isHide = !this.isHide
+    },
+    buyerReg () {
+      axios.post('/buyer/reg', {
+        buyer_id: this.buyer_id,
+        buyer_pwd: this.buyer_pwd,
+        buyer_phone: this.buyer_phone,
+        buyer_name: this.buyer_name,
+        buyer_address: this.buyer_address
+      }).then((response) => {
+        let res = response.data
+        if (res.status === 0) {
+          alert(res.msg)
+          this.$router.push('/buyer/login')
+        } else {
+          alert(res.msg)
+        }
+      })
     }
   }
 }
