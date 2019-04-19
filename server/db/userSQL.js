@@ -15,7 +15,11 @@ var user = {
   buyerReg_insert: 'insert into buyer_reg (buyer_id,buyer_pwd,buyer_name,buyer_phone,buyer_address) values (?,?,?,?,?)',
   buyer_queryById: 'select * from buyer_reg where buyer_id = ?',
   buyer_login_step2: 'select * from buyer_reg where buyer_id=? and buyer_pwd =?',
-  buyer_login_step1: 'select * from buyer_reg where buyer_id =?'
+  buyer_login_step1: 'select * from buyer_reg where buyer_id =?',
+  buyer_get_all_goods: 'select * from seller_upload_goods',
+  buyer_get_minimum_price: 'select * from seller_upload_goods order by goods_price',
+  buyer_get_recommend: 'select * from seller_upload_goods order by goods_sale desc,goods_score desc,goods_price asc',
+  buyer_get_swiper: 'select * from seller_goods_vip'
 }
 
 module.exports = user

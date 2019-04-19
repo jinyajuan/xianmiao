@@ -1,6 +1,6 @@
 <template>
     <div class="banner">
-        <img class="banner-img" :src="this.$route.query.imgUrl" alt="">
+        <img class="banner-img" :src="this.$route.query.goods_img" alt="">
         <div class="banner-info">
           <div class="banner-title"></div>
           <div class="banner-number"></div>

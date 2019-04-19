@@ -10,6 +10,7 @@ let router = express.Router()
 // connection.connect()
 dbConfig.connect()
 
+// 注册
 router.post('/reg', function (req, res) {
   let params = req.body
 
@@ -51,7 +52,7 @@ router.post('/reg', function (req, res) {
     }
   })
 })
-
+// 登录
 router.post('/login', function (req, res) {
   let params = req.body
   // console.log(params);
@@ -85,10 +86,10 @@ router.post('/login', function (req, res) {
     }
   })
 })
-
+// 上传商品
 router.post('/uploadGoods',function (req, res) {
   let params = req.body
-
+  console.log(params);
   let goodsInfo= [
     params.user_id,
     params.goods_id,
@@ -105,7 +106,7 @@ router.post('/uploadGoods',function (req, res) {
   ]
 
   dbConfig.query(user.uploadGoods, goodsInfo, (err, result) => {
-    // console.log(result)
+    console.log(result)
     if(err) throw err
     else {
       res.send({

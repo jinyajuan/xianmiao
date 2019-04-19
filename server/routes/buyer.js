@@ -85,4 +85,61 @@ router.post('/login', function (req, res) {
   })
 })
 
+// 获取全部商品
+router.post('/getGoods', function (req, res) {
+  dbConfig.query(user.buyer_get_all_goods, (err, result) => {
+    if (err) throw err
+    else {
+      res.send({
+        status: 0,
+        result,
+        msg: '获取所有商品成功！'
+      })
+    }
+  })
+})
+
+// 获取低价商品
+router.post('/getMinimumPrice', function (req, res) {
+  dbConfig.query(user.buyer_get_minimum_price, (err, result) => {
+    if (err) throw err
+    else {
+      res.send({
+        status: 0,
+        result,
+        msg: '获取所有低价商品！'
+      })
+    }
+  })
+})
+
+// 获取推荐商品（销量最高，评分最高，价钱最低）
+router.post('/getRecommondItem', function (req, res) {
+  dbConfig.query(user.buyer_get_recommend, (err, result) => {
+    if (err) throw err
+    else {
+      res.send({
+        status: 0,
+        result,
+        msg: '获取所有推荐商品！'
+      })
+    }
+  })
+})
+
+// 获取VIP商品（轮播组件）
+router.post('/getSwiper', function (req, res) {
+  dbConfig.query(user.buyer_get_swiper, (err, result) => {
+    if (err) throw err
+    else {
+      res.send({
+        status: 0,
+        result,
+        msg: '获取vip商品！'
+      })
+    }
+  })
+})
+
+
 module.exports = router

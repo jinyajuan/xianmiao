@@ -4,7 +4,7 @@
       <div class="iconfont notice-left-icon">&#xe613;</div>
     </div>
     <div class="notice-center">
-      <marquee behavior="" direction="">{{this.$route.query.notice}}</marquee>
+      <marquee behavior="" direction="">{{this.$route.query.goods_notice}}</marquee>
     </div>
     <div class="notice-right">
       <div class="iconfont notice-right-icon">&#xe604;</div>

@@ -1,9 +1,9 @@
 <template>
   <div class="goods-detail">
-    <div class="name">{{this.$route.query.name}}</div>
+    <div class="name">{{this.$route.query.goods_name}}</div>
     <div class="detail">
-      <p class="price">￥{{this.$route.query.price}}</p>
-      <p class="count">销量：{{this.$route.query.sale}}</p>
+      <p class="price">￥{{this.$route.query.goods_price}}</p>
+      <p class="count">销量：{{this.$route.query.goods_sale}}</p>
     </div>
   </div>
 </template>

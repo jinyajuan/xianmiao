@@ -9,7 +9,7 @@
             v-html="item"
       >
       </span>
-      <span class="iconfont score-center-icon">{{this.$route.query.score}}分</span>
+      <span class="iconfont score-center-icon">{{this.$route.query.goods_score}}分</span>
     </div>
     <div class="score-right">
       <div class="iconfont score-right-icon">&#xe604;</div>
@@ -26,7 +26,7 @@ export default {
     }
   },
   mounted () {
-    for (let i = 0; i < Math.round(this.$route.query.score); i++) {
+    for (let i = 0; i < Math.round(this.$route.query.goods_score); i++) {
       this.starList.push('&#xe610;')
     }
   }

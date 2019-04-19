@@ -10,25 +10,26 @@
     </div>
     <div class="recommond-content">
       <ul>
-          <li class="item border-bottom" v-for="item of RecommondItemList" :key="item.id">
-            <img class="item-img" :src="item.imgUrl" alt="">
+        <li class="item border-bottom" v-for="item of RecommondItemList" :key="item.goods_id">
+            <img class="item-img" :src="item.goods_img" alt="">
             <div class="item-info">
-              <div class="item-desc">{{item.name}}</div>
-              <div class="item-count">成交量：{{item.sale}}份</div>
+              <div class="item-desc">{{item.goods_name}}</div>
+              <div class="item-count">成交量：{{item.goods_sale}}份</div>
               <div class="item-detail">
-                <div class="item-price">{{item.price}}</div>
+                <div class="item-price">{{item.goods_price}}</div>
                 <button class="item-button">
                   <router-link :to="{path:'/buyer/detail',
-                    query: {id: item.id,
-                    imgUrl: item.imgUrl,
-                    name:item.name,
-                    price: item.price,
-                    sale: item.sale,
-                    notice: item.notice,
-                    score: item.score,
-                    checked: item.checked,
-                    count: item.count,
-                    desc: item.desc}}">
+                  query: {goods_id: item.goods_id,
+                  goods_img: item.goods_img,
+                  goods_name:item.goods_name,
+                  goods_price: item.goods_price,
+                  goods_sale: item.goods_sale,
+                  goods_notice: item.goods_notice,
+                  goods_score: item.goods_score,
+                  goods_checked: item.goods_checked,
+                  goods_count: item.goods_count,
+                  goods_type: item.goods_type,
+                  goods_desc: item.goods_desc}}">
                     查看详情
                   </router-link>
                 </button>

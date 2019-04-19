@@ -1,7 +1,7 @@
 <template>
   <div class="desc">
     <div class="desc-title border-bottom">详情展示</div>
-    <div class="desc-content">{{this.$route.query.desc}}</div>
+    <div class="desc-content">{{this.$route.query.goods_desc}}</div>
   </div>
 </template>
 
