@@ -12,12 +12,28 @@
       <span class="iconfont zh">&#xe621;</span>
       <span class="item-desc">身份转换至卖家</span>
     </li>
+    <li class="item border-bottom" @click="exit" v-if="exitLogin">
+      <span class="iconfont tc">&#xe64c;</span>
+      <span class="item-desc">退出登录</span>
+    </li>
   </ul>
 </template>
 
 <script>
 export default {
   name: 'MeItems',
+  data () {
+    return {
+      exitLogin: false
+    }
+  },
+  mounted () {
+    if (sessionStorage.getItem('buyer_login_state') === null) { // 未登录
+      this.exitLogin = false
+    } else { // 登录成功
+      this.exitLogin = true
+    }
+  },
   methods: {
     goSwitch () {
       this.$emit('goSwitch')
@@ -31,6 +47,11 @@ export default {
       if (location.hash === '#/buyer/me') {
         alert('请先登录')
       }
+    },
+    exit () {
+      // 退出登录
+      sessionStorage.removeItem('buyer_login_state')
+      this.$router.push('/buyer/login')
     }
   }
 }
@@ -61,6 +82,9 @@ export default {
   }
   .zh{
     color: #44abff;
+  }
+  .tc{
+    color: #ff4aa5;
   }
   .item-desc{
     /*line-height: .66rem;*/

@@ -26,12 +26,14 @@ export default {
         buyer_pwd: this.buyer_pwd
       }).then((response) => {
         let res = response.data
+        // 登录成功
         if (res.status === 0) {
           alert(res.msg)
+          sessionStorage.setItem('buyer_login_state', this.buyer_id) // 把用户名对应的值保存到sessionStorage
           this.$router.push({
             path: '/',
             query: {
-              buyer_id: this.buyer_id
+              buyer_id: sessionStorage.getItem('buyer_login_state')
             }
           })
         } else if (res.status === 1) {

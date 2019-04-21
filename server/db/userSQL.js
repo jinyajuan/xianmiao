@@ -19,7 +19,16 @@ var user = {
   buyer_get_all_goods: 'select * from seller_upload_goods',
   buyer_get_minimum_price: 'select * from seller_upload_goods order by goods_price',
   buyer_get_recommend: 'select * from seller_upload_goods order by goods_sale desc,goods_score desc,goods_price asc',
-  buyer_get_swiper: 'select * from seller_goods_vip'
+  buyer_get_swiper: 'select * from seller_goods_vip',
+  selectAllGoods: 'select * from seller_upload_goods where goods_id=?',
+  select_from_cart: 'select * from buyer_cart where goods_id=?',
+  add_cart: 'INSERT INTO buyer_cart (buyer_id,user_id,goods_id, goods_img, goods_name,goods_price,goods_desc,goods_notice,goods_count,goods_score,goods_sale,goods_checked,goods_type) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)',
+  add_cart_count: 'update buyer_cart set goods_count=goods_count+1 where goods_id=?',
+  get_cart: 'select * from buyer_cart where buyer_id=?',
+  get_cart_item: 'select * from buyer_cart where buyer_id=? and goods_id=?',
+  count_add: 'update buyer_cart set goods_count=goods_count+1 where goods_id=?',
+  count_minus: 'update buyer_cart set goods_count=goods_count-1 where goods_id=?',
+  delete_goods: 'delete from buyer_cart where goods_id=? and buyer_id=?'
 }
 
 module.exports = user

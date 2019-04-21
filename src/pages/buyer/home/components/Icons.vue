@@ -1,6 +1,6 @@
 <template>
   <div class="icons">
-    <router-link to="/buyer/goods">
+    <router-link :to="{path:'/buyer/goods',query: {buyer_id: this.$route.query.buyer_id}}">
       <div class="icon" v-for="item of IconsList" :key="item.id">
         <span class="iconfont" v-html="item.iconUrl"></span>
         <span class="desc">{{item.iconDesc}}</span>

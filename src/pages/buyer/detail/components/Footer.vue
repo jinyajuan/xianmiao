@@ -8,32 +8,80 @@
     <div class="icons-icon border-right">
       <router-link to="/buyer/cart">
         <span class="iconfont">&#xe61b;</span>
-        <span class="goodsCount">{{this.$store.state.CartItemList.length}}</span>
+        <span class="goodsCount">{{this.cart_all_goods_length}}</span>
       </router-link>
     </div>
     <div class="icons-buyer border-right add">
       <span class="iconfont-desc" @click="addCartItemList">加入购物车</span>
     </div>
     <div class="icons-buyer buy">
-      <router-link to="/buyer/order">
-        <span class="iconfont-desc" @click="buyImmediately">立即购买</span>
-      </router-link>
+      <span class="iconfont-desc" @click="buyImmediately">立即购买</span>
     </div>
   </div>
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   name: 'DetailFooter',
+  data () {
+    return {
+      buyer_id: '',
+      goods_id: '',
+      cart_all_goods_length: 0
+    }
+  },
   methods: {
+    // 加入购物车
     addCartItemList () {
-      this.$store.state.CartItemList.push(this.$route.query)
-      console.log(this.$store.state.CartItemList)
+      if (sessionStorage.getItem('buyer_login_state') === null) {
+        alert('请先登录')
+        this.$router.push('/buyer/login')
+      } else {
+        // this.$store.state.CartItemList.push(this.$route.query)
+        // console.log(this.$store.state.CartItemList)
+        axios.post('/buyer/addCart', {
+          buyer_id: sessionStorage.getItem('buyer_login_state'),
+          goods_id: this.$route.query.goods_id
+        }).then((response) => {
+          let res = response.data
+          // console.log(res)
+          if (res.status === 0) {
+            alert(res.msg)
+            axios.post('/buyer/cartList', {
+              buyer_id: sessionStorage.getItem('buyer_login_state')
+            }).then((response) => {
+              let res = response.data
+              if (res.status === 0) {
+                // alert(res.msg)
+                this.cart_all_goods_length = res.result.length
+              }
+            })
+          }
+        })
+      }
     },
     buyImmediately () {
-      this.$store.state.CartItemListGoPay.push(this.$route.query)
-      this.$router.push('/buyer/order')
+      console.log(sessionStorage.getItem('buyer_login_state'))
+      if (sessionStorage.getItem('buyer_login_state') === null) {
+        alert('请先登录')
+        this.$router.push('/buyer/login')
+      } else {
+        this.$store.state.CartItemListGoPay.push(this.$route.query)
+        this.$router.push('/buyer/order')
+      }
     }
+  },
+  mounted () {
+    axios.post('/buyer/cartList', {
+      buyer_id: sessionStorage.getItem('buyer_login_state')
+    }).then((response) => {
+      let res = response.data
+      if (res.status === 0) {
+        // alert(res.msg)
+        this.cart_all_goods_length = res.result.length
+      }
+    })
   }
 }
 </script>

@@ -141,5 +141,145 @@ router.post('/getSwiper', function (req, res) {
   })
 })
 
+// 加入购物车
+router.post('/addCart', function (req, res) {
+  let params = req.body
+  // 1.在所有数据中，找到商品id符合的这一条数据
+  dbConfig.query(user.selectAllGoods,[params.goods_id], (err,result1) => {
+    if (err) throw err
+    else {
+      // 2.在购物车表中寻找是否含有符合商品id的数据（判断该商品是否已经存在于购物车中
+      dbConfig.query(user.select_from_cart, [params.goods_id], (err, result2) => {
+        if (err) throw err
+        else {
+          //3.如果购物车中存在该条数据，则数量+1
+          if (result2.length === 1) {
+            dbConfig.query(user.add_cart_count, [params.goods_id], (err, result4) => {
+              if (err) throw err
+              else {
+                res.send({
+                  status: 0,
+                  result4,
+                  msg: '该商品成功+1！'
+                })
+                res.end()
+              }
+            })
+          } else if (result2.length === 0) {
+          //  4.如果购物车中不存在该条数据，则插入该条数据
+            let info = [
+              params.buyer_id,
+              result1[0].user_id,
+              result1[0].goods_id,
+              result1[0].goods_img,
+              result1[0].goods_name,
+              result1[0].goods_price,
+              result1[0].goods_desc,
+              result1[0].goods_notice,
+              result1[0].goods_count,
+              result1[0].goods_score,
+              result1[0].goods_sale,
+              result1[0].goods_checked,
+              result1[0].goods_type
+            ]
+            dbConfig.query(user.add_cart, info, (err, result3) => {
+              if (err) throw err
+              else {
+                res.send({
+                  status: 0,
+                  result3,
+                  msg: '该商品成功加入购物车！'
+                })
+                res.end()
+              }
+            })
+          }
+        }
+      })
+    }
+  })
+})
+
+// 获取购物车的长度
+router.post('/cartList', function (req,res) {
+  let params = req.body
+  console.log(params)
+  dbConfig.query(user.get_cart, [params.buyer_id], (err, result) => {
+    if (err) throw err
+    else {
+      res.send({
+        status: 0,
+        result,
+        msg: '获取所有购物车的商品！'
+      })
+    }
+  })
+})
+
+// 购物车列表上面数量的增加（+1）
+router.post('/countAdd', function (req, res) {
+  let params = req.body
+  // console.log(params)
+
+  dbConfig.query(user.count_add, [params.goods_id], (err, result) => {
+    if (err) throw err
+    else {
+      dbConfig.query(user.get_cart_item, [params.buyer_id, params.goods_id], (err, result) => {
+        if (err) throw err
+        else {
+          res.send({
+            status: 0,
+            result,
+            msg: '数量+1！'
+          })
+        }
+      })
+    }
+  })
+})
+
+// 购物车列表上面数量的减少（-1）
+router.post('/countMinus', function (req, res) {
+  let params = req.body
+  // console.log(params)
+
+  dbConfig.query(user.count_minus, [params.goods_id], (err, result) => {
+    if (err) throw err
+    else {
+      dbConfig.query(user.get_cart_item, [params.buyer_id, params.goods_id], (err, result) => {
+        if (err) throw err
+        else {
+          res.send({
+            status: 0,
+            result,
+            msg: '数量-1！'
+          })
+        }
+      })
+    }
+  })
+})
+
+// 删除某条数据
+router.post('/delGoods', function (req, res) {
+  let params = req.body
+  // console.log(params)
+
+  dbConfig.query(user.delete_goods, [params.goods_id,params.buyer_id], (err, result) => {
+    if (err) throw err
+    else {
+      dbConfig.query(user.get_cart, [params.buyer_id], (err, result) => {
+        if (err) throw err
+        else {
+          res.send({
+            status: 0,
+            result,
+            msg: '删除成功'
+          })
+        }
+      })
+    }
+  })
+})
 
 module.exports = router

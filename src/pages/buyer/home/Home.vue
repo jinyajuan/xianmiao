@@ -104,6 +104,8 @@ export default {
         }
       }
     })
+
+    console.log(sessionStorage.getItem('buyer_login_state'))
   }
 }
 </script>

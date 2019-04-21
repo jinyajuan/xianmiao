@@ -40,9 +40,6 @@ export default {
   name: 'HomeMinimum',
   props: {
     minimumPriceList: Array
-  },
-  mounted () {
-    console.log(this.minimumPriceList)
   }
 }
 </script>

@@ -11,7 +11,8 @@ export default {
   methods: {
     goBack () {
       this.$router.go(-1)
-      // alert('1')
+      // 清空暂时的订单数组
+      this.$store.state.CartItemListGoPay = []
     }
   }
 }

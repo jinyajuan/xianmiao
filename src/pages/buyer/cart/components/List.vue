@@ -1,19 +1,21 @@
 <template>
   <div class="list">
       <ul>
-        <li class="item border-bottom" v-for="(item, index) of this.$store.state.CartItemList" :key="item.id">
-          <a href="javascript:;" class="cart_check_box" :checked="item.checked" @click="isSelectSingle(item.checked,index)"></a>
+        <li class="item border-bottom" v-for="(item, index) of this.CartItemList" :key="item.goods_id">
+          <a href="javascript:;" class="cart_check_box" :checked="item.goods_checked" @click="isSelectSingle(item.goods_checked,index)"></a>
+          <!--<a href="javascript:;" class="cart_check_box" checked="false" @click="isSelectSingle(item.goods_checked,index)"></a>-->
+          <!--<a href="javascript:;" class="cart_check_box" :checked="item.goods_checked" @click="isSelectSingle(item.goods_checked,index)"></a>-->
           <router-link to="/buyer/detail">
-            <img class="item-img" :src="item.imgUrl" alt="">
+            <img class="item-img" :src="item.goods_img" alt="">
           </router-link>
           <div class="item-info">
-            <div class="item-desc">{{item.desc}}</div>
-            <div class="item-count">成交量：{{item.sale}}</div>
+            <div class="item-desc">{{item.goods_name}}</div>
+            <div class="item-count">成交量：{{item.goods_sale}}</div>
             <div class="item-detail">
-              <div class="item-price">￥{{((item.price).toFixed(2) * parseInt(item.count)).toFixed(2)}}</div>
+              <div class="item-price">￥{{parseFloat((item.goods_price * item.goods_count).toFixed(2))}}</div>
               <div class="item-count-change">
                 <button class="item-button" @click="countMinusOrAdd(false,index)">-</button>
-                <span class="item-button-counter">{{item.count}}</span>
+                <span class="item-button-counter">{{item.goods_count}}</span>
                 <button class="item-button" @click="countMinusOrAdd(true,index)">+</button>
               </div>
             </div>
@@ -28,9 +30,8 @@
 <script>
 export default {
   name: 'CartList',
-  data () {
-    return {
-    }
+  props: {
+    CartItemList: Array
   },
   methods: {
     countMinusOrAdd (flag, index) {

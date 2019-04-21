@@ -16,6 +16,7 @@ import OrderPersonal from '@/pages/buyer/order/components/Personal'
 import OrderGoods from '@/pages/buyer/order/components/Goods'
 import OrderRemake from '@/pages/buyer/order/components/Remake'
 import OrderFooter from '@/pages/buyer/order/components/Footer'
+import axios from 'axios'
 export default {
   name: 'BuyerOrder',
   components: {
@@ -38,16 +39,24 @@ export default {
     }
   },
   mounted () {
-    this.$store.state.CartItemListGoPay.forEach((item) => {
-      if (item.sale > 999) {
-        item.sale = 999 + '+'
+    axios.post('/buyer/getPersonal', {
+      buyer_id: this.sessionStorage.getItem('buyer_login_state')
+    }).then((response) => {
+      let res = response.data
+      if (res.status) {
+        
       }
     })
-    this.$store.state.CartItemList.forEach((item) => {
-      if (item.sale > 999) {
-        item.sale = 999 + '+'
-      }
-    })
+    // this.$store.state.CartItemListGoPay.forEach((item) => {
+    //   if (item.sale > 999) {
+    //     item.sale = 999 + '+'
+    //   }
+    // })
+    // this.$store.state.CartItemList.forEach((item) => {
+    //   if (item.sale > 999) {
+    //     item.sale = 999 + '+'
+    //   }
+    // })
   }
 }
 </script>

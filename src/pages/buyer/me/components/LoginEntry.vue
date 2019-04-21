@@ -1,6 +1,6 @@
 <template>
   <div class="login border-bottom">
-    <div class="already_login" v-if="login">
+    <div class="already_login" v-if="loginState">
       <img src="@/assets/Images/bgImg/716f421ebcdf580f0cffc326ad195a36.png" alt="">
     </div>
     <div class="login-entry" v-else>
@@ -14,16 +14,14 @@ export default {
   name: 'MeLoginEntry',
   data () {
     return {
-      login: true
+      loginState: false
     }
   },
   mounted () {
-    if (location.hash === '#/buyer/me') {
-      // console.log('没有登录')
-      this.login = false
-    } else {
-      // console.log('已经登录')
-      this.login = true
+    if (sessionStorage.getItem('buyer_login_state') === null) { // 未登录显示登录入口
+      this.loginState = false
+    } else { // 登录成功去除登录入口显示图标
+      this.loginState = true
     }
   },
   methods: {
