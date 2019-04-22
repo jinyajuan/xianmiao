@@ -5,7 +5,18 @@
           <a href="javascript:;" class="cart_check_box" :checked="item.goods_checked" @click="isSelectSingle(item.goods_checked,index)"></a>
           <!--<a href="javascript:;" class="cart_check_box" checked="false" @click="isSelectSingle(item.goods_checked,index)"></a>-->
           <!--<a href="javascript:;" class="cart_check_box" :checked="item.goods_checked" @click="isSelectSingle(item.goods_checked,index)"></a>-->
-          <router-link to="/buyer/detail">
+          <router-link :to="{path:'/buyer/detail',
+                  query: {goods_id: item.goods_id,
+                  goods_img: item.goods_img,
+                  goods_name:item.goods_name,
+                  goods_price: item.goods_price,
+                  goods_sale: item.goods_sale,
+                  goods_notice: item.goods_notice,
+                  goods_score: item.goods_score,
+                  goods_checked: item.goods_checked,
+                  goods_count: item.goods_count,
+                  goods_type: item.goods_type,
+                  goods_desc: item.goods_desc}}">
             <img class="item-img" :src="item.goods_img" alt="">
           </router-link>
           <div class="item-info">

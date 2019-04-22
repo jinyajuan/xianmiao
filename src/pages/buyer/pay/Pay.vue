@@ -9,7 +9,7 @@
 <script>
 import PayHeader from '@/pages/buyer/pay/components/Header'
 import PaySuccess from '@/pages/buyer/pay/components/Success'
-import HomeFooter from '@/pages/buyer/home/components/Footer'
+import HomeFooter from '@/pages/buyer/pay/components/Footer'
 export default {
   name: 'BuyerPay',
   components: {

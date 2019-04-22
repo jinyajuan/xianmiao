@@ -8,6 +8,7 @@ import BuyerReg from '@/pages/buyer/reg/Reg'
 import BuyerDetail from '@/pages/buyer/detail/Detail'
 import BuyerCart from '@/pages/buyer/cart/Cart'
 import BuyerOrder from '@/pages/buyer/order/Order'
+import BuyerInfoChange from '@/pages/buyer/change/Change'
 import BuyerPay from '@/pages/buyer/pay/Pay'
 import SellerLogin from '@/pages/seller/login/Login'
 import SellerReg from '@/pages/seller/reg/Reg'
@@ -54,6 +55,10 @@ export default new Router({
       path: '/buyer/order',
       name: 'BuyerOrder',
       component: BuyerOrder
+    }, {
+      path: '/buyer/change',
+      name: 'BuyerInfoChange',
+      component: BuyerInfoChange
     }, {
       path: '/buyer/pay',
       name: 'BuyerPay',

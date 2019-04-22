@@ -38,8 +38,6 @@ export default {
         alert('请先登录')
         this.$router.push('/buyer/login')
       } else {
-        // this.$store.state.CartItemList.push(this.$route.query)
-        // console.log(this.$store.state.CartItemList)
         axios.post('/buyer/addCart', {
           buyer_id: sessionStorage.getItem('buyer_login_state'),
           goods_id: this.$route.query.goods_id

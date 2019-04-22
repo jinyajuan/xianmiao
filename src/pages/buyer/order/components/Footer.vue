@@ -2,17 +2,16 @@
   <div class="footer">
     <div class="sum">
       <span class="sum-word">合计：￥</span>
-      <span class="sum-price">{{this.totalMoney.toFixed(2)}}</span>
+      <span class="sum-price">{{parseFloat(this.totalMoney.toFixed(2))}}</span>
     </div>
     <div class="buy-btn">
-      <router-link to="/buyer/pay">
-        <button>付款</button>
-      </router-link>
+      <button @click="goPay">付款</button>
     </div>
   </div>
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   name: 'OrderFooter',
   data () {
@@ -22,8 +21,26 @@ export default {
   },
   mounted () {
     this.$store.state.CartItemListGoPay.forEach((item) => {
-      this.totalMoney += item.price * item.count
+      this.totalMoney += item.goods_price * item.goods_count
     })
+  },
+  methods: {
+    goPay () {
+      for (var i = 0; i < this.$store.state.CartItemListGoPay.length; i++) {
+        this.$store.state.CartItemListGoPay[i].goods_checked = 1
+      }
+      console.log(this.$store.state.BuyerRemake)
+      axios.post('/buyer/goPay', {
+        goods_list: this.$store.state.CartItemListGoPay,
+        buyer_remake: this.$store.state.BuyerRemake
+      }).then((response) => {
+        let res = response.data
+        if (res.status === 0) {
+          alert(res.msg)
+          this.$router.push('/buyer/pay')
+        }
+      })
+    }
   }
 }
 </script>

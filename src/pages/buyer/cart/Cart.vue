@@ -62,16 +62,18 @@ export default {
       for (let i = 0; i < this.CartItemList.length; i++) {
         this.check_flag[i] = this.CartItemList[i].goods_checked
       }
+      // console.log(this.check_flag)
       // 1.2 商品数量的加减
       if (flag) { // 加
         axios.post('/buyer/countAdd', {
           goods_id: this.CartItemList[index].goods_id,
-          buyer_id: this.CartItemList[index].buyer_id
+          buyer_id: sessionStorage.getItem('buyer_login_state')
         }).then((response) => {
           let res = response.data
           if (res.status === 0) {
             // 1.3 将数据库内的新数据复制给购物车
-            this.CartItemList = res.result
+            // console.log(res)
+            this.CartItemList = res.result2
             // 1.4.将暂存数据赋值给购物车
             for (let j = 0; j < this.CartItemList.length; j++) {
               this.CartItemList[j].goods_checked = this.check_flag[j]
@@ -84,12 +86,12 @@ export default {
         if (this.CartItemList[index].goods_count > 1) {
           axios.post('/buyer/countMinus', {
             goods_id: this.CartItemList[index].goods_id,
-            buyer_id: this.CartItemList[index].buyer_id
+            buyer_id: sessionStorage.getItem('buyer_login_state')
           }).then((response) => {
             let res = response.data
             if (res.status === 0) {
               // 1.3 将数据库内的新数据复制给购物车
-              this.CartItemList = res.result
+              this.CartItemList = res.result2
               // 1.4 将暂存数据赋值给购物车
               for (let j = 0; j < this.CartItemList.length; j++) {
                 this.CartItemList[j].goods_checked = this.check_flag[j]
@@ -163,7 +165,7 @@ export default {
         //  7.4 删除对应的数组部分
         axios.post('/buyer/delGoods', {
           goods_id: this.CartItemList[index].goods_id,
-          buyer_id: this.CartItemList[index].buyer_id
+          buyer_id: sessionStorage.getItem('buyer_login_state')
         }).then((response) => {
           let res = response.data
           if (res.status === 0) {
@@ -197,6 +199,7 @@ export default {
       } else {
         this.$router.push('/buyer/order')
       }
+      // console.log(this.$store.state.CartItemListGoPay)
     },
     //  *9. 处理弹出面板的消失
     handleDelNoGoodsToPay () {
@@ -204,15 +207,6 @@ export default {
     }
   },
   mounted () {
-    // let totalPrice = 0
-    // // 遍历每一项，当选中的状态下进行计算
-    // this.$store.state.CartItemList.forEach((item) => {
-    //   if (item.checked) {
-    //     totalPrice += parseInt(item.count) * parseFloat(item.price)
-    //   }
-    // })
-    // this.totalPrice = parseFloat(totalPrice.toFixed(2))
-
     // 1. 获取所有购物车内的商品
     axios.post('/buyer/cartList', {
       buyer_id: sessionStorage.getItem('buyer_login_state')
@@ -220,7 +214,7 @@ export default {
       let res = response.data
       if (res.status === 0) {
         this.CartItemList = res.result
-        alert(res.msg)
+        // alert(res.msg)
         for (let i = 0; i < this.CartItemList.length; i++) {
           if (this.CartItemList[i].goods_checked === 0) {
             this.CartItemList[i].goods_checked = Boolean(this.CartItemList[i].goods_checked)

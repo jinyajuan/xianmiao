@@ -2,8 +2,8 @@
   <div class="remake">
     <div class="content">
       <div>
-        <label for="remake-content">备注：</label>
-        <input id="remake-content" type="text" placeholder="选填，先和商家协商一致">
+        <label for="remake">备注：</label>
+        <input id="remake" ref="buyer_remake" v-model="remake" type="text" placeholder="选填，先和商家协商一致">
       </div>
     </div>
   </div>
@@ -11,7 +11,16 @@
 
 <script>
 export default {
-  name: 'OrderRemake'
+  name: 'OrderRemake',
+  data () {
+    return {
+      remake: ''
+    }
+  },
+  updated () {
+    // console.log(this.$refs.buyer_remake.value)
+    this.$store.state.BuyerRemake = this.$refs.buyer_remake.value
+  }
 }
 </script>
 

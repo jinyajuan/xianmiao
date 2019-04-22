@@ -1,16 +1,27 @@
 <template>
   <div class="goods">
-    <ul class="list" v-for="item of this.$store.state.CartItemListGoPay" :key="item.id">
+    <ul class="list" v-for="item of this.$store.state.CartItemListGoPay" :key="item.goods_id">
       <li class="item border-bottom">
-        <router-link to="/buyer/detail">
-          <img class="item-img" :src="item.imgUrl" alt="">
+        <router-link :to="{path:'/buyer/detail',
+                  query: {goods_id: item.goods_id,
+                  goods_img: item.goods_img,
+                  goods_name:item.goods_name,
+                  goods_price: item.goods_price,
+                  goods_sale: item.goods_sale,
+                  goods_notice: item.goods_notice,
+                  goods_score: item.goods_score,
+                  goods_checked: item.goods_checked,
+                  goods_count: item.goods_count,
+                  goods_type: item.goods_type,
+                  goods_desc: item.goods_desc}}">
+          <img class="item-img" :src="item.goods_img" alt="">
         </router-link>
         <div class="item-info">
-          <div class="item-name">{{item.name}}</div>
-          <div class="item-sale">成交量：{{item.sale}}份</div>
+          <div class="item-name">{{item.goods_name}}</div>
+          <div class="item-sale">单价：￥{{item.goods_price}}</div>
           <div class="item-detail">
-            <div class="item-price">￥{{item.price.toFixed(2)}}</div>
-            <div class="item-count">X{{item.count}}</div>
+            <div class="item-price">￥{{parseFloat((item.goods_price * item.goods_count).toFixed(2))}}</div>
+            <div class="item-count">X{{item.goods_count}}</div>
           </div>
         </div>
       </li>

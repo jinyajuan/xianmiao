@@ -149,12 +149,12 @@ router.post('/addCart', function (req, res) {
     if (err) throw err
     else {
       // 2.在购物车表中寻找是否含有符合商品id的数据（判断该商品是否已经存在于购物车中
-      dbConfig.query(user.select_from_cart, [params.goods_id], (err, result2) => {
+      dbConfig.query(user.select_from_cart, [params.goods_id, params.buyer_id], (err, result2) => {
         if (err) throw err
         else {
           //3.如果购物车中存在该条数据，则数量+1
           if (result2.length === 1) {
-            dbConfig.query(user.add_cart_count, [params.goods_id], (err, result4) => {
+            dbConfig.query(user.add_cart_count, [params.goods_id,params.buyer_id], (err, result4) => {
               if (err) throw err
               else {
                 res.send({
@@ -219,17 +219,16 @@ router.post('/cartList', function (req,res) {
 // 购物车列表上面数量的增加（+1）
 router.post('/countAdd', function (req, res) {
   let params = req.body
-  // console.log(params)
 
-  dbConfig.query(user.count_add, [params.goods_id], (err, result) => {
+  dbConfig.query(user.count_add, [params.goods_id,params.buyer_id], (err, result1) => {
     if (err) throw err
     else {
-      dbConfig.query(user.get_cart_item, [params.buyer_id, params.goods_id], (err, result) => {
+      dbConfig.query(user.get_cart, [params.buyer_id], (err, result2) => {
         if (err) throw err
         else {
           res.send({
             status: 0,
-            result,
+            result2,
             msg: '数量+1！'
           })
         }
@@ -241,17 +240,16 @@ router.post('/countAdd', function (req, res) {
 // 购物车列表上面数量的减少（-1）
 router.post('/countMinus', function (req, res) {
   let params = req.body
-  // console.log(params)
 
-  dbConfig.query(user.count_minus, [params.goods_id], (err, result) => {
+  dbConfig.query(user.count_minus, [params.goods_id, params.buyer_id], (err, result1) => {
     if (err) throw err
     else {
-      dbConfig.query(user.get_cart_item, [params.buyer_id, params.goods_id], (err, result) => {
+      dbConfig.query(user.get_cart, [params.buyer_id], (err, result2) => {
         if (err) throw err
         else {
           res.send({
             status: 0,
-            result,
+            result2,
             msg: '数量-1！'
           })
         }
@@ -281,5 +279,180 @@ router.post('/delGoods', function (req, res) {
     }
   })
 })
+
+// 获取收件人信息（订单顶部）
+router.post('/getPersonal', function (req, res) {
+  let params = req.body
+
+  dbConfig.query(user.get_personal, [params.buyer_id], (err, result) => {
+    if (err) throw err
+    else {
+      res.send({
+        status: 0,
+        msg: '获取收件人信息',
+        result
+      })
+      res.end()
+    }
+  })
+})
+
+// 修改收件人信息
+router.post('/changePersonalInfo', function (req, res) {
+  let params = req.body
+
+  dbConfig.query(user.set_personal, [params.buyer_name,params.buyer_phone,params.buyer_address,params.buyer_id], (err, result) => {
+    if (err) throw err
+    else {
+      res.send({
+        status: 0,
+        msg: '成功修改收件人信息',
+        result
+      })
+      res.end()
+    }
+  })
+})
+
+// 去付款（下单成功）
+router.post('/goPay', function (req, res) {
+  let params = req.body
+  // console.log(params.buyer_remake)
+  for (let i = 0; i < params.goods_list.length; i++) {
+    // 1.修改所有商品的商品销售记录（先销售=原始销售+本次数量）
+    dbConfig.query(user.change_sale,[params.goods_list[i].goods_count, params.goods_list[i].goods_id,], (err,data) => {
+      if (err) throw err
+      else {
+      //  2.根据user_id找出卖家的详细信息
+        dbConfig.query(user.select_seller, [params.goods_list[i].user_id] , (err, sellerInfo) => {
+          if (err) throw err
+          else {
+            // 3.根据buyer_id找出买家所有的详细信息
+            dbConfig.query(user.select_buyer, [params.goods_list[i].buyer_id], (err, buyerInfo) => {
+              if (err) throw err
+              else {
+                //4.根据goods_id找到商品的详细信息
+                dbConfig.query(user.select_goods,[params.goods_list[i].goods_id],(err,goodsInfo) => {
+                  if (err) throw err
+                  else {
+                    // 5.将所有需要的数据数据放入数组之中
+                    let orderInfo = [
+                      (new Date()).getTime(),
+                      sellerInfo[0].user_id,
+                      sellerInfo[0].user_name,
+                      sellerInfo[0].user_identify,
+                      sellerInfo[0].user_phone,
+                      sellerInfo[0].shop_address,
+                      sellerInfo[0].shop_name,
+                      goodsInfo[0].goods_id,
+                      goodsInfo[0].goods_img,
+                      goodsInfo[0].goods_price,
+                      goodsInfo[0].goods_count,
+                      goodsInfo[0].goods_name,
+                      goodsInfo[0].goods_desc,
+                      goodsInfo[0].goods_notice,
+                      goodsInfo[0].goods_score,
+                      goodsInfo[0].goods_sale,
+                      goodsInfo[0].goods_checked,
+                      goodsInfo[0].goods_type,
+                      buyerInfo[0].buyer_id,
+                      buyerInfo[0].buyer_name,
+                      buyerInfo[0].buyer_address,
+                      buyerInfo[0].buyer_phone,
+                      goodsInfo[0].goods_price* goodsInfo[0].goods_count,
+                      params.buyer_remake
+                    ]
+                    // console.log(orderInfo)
+                    dbConfig.query(user.create_order, orderInfo, (err, result) => {
+                      if (err) throw err
+                      else {
+                        if (i === params.goods_list.length-1) {
+                          res.send({
+                            status: 0,
+                            result,
+                            msg: '购买成功'
+                          })
+                          res.end()
+                        }
+                      }
+                    })
+                  }
+                })
+              }
+            })
+          }
+        })
+      }
+    })
+  }
+})
+
+// router.post('/goPay', function (req, res) {
+//   let params = req.body
+//   // console.log(params)
+//   for (let i = 0; i < params.goods_list.length; i++) {
+//     console.log(i+ '----------'+ params.goods_list.length)
+//     // 1.根据user_id找出卖家的详细信息
+//     dbConfig.query(user.select_seller, [params.goods_list[i].user_id] , (err, sellerInfo) => {
+//       if (err) throw err
+//       else {
+//         // console.log(sellerInfo[0])
+//         // 2.根据buyer_id找出买家所有的详细信息
+//         dbConfig.query(user.select_buyer, [params.goods_list[i].buyer_id], (err, buyerInfo) => {
+//           if (err) throw err
+//           else {
+//             // 3.将所有需要的数据数据放入数组之中
+//             let orderInfo = [
+//               (new Date()).getTime(),
+//               sellerInfo[0].user_id,
+//               sellerInfo[0].user_name,
+//               sellerInfo[0].user_identify,
+//               sellerInfo[0].user_phone,
+//               sellerInfo[0].shop_address,
+//               sellerInfo[0].shop_name,
+//               params.goods_list[i].goods_id,
+//               params.goods_list[i].goods_img,
+//               params.goods_list[i].goods_price,
+//               params.goods_list[i].goods_count,
+//               params.goods_list[i].goods_name,
+//               params.goods_list[i].goods_desc,
+//               params.goods_list[i].goods_notice,
+//               params.goods_list[i].goods_score,
+//               params.goods_list[i].goods_sale,
+//               params.goods_list[i].goods_checked,
+//               params.goods_list[i].goods_type,
+//               buyerInfo[0].buyer_id,
+//               buyerInfo[0].buyer_name,
+//               buyerInfo[0].buyer_address,
+//               buyerInfo[0].buyer_phone,
+//               params.goods_list[i].goods_price* params.goods_list[i].goods_count,
+//             ]
+//             console.log(orderInfo)
+//             // 4.所有购买商品的销量变化(原始销量+现在的购买量)
+//             dbConfig.query(user.change_sale,[params.goods_list[i].goods_count, params.goods_list[i].goods_id,], (err,data) => {
+//               if (err) throw err
+//               else {
+//                 // 5.将所有详细数据全部插入表中
+//                 dbConfig.query(user.create_order, orderInfo, (err, result) => {
+//                   if (err) throw err
+//                   else {
+//                     if (i === params.goods_list.length-1) {
+//                       res.send({
+//                         status: 0,
+//                         result,
+//                         msg: '购买成功'
+//                       })
+//                       res.end()
+//                     }
+//                   }
+//                 })
+//               }
+//             })
+//           }
+//         })
+//       }
+//     })
+//   }
+// })
 
 module.exports = router

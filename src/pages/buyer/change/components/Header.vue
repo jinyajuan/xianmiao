@@ -1,19 +1,16 @@
 <template>
   <div class="header">
     <span class="iconfont header-icon" @click="goBack">&#xe64e;</span>
-    <span class="header-title">确认订单</span>
+    <span class="header-title">收件信息修改</span>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'OrderHeader',
+  name: 'ChangeHeader',
   methods: {
     goBack () {
       this.$router.go(-1)
-      // 清空暂时的订单数组和备注信息
-      this.$store.state.CartItemListGoPay = []
-      this.$store.state.BuyerRemake = ''
     }
   }
 }
@@ -45,4 +42,5 @@ export default {
     font-size: .4rem;
     color: white;
   }
+
 </style>

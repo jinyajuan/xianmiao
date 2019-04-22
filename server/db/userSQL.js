@@ -21,14 +21,25 @@ var user = {
   buyer_get_recommend: 'select * from seller_upload_goods order by goods_sale desc,goods_score desc,goods_price asc',
   buyer_get_swiper: 'select * from seller_goods_vip',
   selectAllGoods: 'select * from seller_upload_goods where goods_id=?',
-  select_from_cart: 'select * from buyer_cart where goods_id=?',
+  select_from_cart: 'select * from buyer_cart where goods_id=? and buyer_id=?',
   add_cart: 'INSERT INTO buyer_cart (buyer_id,user_id,goods_id, goods_img, goods_name,goods_price,goods_desc,goods_notice,goods_count,goods_score,goods_sale,goods_checked,goods_type) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)',
-  add_cart_count: 'update buyer_cart set goods_count=goods_count+1 where goods_id=?',
+  add_cart_count: 'update buyer_cart set goods_count=goods_count+1 where goods_id=? and buyer_id=?',
   get_cart: 'select * from buyer_cart where buyer_id=?',
   get_cart_item: 'select * from buyer_cart where buyer_id=? and goods_id=?',
-  count_add: 'update buyer_cart set goods_count=goods_count+1 where goods_id=?',
-  count_minus: 'update buyer_cart set goods_count=goods_count-1 where goods_id=?',
-  delete_goods: 'delete from buyer_cart where goods_id=? and buyer_id=?'
+  count_add: 'update buyer_cart set goods_count=goods_count+1 where goods_id=? and buyer_id=?',
+  count_minus: 'update buyer_cart set goods_count=goods_count-1 where goods_id=? and buyer_id=?',
+  delete_goods: 'delete from buyer_cart where goods_id=? and buyer_id=?',
+
+  get_personal: 'select * from buyer_reg where buyer_id=?',
+  set_personal: 'update buyer_reg set buyer_name=?,buyer_phone=?,buyer_address=? where buyer_id=?',
+
+  select_seller: 'select * from seller_reg where user_id=?',
+  select_buyer: 'select * from buyer_reg where buyer_id=?',
+  select_goods: 'select * from seller_upload_goods where goods_id=?',
+  change_sale: 'update seller_upload_goods set goods_sale=goods_sale+? where goods_id=?',
+  // create_order1: 'insert into order_copy (create_time,user_id,user_name,shop_address,shop_name,goods_id,goods_price,goods_name,goods_count,buyer_id,buyer_name,buyer_address,buyer_phone) values (?,?,?,?,?,?,?,?,?,?,?,?,?)',
+  create_order: 'insert into order_copy (create_time,user_id,user_name,user_identify,user_phone,shop_address,shop_name,goods_id,goods_img,goods_price,goods_count,goods_name,goods_desc,goods_notice,goods_score,goods_sale,goods_checked,goods_type,buyer_id,buyer_name,buyer_address,buyer_phone,goods_total_price,buyer_remake) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)'
+  // create_order: 'insert into order (user_id,user_name,user_identify,user_phone,shop_address,shop_name,buyer_id,buyer_name,buyer_address,buyer_phone,goods_id,goods_img,goods_price,goods_name,goods_desc,goods_notice,goods_count,goods_score,goods_sale,goods_checked,goods_type,buyer_remake,create_time) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)'
 }
 
 module.exports = user

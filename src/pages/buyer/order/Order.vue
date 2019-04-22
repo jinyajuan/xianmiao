@@ -28,23 +28,18 @@ export default {
   },
   data () {
     return {
-      personalInfo: [
-        {
-          id: '0001',
-          name: '王昭君',
-          phone: 15899083780,
-          address: '广东省深圳市龙岗区坂田街道和成世纪名园小区22栋A单元702室'
-        }
-      ]
+      personalInfo: []
     }
   },
   mounted () {
     axios.post('/buyer/getPersonal', {
-      buyer_id: this.sessionStorage.getItem('buyer_login_state')
+      buyer_id: sessionStorage.getItem('buyer_login_state')
     }).then((response) => {
       let res = response.data
-      if (res.status) {
-        
+      if (res.status === 0) {
+        // alert(res.msg)
+        this.personalInfo = res.result
+        // console.log(res.result)
       }
     })
     // this.$store.state.CartItemListGoPay.forEach((item) => {

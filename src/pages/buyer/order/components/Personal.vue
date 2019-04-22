@@ -1,9 +1,12 @@
 <template>
   <div class="person">
     <div class="personal" v-for="item of personalInfo" :key="item.id">
-      <div class="personal-info name">{{item.name}}</div>
-      <div class="personal-info phone">{{item.phone}}</div>
-      <div class="personal-info address">{{item.address}}</div>
+      <div class="personal-info name" ref="name">{{item.buyer_name}}</div>
+      <div class="personal-info phone" ref="phone">{{item.buyer_phone}}</div>
+      <div class="personal-info address" ref="address">{{item.buyer_address}}</div>
+      <router-link class="change" to="/buyer/change">
+        更改收件信息>
+      </router-link>
     </div>
   </div>
 </template>
@@ -19,12 +22,14 @@ export default {
 
 <style scoped>
   .person{
+    /*background-color: #55a532;*/
     background-color: #eeeeee;
     padding: .15rem;
   }
   .personal{
     /*width: 100%;*/
-    height: 2.5rem;
+    /*height: 2.5rem;*/
+    overflow: hidden;
     padding: .15rem;
     border-radius: .1rem;
     background-color: white;
@@ -53,6 +58,9 @@ export default {
     width: 100%;
     padding: .3rem 0;
     /*background-color: #55a532;*/
+  }
+  .change{
+    float: right;
   }
 
 </style>
