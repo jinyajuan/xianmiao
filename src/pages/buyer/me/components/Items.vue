@@ -12,10 +12,16 @@
       <span class="iconfont zh">&#xe621;</span>
       <span class="item-desc">身份转换至卖家</span>
     </li>
-    <li class="item border-bottom" @click="exit" v-if="exitLogin">
-      <span class="iconfont tc">&#xe64c;</span>
-      <span class="item-desc">退出登录</span>
-    </li>
+    <div v-if="exitLogin">
+      <li class="item border-bottom" @click="historyOrder">
+        <span class="iconfont dd">&#xe631;</span>
+        <span class="item-desc">历史订单</span>
+      </li>
+      <li class="item border-bottom" @click="exit" >
+        <span class="iconfont tc">&#xe64c;</span>
+        <span class="item-desc">退出登录</span>
+      </li>
+    </div>
   </ul>
 </template>
 
@@ -52,6 +58,9 @@ export default {
       // 退出登录
       sessionStorage.removeItem('buyer_login_state')
       this.$router.push('/buyer/login')
+    },
+    historyOrder () {
+      this.$router.push('/buyer/history')
     }
   }
 }
@@ -85,6 +94,9 @@ export default {
   }
   .tc{
     color: #ff4aa5;
+  }
+  .dd{
+    color: #d8ff78;
   }
   .item-desc{
     /*line-height: .66rem;*/

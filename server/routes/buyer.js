@@ -27,8 +27,8 @@ router.post('/reg', function (req, res) {
           params.buyer_id,
           params.buyer_pwd,
           params.buyer_name,
-          params.buyer_address,
-          params.buyer_phone
+          params.buyer_phone,
+          params.buyer_address
         ]
         dbConfig.query(user.buyerReg_insert, userInfo, (err, result) => {
           console.log(result)
@@ -387,72 +387,36 @@ router.post('/goPay', function (req, res) {
   }
 })
 
-// router.post('/goPay', function (req, res) {
-//   let params = req.body
-//   // console.log(params)
-//   for (let i = 0; i < params.goods_list.length; i++) {
-//     console.log(i+ '----------'+ params.goods_list.length)
-//     // 1.根据user_id找出卖家的详细信息
-//     dbConfig.query(user.select_seller, [params.goods_list[i].user_id] , (err, sellerInfo) => {
-//       if (err) throw err
-//       else {
-//         // console.log(sellerInfo[0])
-//         // 2.根据buyer_id找出买家所有的详细信息
-//         dbConfig.query(user.select_buyer, [params.goods_list[i].buyer_id], (err, buyerInfo) => {
-//           if (err) throw err
-//           else {
-//             // 3.将所有需要的数据数据放入数组之中
-//             let orderInfo = [
-//               (new Date()).getTime(),
-//               sellerInfo[0].user_id,
-//               sellerInfo[0].user_name,
-//               sellerInfo[0].user_identify,
-//               sellerInfo[0].user_phone,
-//               sellerInfo[0].shop_address,
-//               sellerInfo[0].shop_name,
-//               params.goods_list[i].goods_id,
-//               params.goods_list[i].goods_img,
-//               params.goods_list[i].goods_price,
-//               params.goods_list[i].goods_count,
-//               params.goods_list[i].goods_name,
-//               params.goods_list[i].goods_desc,
-//               params.goods_list[i].goods_notice,
-//               params.goods_list[i].goods_score,
-//               params.goods_list[i].goods_sale,
-//               params.goods_list[i].goods_checked,
-//               params.goods_list[i].goods_type,
-//               buyerInfo[0].buyer_id,
-//               buyerInfo[0].buyer_name,
-//               buyerInfo[0].buyer_address,
-//               buyerInfo[0].buyer_phone,
-//               params.goods_list[i].goods_price* params.goods_list[i].goods_count,
-//             ]
-//             console.log(orderInfo)
-//             // 4.所有购买商品的销量变化(原始销量+现在的购买量)
-//             dbConfig.query(user.change_sale,[params.goods_list[i].goods_count, params.goods_list[i].goods_id,], (err,data) => {
-//               if (err) throw err
-//               else {
-//                 // 5.将所有详细数据全部插入表中
-//                 dbConfig.query(user.create_order, orderInfo, (err, result) => {
-//                   if (err) throw err
-//                   else {
-//                     if (i === params.goods_list.length-1) {
-//                       res.send({
-//                         status: 0,
-//                         result,
-//                         msg: '购买成功'
-//                       })
-//                       res.end()
-//                     }
-//                   }
-//                 })
-//               }
-//             })
-//           }
-//         })
-//       }
-//     })
-//   }
-// })
+// 获取个人历史订单
+router.post('/getOrder', function (req, res) {
+  let params = req.body
+  console.log(params)
+  dbConfig.query(user.get_history_order, [params.buyer_id], (err, result) => {
+    if (err) throw err
+    else {
+      res.send({
+        status: 0,
+        msg: '获取到个人所有订单',
+        result
+      })
+      res.end()
+    }
+  })
+})
 
+// 获取订单详情
+router.post('/getOrderDetail', function (req, res) {
+  let params = req.body
+  dbConfig.query(user.get_order_detail, [params.create_time], (err, result) => {
+    if (err) throw err
+    else {
+      res.send({
+        msg: '获取到订单详情',
+        status: 0,
+        result
+      })
+      res.end()
+    }
+  })
+})
 module.exports = router

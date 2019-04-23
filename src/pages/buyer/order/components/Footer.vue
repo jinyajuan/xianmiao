@@ -26,6 +26,9 @@ export default {
   },
   methods: {
     goPay () {
+      if (this.$store.state.CartItemListGoPay.length === 0) {
+        alert('请返回选择商品~')
+      }
       for (var i = 0; i < this.$store.state.CartItemListGoPay.length; i++) {
         this.$store.state.CartItemListGoPay[i].goods_checked = 1
       }

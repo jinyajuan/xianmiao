@@ -10,6 +10,8 @@ import BuyerCart from '@/pages/buyer/cart/Cart'
 import BuyerOrder from '@/pages/buyer/order/Order'
 import BuyerInfoChange from '@/pages/buyer/change/Change'
 import BuyerPay from '@/pages/buyer/pay/Pay'
+import BuyerHistory from '@/pages/buyer/history/History'
+import BuyerOrderDetail from '@/pages/buyer/orderDetail/OrderDetail'
 import SellerLogin from '@/pages/seller/login/Login'
 import SellerReg from '@/pages/seller/reg/Reg'
 import SellerHome from '@/pages/seller/home/Home'
@@ -59,6 +61,14 @@ export default new Router({
       path: '/buyer/change',
       name: 'BuyerInfoChange',
       component: BuyerInfoChange
+    }, {
+      path: '/buyer/history',
+      name: 'BuyerHistory',
+      component: BuyerHistory
+    }, {
+      path: '/buyer/orderDetail',
+      name: 'BuyerOrderDetail',
+      component: BuyerOrderDetail
     }, {
       path: '/buyer/pay',
       name: 'BuyerPay',

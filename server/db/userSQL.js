@@ -37,9 +37,9 @@ var user = {
   select_buyer: 'select * from buyer_reg where buyer_id=?',
   select_goods: 'select * from seller_upload_goods where goods_id=?',
   change_sale: 'update seller_upload_goods set goods_sale=goods_sale+? where goods_id=?',
-  // create_order1: 'insert into order_copy (create_time,user_id,user_name,shop_address,shop_name,goods_id,goods_price,goods_name,goods_count,buyer_id,buyer_name,buyer_address,buyer_phone) values (?,?,?,?,?,?,?,?,?,?,?,?,?)',
-  create_order: 'insert into order_copy (create_time,user_id,user_name,user_identify,user_phone,shop_address,shop_name,goods_id,goods_img,goods_price,goods_count,goods_name,goods_desc,goods_notice,goods_score,goods_sale,goods_checked,goods_type,buyer_id,buyer_name,buyer_address,buyer_phone,goods_total_price,buyer_remake) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)'
-  // create_order: 'insert into order (user_id,user_name,user_identify,user_phone,shop_address,shop_name,buyer_id,buyer_name,buyer_address,buyer_phone,goods_id,goods_img,goods_price,goods_name,goods_desc,goods_notice,goods_count,goods_score,goods_sale,goods_checked,goods_type,buyer_remake,create_time) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)'
+  create_order: 'insert into order_copy (create_time,user_id,user_name,user_identify,user_phone,shop_address,shop_name,goods_id,goods_img,goods_price,goods_count,goods_name,goods_desc,goods_notice,goods_score,goods_sale,goods_checked,goods_type,buyer_id,buyer_name,buyer_address,buyer_phone,goods_total_price,buyer_remake) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',
+  get_history_order: 'select * from order_copy where buyer_id=?',
+  get_order_detail: 'select * from order_copy where create_time=?'
 }
 
 module.exports = user
