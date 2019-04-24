@@ -119,8 +119,9 @@ export default {
         this.everyOrderDetailList = res.result[0]
         this.create_data = this.format(this.everyOrderDetailList.create_time)
         this.everyOrderDetailList.goods_type = this.goodsType[res.result[0].goods_type]
-        this.everyOrderDetailList.goods_checked = Boolean(this.everyOrderDetailList.goods_checked)
+        this.everyOrderDetailList.goods_checked = Boolean(Number(this.everyOrderDetailList.goods_checked))
         this.orderAcceptState = this.everyOrderDetailList.goods_checked
+        // console.log(this.orderAcceptState, this.everyOrderDetailList.goods_checked)
         // console.log(this.everyOrderDetailList)
         // alert(res.msg)
       }
