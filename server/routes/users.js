@@ -205,6 +205,7 @@ router.post('/selectPassword', function (req, res) {
   })
 })
 
+//修改密码
 router.post('/changePassword', function (req, res) {
   let params = req.body
   // console.log(params)
@@ -223,6 +224,7 @@ router.post('/changePassword', function (req, res) {
   })
 })
 
+// 修改电话号码
 router.post('/changePhone', function (req, res) {
   let params = req.body
   // console.log(params)
@@ -237,6 +239,56 @@ router.post('/changePhone', function (req, res) {
         msg: '其他信息修改成功~'
       })
       res.end()
+    }
+  })
+})
+
+// 获取所有订单
+router.post('/getOrder', function (req, res) {
+  let params = req.body
+
+  dbConfig.query(user.getOrder,[params.user_id],(err, result) => {
+    if (err) throw err
+    else {
+      res.send({
+        status: 0,
+        msg: '获取到所有订单信息',
+        result
+      })
+      res.end()
+    }
+  })
+})
+
+// 获取订单详细信息
+router.post('/getOrderDetail', function (req, res) {
+  let params = req.body
+
+  dbConfig.query(user.getOrderDetail, [params.user_id,params.create_time], (err, result) => {
+    if (err) throw err
+    else {
+      res.send({
+        status: 0,
+        msg: '订单详细信息',
+        result
+      })
+      res.end()
+    }
+  })
+})
+
+// 确认接单
+router.post('/acceptOrder', function (req, res) {
+  let params = req.body
+
+  dbConfig.query(user.acceptOrder,[params.create_time], (err,result) => {
+    if (err) throw err
+    else {
+      res.send({
+        status: 0,
+        msg: '确认订单并且安排出货',
+        result
+      })
     }
   })
 })

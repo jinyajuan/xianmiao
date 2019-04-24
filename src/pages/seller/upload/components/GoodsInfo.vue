@@ -67,39 +67,41 @@ export default {
       goods_checked: ''
     }
   },
-  // updated () {
-  //   console.log(this.goods_type)
-  // },
   methods: {
     uploadGoods () {
-      axios.post('/users/uploadGoods', {
-        user_id: this.$route.query.user_id,
-        goods_id: (new Date()).getTime(),
-        goods_img: this.goods_img,
-        goods_name: this.goods_name,
-        goods_type: this.goods_type,
-        goods_price: this.goods_price,
-        goods_desc: this.goods_desc,
-        goods_notice: this.goods_notice,
-        goods_count: 1,
-        goods_score: 0,
-        goods_sale: 0,
-        goods_checked: 0
-      }).then((response) => {
-        let res = response.data
-        if (res.status === 0) {
-          alert(res.msg)
-          this.goods_img = ''
-          this.goods_name = ''
-          this.goods_price = ''
-          this.goods_type = 0
-          this.goods_desc = ''
-          this.goods_notice = ''
-        } else {
-          alert(res.msg)
-          // console.log('上传失败')
-        }
-      })
+      console.log(this.goods_img)
+      if (this.goods_img === '' || this.goods_name === '' || this.goods_price === '' || this.goods_desc === '' || this.goods_notice === '' || this.goods_type === 0) {
+        alert('请完整填写所有信息')
+      } else {
+        axios.post('/users/uploadGoods', {
+          user_id: this.$route.query.user_id,
+          goods_id: (new Date()).getTime(),
+          goods_img: this.goods_img,
+          goods_name: this.goods_name,
+          goods_type: this.goods_type,
+          goods_price: this.goods_price,
+          goods_desc: this.goods_desc,
+          goods_notice: this.goods_notice,
+          goods_count: 1,
+          goods_score: 0,
+          goods_sale: 0,
+          goods_checked: 0
+        }).then((response) => {
+          let res = response.data
+          if (res.status === 0) {
+            alert(res.msg)
+            this.goods_img = ''
+            this.goods_name = ''
+            this.goods_price = ''
+            this.goods_type = 0
+            this.goods_desc = ''
+            this.goods_notice = ''
+          } else {
+            alert(res.msg)
+            // console.log('上传失败')
+          }
+        })
+      }
     }
   }
 }

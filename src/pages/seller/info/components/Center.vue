@@ -27,6 +27,11 @@
           <label>联系电话 </label>
           <input type="tel" placeholder='' disabled="disabled" ref="user_phone">
         </div>
+        <div class="session">
+          <router-link to="/" style="float: right">
+            退出登录
+          </router-link>
+        </div>
       </div>
     </div>
     <div class="change-pass info-session" v-bind:class="{active:isActive}">

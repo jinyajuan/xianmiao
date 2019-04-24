@@ -11,6 +11,9 @@ var user = {
   selectPassword: 'select user_pwd from seller_reg where user_id=?',
   changePassword: 'update seller_reg set user_pwd = ? where user_id=?',
   changePhone: 'update seller_reg set user_phone = ?,shop_name=?,shop_address=? where user_id=?',
+  getOrder: 'select * from order_copy where user_id=?',
+  getOrderDetail: 'select * from order_copy where user_id=? and create_time=?',
+  acceptOrder: 'update order_copy set goods_checked = 1 where create_time=?',
 
   buyerReg_insert: 'insert into buyer_reg (buyer_id,buyer_pwd,buyer_name,buyer_phone,buyer_address) values (?,?,?,?,?)',
   buyer_queryById: 'select * from buyer_reg where buyer_id = ?',
