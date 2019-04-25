@@ -419,4 +419,22 @@ router.post('/getOrderDetail', function (req, res) {
     }
   })
 })
+
+// 直接购买
+router.post('/buyImmediately', function (req, res) {
+  let params = req.body
+  // console.log(params)
+
+  dbConfig.query(user.selectAllGoods, [params.goods_id], (err, result) => {
+    if (err) throw err
+    else {
+      res.send({
+        status: 0,
+        msg: '直接购买',
+        result
+      })
+    }
+  })
+})
+
 module.exports = router

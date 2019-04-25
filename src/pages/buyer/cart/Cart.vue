@@ -192,7 +192,7 @@ export default {
         }
       })
 
-      // console.log(this.$store.state.CartItemListGoPay)
+      console.log(this.$store.state.CartItemListGoPay)
       // 8.2 判断CartItemListGoPay的长度，当长度为0时，弹出提示，反之，跳转
       if (this.$store.state.CartItemListGoPay.length === 0) {
         this.hasNoGoodsToPay = false

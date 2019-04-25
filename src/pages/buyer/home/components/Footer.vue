@@ -1,25 +1,25 @@
 <template>
   <div class="footer">
     <div class="icons">
-      <router-link :to="{path:'/',query: {buyer_id: this.$route.query.buyer_id}}">
+      <router-link :to="{path:'/'}">
         <span class="iconfont">&#xe607;</span>
         <span class="iconfont-desc">首页</span>
       </router-link>
     </div>
     <div class="icons">
-      <router-link :to="{path:'/buyer/goods',query: {buyer_id: this.$route.query.buyer_id}}">
+      <router-link :to="{path:'/buyer/goods'}">
           <span class="iconfont">&#xe689;</span>
           <span class="iconfont-desc">商品</span>
       </router-link>
     </div>
     <div class="icons">
-      <router-link :to="{path:'/buyer/cart',query: {buyer_id: this.$route.query.buyer_id}}">
+      <router-link :to="{path:'/buyer/cart'}">
         <span class="iconfont">&#xe61b;</span>
         <span class="iconfont-desc">购物车</span>
       </router-link>
     </div>
     <div class="icons">
-      <router-link :to="{path:'/buyer/me',query: {buyer_id: this.$route.query.buyer_id}}">
+      <router-link :to="{path:'/buyer/me'}">
       <!--<router-link to="/buyer/me">-->
         <span class="iconfont">&#xe658;</span>
         <span class="iconfont-desc">我的</span>

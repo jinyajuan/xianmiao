@@ -59,14 +59,27 @@ export default {
         })
       }
     },
+    // 立即购买
     buyImmediately () {
       console.log(sessionStorage.getItem('buyer_login_state'))
       if (sessionStorage.getItem('buyer_login_state') === null) {
         alert('请先登录')
         this.$router.push('/buyer/login')
       } else {
-        this.$store.state.CartItemListGoPay.push(this.$route.query)
-        this.$router.push('/buyer/order')
+        axios.post('/buyer/buyImmediately', {
+          // buyer_id: sessionStorage.getItem('buyer_login_state'),
+          goods_id: this.$route.query.goods_id
+        }).then((response) => {
+          let res = response.data
+          if (res.status === 0) {
+            // alert(res.msg)
+            // 注意：这个地方需要和购物车传入后台的数据格式一致，才能调用同一个后台的插入订单的借口
+            this.$store.state.CartItemListGoPay = res.result
+            this.$store.state.CartItemListGoPay[0].buyer_id = sessionStorage.getItem('buyer_login_state')
+            console.log(this.$store.state.CartItemListGoPay)
+            this.$router.push('/buyer/order')
+          }
+        })
       }
     }
   },
