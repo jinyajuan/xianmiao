@@ -488,4 +488,20 @@ router.post('/searchHistory', function (req, res) {
   })
 })
 
+// 删除历史记录
+router.post('/deteleSearch', function (req, res) {
+  let params = req.body
+
+  dbConfig.query(user.delete_history, [params.buyer_id], (err, result) => {
+    if (err) throw err
+    else {
+      res.send({
+        status: 0,
+        msg: '删除成功',
+        result
+      })
+    }
+  })
+})
+
 module.exports = router

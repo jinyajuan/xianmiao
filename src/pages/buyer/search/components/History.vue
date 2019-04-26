@@ -32,8 +32,9 @@
       </ul>
     </div>
     <div class="historyCon" v-else>
-      <div>
-        <p class="title">历史搜索</p>
+      <div style="overflow: hidden">
+        <p class="title" style="float: left;">历史搜索</p>
+        <p class="iconfont" style="float: right;" @click="delateSearchHistory">&#xe619;</p>
       </div>
       <div>
         <span class="content" v-for="item in historyItem" :key="item.search_id">{{item.search_content}}</span>
@@ -62,16 +63,13 @@ export default {
     })
   },
   methods: {
-    searchGoods () {
-      // 2.搜索关键字商品
-      axios.post('/buyer/searchGoods', {
-        search_content: this.$refs.search.innerHTML
+    delateSearchHistory () {
+      axios.post('/buyer/deteleSearch', {
+        buyer_id: sessionStorage.getItem('buyer_login_state')
       }).then((response) => {
         let res = response.data
         if (res.status === 0) {
-          // console.log('搜索出来的商品')
-          this.$store.state.searchGoodsList = res.result
-          this.$store.state.historyOrSearch = true
+          alert(res.msg)
         }
       })
     }

@@ -48,7 +48,8 @@ var user = {
   // search_item: 'select * from seller_upload_goods where goods_name like \'%?%\'',
   // search_item: 'select * from seller_upload_goods where goods_name like \'%\'?\'%\'',
   add_search: 'insert into buyer_search (search_id,search_content,buyer_id) values (?,?,?)',
-  search_history: 'select * from buyer_search where buyer_id = ?'
+  search_history: 'select * from buyer_search where buyer_id = ?',
+  delete_history: 'delete from buyer_search where buyer_id=?'
 }
 
 module.exports = user
