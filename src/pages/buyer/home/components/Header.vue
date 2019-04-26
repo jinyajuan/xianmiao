@@ -1,8 +1,7 @@
 <template>
   <div class="header">
-    <div class="header-input">
+    <div class="header-input" @click="handleSearch">
       <input class="header-input-search" type="text" placeholder="输入商品名称、店铺名称">
-      <span class="iconfont">&#xe617;</span>
     </div>
     <div class="header-right">
       <span>北京</span>
@@ -13,7 +12,12 @@
 
 <script>
 export default {
-  name: 'HomeHeader'
+  name: 'HomeHeader',
+  methods: {
+    handleSearch () {
+      this.$router.push('/buyer/search')
+    }
+  }
 }
 </script>
 

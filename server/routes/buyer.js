@@ -437,4 +437,55 @@ router.post('/buyImmediately', function (req, res) {
   })
 })
 
+// 检索关键字商品
+router.post('/searchGoods', function (req, res) {
+  let params = req.body
+  console.log(params.search_content)
+
+  dbConfig.query(user.search_item, ["%" + params.search_content + "%"], (err, result) => {
+    if (err) throw err
+    else {
+      res.send({
+        status: 0,
+        msg: '成功查找搜索的商品信息',
+        result
+      })
+      res.end()
+    }
+  })
+})
+
+// 搜索内容记录插入数据库
+router.post('/searchRecommend', function (req, res) {
+  let params = req.body
+
+  dbConfig.query(user.add_search,[params.search_id,params.search_content,params.buyer_id], (err, result) => {
+    if (err) throw err
+    else {
+      res.send({
+        status: 0,
+        msg: '搜索内容以及插入数据库',
+        result
+      })
+    }
+  })
+})
+
+// 搜索属于自己的历史搜索记录（历史搜索内容显示在历史记录里面）
+router.post('/searchHistory', function (req, res) {
+  let params = req.body
+
+  dbConfig.query(user.search_history, [params.buyer_id], (err, result) => {
+    if (err) throw err
+    else {
+      res.send({
+        status: 0,
+        msg: '显示在历史搜索记录',
+        result
+      })
+      res.end()
+    }
+  })
+})
+
 module.exports = router

@@ -42,7 +42,13 @@ var user = {
   change_sale: 'update seller_upload_goods set goods_sale=goods_sale+? where goods_id=?',
   create_order: 'insert into order_copy (create_time,user_id,user_name,user_identify,user_phone,shop_address,shop_name,goods_id,goods_img,goods_price,goods_count,goods_name,goods_desc,goods_notice,goods_score,goods_sale,goods_checked,goods_type,buyer_id,buyer_name,buyer_address,buyer_phone,goods_total_price,buyer_remake) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',
   get_history_order: 'select * from order_copy where buyer_id=?',
-  get_order_detail: 'select * from order_copy where create_time=?'
+  get_order_detail: 'select * from order_copy where create_time=?',
+
+  search_item: "select * from seller_upload_goods where goods_name like ?",
+  // search_item: 'select * from seller_upload_goods where goods_name like \'%?%\'',
+  // search_item: 'select * from seller_upload_goods where goods_name like \'%\'?\'%\'',
+  add_search: 'insert into buyer_search (search_id,search_content,buyer_id) values (?,?,?)',
+  search_history: 'select * from buyer_search where buyer_id = ?'
 }
 
 module.exports = user
