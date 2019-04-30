@@ -8,7 +8,9 @@
         请选择一下身份切换
       </div>
       <div class="panel_footer">
-        <button class="cancel">管理员</button>
+        <router-link to="/admin/login">
+          <button class="cancel">管理员</button>
+        </router-link>
         <router-link to="/seller/login">
           <button class="submit">卖家</button>
         </router-link>

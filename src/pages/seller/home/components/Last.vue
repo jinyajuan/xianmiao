@@ -3,12 +3,12 @@
     <p class="title border-bottom">一周以前上新</p>
     <ul>
       <li class="item border-bottom" v-for="item of this.LastList" :key="item.id">
-        <img class="item-img" :src="item.imgUrl" alt="">
+        <img class="item-img" :src="item.goods_img" alt="">
         <div class="item-info">
-          <div class="item-desc">{{item.name}}</div>
-          <div class="item-count">成交量：{{item.sale}}份</div>
+          <div class="item-desc">{{item.goods_name}}</div>
+          <div class="item-count">成交量：{{item.goods_sale}}份</div>
           <div class="item-detail">
-            <div class="item-price">￥{{item.price.toFixed(2)}}</div>
+            <div class="item-price">￥{{item.goods_price}}</div>
             <button class="item-button">
               <router-link :to="{path:'/seller/change/',
               query: {goods_id: item.goods_id,

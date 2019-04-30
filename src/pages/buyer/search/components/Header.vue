@@ -25,34 +25,39 @@ export default {
       this.$store.state.searchGoodsList = []
     },
     search () {
-      this.$store.state.historyOrSearch = true
-      if (this.$refs.search.value === '') {
-        alert('请输入关键字')
+      if (sessionStorage.getItem('buyer_login_state') === null) {
+        alert('请先登录')
+        this.$router.push('/buyer/login')
       } else {
-        // 1.插入搜索记录
-        axios.post('/buyer/searchRecommend', {
-          search_id: new Date().getTime(),
-          search_content: this.$refs.search.value,
-          buyer_id: sessionStorage.getItem('buyer_login_state')
-        }).then((response) => {
-          let res = response.data
-          if (res.status === 0) {
-            // alert(res.msg)
-          }
-        })
+        this.$store.state.historyOrSearch = true
+        if (this.$refs.search.value === '') {
+          alert('请输入关键字')
+        } else {
+          // 1.插入搜索记录
+          axios.post('/buyer/searchRecommend', {
+            search_id: new Date().getTime(),
+            search_content: this.$refs.search.value,
+            buyer_id: sessionStorage.getItem('buyer_login_state')
+          }).then((response) => {
+            let res = response.data
+            if (res.status === 0) {
+              // alert(res.msg)
+            }
+          })
 
-        // 2.搜索关键字商品
-        axios.post('/buyer/searchGoods', {
-          search_content: this.$refs.search.value
-        }).then((response) => {
-          let res = response.data
-          if (res.status === 0) {
-            // console.log('搜索出来的商品')
-            this.$store.state.searchGoodsList = res.result
-            // console.log(this.$store.state.searchGoodsList)
-            // alert(res.msg)
-          }
-        })
+          // 2.搜索关键字商品
+          axios.post('/buyer/searchGoods', {
+            search_content: this.$refs.search.value
+          }).then((response) => {
+            let res = response.data
+            if (res.status === 0) {
+              // console.log('搜索出来的商品')
+              this.$store.state.searchGoodsList = res.result
+              // console.log(this.$store.state.searchGoodsList)
+              // alert(res.msg)
+            }
+          })
+        }
       }
     }
   }

@@ -21,6 +21,8 @@ import SellerInfo from '@/pages/seller/info/Info'
 import SellerOrder from '@/pages/seller/order/Order'
 import SellerDetail from '@/pages/seller/detail/Detail'
 import SellerChange from '@/pages/seller/change/Change'
+import AdminLogin from '@/pages/admin/login/Login'
+// import AdminHome from '@/pages/admin/home/Home'
 
 Vue.use(Router)
 
@@ -110,6 +112,10 @@ export default new Router({
       path: '/seller/change',
       name: 'SellerChange',
       component: SellerChange
+    }, {
+      path: '/admin/login',
+      name: 'AdminLogin',
+      component: AdminLogin
     }
   ],
   scrollBehavior: function (to, from, savedPosition) {

@@ -44,12 +44,15 @@ var user = {
   get_history_order: 'select * from order_copy where buyer_id=?',
   get_order_detail: 'select * from order_copy where create_time=?',
 
-  search_item: "select * from seller_upload_goods where goods_name like ?",
+  search_item: 'select * from seller_upload_goods where goods_name like ?',
   // search_item: 'select * from seller_upload_goods where goods_name like \'%?%\'',
   // search_item: 'select * from seller_upload_goods where goods_name like \'%\'?\'%\'',
   add_search: 'insert into buyer_search (search_id,search_content,buyer_id) values (?,?,?)',
   search_history: 'select * from buyer_search where buyer_id = ?',
-  delete_history: 'delete from buyer_search where buyer_id=?'
+  delete_history: 'delete from buyer_search where buyer_id=?',
+
+  admin_login1: 'select * from admin_reg where admin_id=?',
+  admin_login2: 'select * from admin_reg where admin_id=? and admin_pwd=?'
 }
 
 module.exports = user
