@@ -8,7 +8,6 @@ let router = express.Router()
 // 登录
 router.post('/login', function (req, res) {
   let params = req.body
-  console.log(params)
   dbConfig.query(user.admin_login1, [params.admin_id], (err, result) => {
     if (err) throw err
     else {
@@ -39,6 +38,56 @@ router.post('/login', function (req, res) {
           }
         })
       }
+    }
+  })
+})
+
+// 买家信息管理
+router.post('/buyerManage', function (req, res) {
+  let params = req.body
+
+  dbConfig.query(user.admin_buyer_manage, (err, result) => {
+    if (err) throw err
+    else {
+      res.send({
+        status: 0,
+        msg: '所有买家信息',
+        result
+      })
+    }
+  })
+})
+
+// 卖家信息管理orderManage
+router.post('/sellerManage', function (req, res) {
+  let params = req.body
+
+  dbConfig.query(user.admin_seller_manage, (err, result) => {
+    if (err) throw err
+    else {
+      res.send({
+        status: 0,
+        msg: '卖家信息',
+        result
+      })
+      res.end()
+    }
+  })
+})
+
+// 订单信息管理
+router.post('/orderManage', function (req, res) {
+  let params = req.body
+
+  dbConfig.query(user.admin_order_manage, (err, result) => {
+    if (err) throw err
+    else {
+      res.send({
+        status: 0,
+        msg: '订单信息',
+        result
+      })
+      res.end()
     }
   })
 })

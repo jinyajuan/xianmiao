@@ -22,7 +22,12 @@ import SellerOrder from '@/pages/seller/order/Order'
 import SellerDetail from '@/pages/seller/detail/Detail'
 import SellerChange from '@/pages/seller/change/Change'
 import AdminLogin from '@/pages/admin/login/Login'
-// import AdminHome from '@/pages/admin/home/Home'
+import AdminHome from '@/pages/admin/home/Home'
+import AdminBuyerInfo from '@/pages/admin/buyerInfo/BuyerInfo'
+import AdminSeller from '@/pages/admin/seller/Seller'
+import AdminSellerInfo from '@/pages/admin/sellerInfo/SellerInfo'
+import AdminOrder from '@/pages/admin/order/Order'
+import AdminOrderInfo from '@/pages/admin/orderInfo/OrderInfo'
 
 Vue.use(Router)
 
@@ -116,6 +121,30 @@ export default new Router({
       path: '/admin/login',
       name: 'AdminLogin',
       component: AdminLogin
+    }, {
+      path: '/admin/home',
+      name: 'AdminHome',
+      component: AdminHome
+    }, {
+      path: '/admin/buyerInfo',
+      name: 'AdminBuyerInfo',
+      component: AdminBuyerInfo
+    }, {
+      path: '/admin/seller',
+      name: 'AdminSeller',
+      component: AdminSeller
+    }, {
+      path: '/admin/sellerInfo',
+      name: 'AdminSellerInfo',
+      component: AdminSellerInfo
+    }, {
+      path: '/admin/order',
+      name: 'AdminOrder',
+      component: AdminOrder
+    }, {
+      path: '/admin/orderInfo',
+      name: 'AdminOrderInfo',
+      component: AdminOrderInfo
     }
   ],
   scrollBehavior: function (to, from, savedPosition) {

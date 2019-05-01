@@ -52,7 +52,10 @@ var user = {
   delete_history: 'delete from buyer_search where buyer_id=?',
 
   admin_login1: 'select * from admin_reg where admin_id=?',
-  admin_login2: 'select * from admin_reg where admin_id=? and admin_pwd=?'
+  admin_login2: 'select * from admin_reg where admin_id=? and admin_pwd=?',
+  admin_buyer_manage: 'select * from buyer_reg',
+  admin_seller_manage: 'select * from seller_reg',
+  admin_order_manage: 'select * from order_copy'
 }
 
 module.exports = user
