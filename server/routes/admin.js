@@ -2,6 +2,7 @@ let express = require('express')
 // let mysql = require('mysql')
 let dbConfig = require('../db/dbConfig')
 let user = require('../db/userSQL')
+let md5 = require('md5-node')
 
 let router = express.Router()
 
@@ -18,7 +19,7 @@ router.post('/login', function (req, res) {
         })
         res.end()
       } else {
-        dbConfig.query(user.admin_login2, [params.admin_id, params.admin_pwd], (err, result) => {
+        dbConfig.query(user.admin_login2, [params.admin_id, md5(params.admin_pwd)], (err, result) => {
           if (err) throw err
           else {
             if (result.length === 0) {
