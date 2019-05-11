@@ -19,7 +19,7 @@ router.post('/reg', function (req, res) {
       if (result.length !== 0) {
         res.send({
           status: 1,
-          msg: '该用户名已经被注册了'
+          msg: '该用户名已经被注册了,请重新注册！'
         })
         res.end()
       } else if (result.length === 0) {

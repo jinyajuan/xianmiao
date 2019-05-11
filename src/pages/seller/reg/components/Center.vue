@@ -1,10 +1,9 @@
 <template>
   <div class="reg">
-      <!--<form action="">-->
     <div>
         <div :class="{'hide': isHide}">
           <div class="title">欢迎来到卖家注册模块~</div>
-          <input class="border-bottom" type="text"     v-model="user_id" placeholder="请使用电话号码或者邮箱" ref="user_id">
+          <input class="border-bottom" type="text"     v-model="user_id" placeholder="请输入卖家端的账号" ref="user_id">
           <input class="border-bottom" type="password" v-model="user_pwd"  placeholder="请输入密码">
           <input class="border-bottom" type="password" v-model="user_pwd_again" placeholder="请再次输入密码">
           <input class="btn" type="button" @click="handleNextOne" value="下一步">
@@ -24,7 +23,6 @@
           <input class="btn" type="submit" value="注册" @click="sellerReg">
           <!--</router-link>-->
         </div>
-      <!--</form>-->
     </div>
   </div>
 </template>
@@ -49,34 +47,66 @@ export default {
   },
   methods: {
     sellerReg () {
-      axios.post('/users/reg', {
-        user_id: this.user_id,
-        user_pwd: this.user_pwd,
-        user_name: this.user_name,
-        user_identify: this.user_identify,
-        user_phone: this.user_phone,
-        shop_name: this.shop_name,
-        shop_address: this.shop_address
-      }).then((response) => {
-        let res = response.data
-        if (res.status === 0) {
-          alert(res.message)
-          this.$router.push({
-            path: '/seller/home',
-            query: {
-              user_id: this.user_id
-            }
-          })
-        } else {
-          alert(res.message)
-        }
-      })
+      if (this.shop_name.length === 0) {
+        alert('店铺名称不能为空')
+      } else if (this.shop_address.length === 0) {
+        alert('店铺地址不能为空')
+      } else {
+        axios.post('/users/reg', {
+          user_id: this.user_id,
+          user_pwd: this.user_pwd,
+          user_name: this.user_name,
+          user_identify: this.user_identify,
+          user_phone: this.user_phone,
+          shop_name: this.shop_name,
+          shop_address: this.shop_address
+        }).then((response) => {
+          let res = response.data
+          if (res.status === 0) {
+            alert(res.msg)
+            this.$router.push({
+              path: '/seller/home',
+              query: {
+                user_id: this.user_id
+              }
+            })
+          } else {
+            alert(res.msg)
+          }
+        })
+      }
     },
     handleNextOne () {
-      this.isHide = !this.isHide
+      if (this.user_id.length === 0) {
+        alert('用户名不能为空！')
+      } else if (this.user_pwd.length === 0) {
+        alert('密码不能为空！')
+      } else if (this.user_pwd.length < 8) {
+        alert('密码不能少于8位~')
+      } else if (this.user_pwd !== this.user_pwd_again) {
+        alert('前后两次输入的密码不一致！')
+      } else {
+        this.isHide = !this.isHide
+      }
     },
     handleNextTwo () {
-      this.isHide1 = !this.isHide1
+      if (this.user_name.length === 0) {
+        alert('姓名不能为空！')
+      } else if (!this.user_name.match(/^[\u4E00-\u9FA5]{1,10}$/)) {
+        alert('请填写汉字')
+      } else if (this.user_identify.length === 0) {
+        alert('证件号码不能为空！')
+      } else if (!this.user_identify.match(/(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/)) {
+        alert('证件号码格式有误！')
+        this.user_identify = ''
+      } else if (this.user_phone.length === 0) {
+        alert('手机号码不能为空')
+      } else if (!this.user_phone.match(/^[1][3|4|5|8][0-9]{9}$/)) {
+        alert('手机号码格式有误，请重新输入~')
+        this.user_phone = ''
+      } else {
+        this.isHide1 = !this.isHide1
+      }
     }
   }
 }

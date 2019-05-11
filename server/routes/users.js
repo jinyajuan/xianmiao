@@ -29,7 +29,7 @@ router.post('/reg', function (req, res) {
       } else if (result.length === 0) {
         let userInfo = [
           params.user_id,
-          params.user_pwd,
+          md5(params.user_pwd),
           params.user_name,
           params.user_identify,
           params.user_phone,
@@ -43,7 +43,7 @@ router.post('/reg', function (req, res) {
             res.send({
               params,
               status:0,
-              message: '注册成功',
+              msg: '注册成功',
               result
             })
             res.end()
@@ -69,8 +69,10 @@ router.post('/login', function (req, res) {
         res.end()
       } else {  // 存在该用户名
         let aa = result[0]
+        // console.log(aa)
+        // console.log(aa.user_pwd)
 
-        if(aa.user_id === params.user_id && aa.user_pwd === params.user_pwd) {
+        if(aa.user_id === params.user_id && aa.user_pwd === md5(params.user_pwd)) {
           res.send({
             status:0,
             msg: '登录成功~'
