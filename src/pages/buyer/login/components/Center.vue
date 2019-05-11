@@ -21,31 +21,38 @@ export default {
   },
   methods: {
     buyerLogin () {
-      axios.post('/buyer/login', {
-        buyer_id: this.buyer_id,
-        buyer_pwd: this.buyer_pwd
-      }).then((response) => {
-        let res = response.data
-        // 登录成功
-        if (res.status === 0) {
-          alert(res.msg)
-          sessionStorage.setItem('buyer_login_state', this.buyer_id) // 把用户名对应的值保存到sessionStorage
-          this.$router.push({
-            path: '/',
-            query: {
-              buyer_id: sessionStorage.getItem('buyer_login_state')
-            }
-          })
-        } else if (res.status === 1) {
-          alert(res.msg)
-          this.buyer_id = ''
-          this.buyer_pwd = ''
-        } else {
-          alert(res.msg)
-          this.buyer_id = ''
-          this.buyer_pwd = ''
-        }
-      })
+      if (this.buyer_id.length === 0) {
+        alert('用户名不能为空')
+      } else if (this.buyer_pwd.length === 0) {
+        alert('密码不能为空')
+      } else {
+        axios.post('/buyer/login', {
+          buyer_id: this.buyer_id,
+          buyer_pwd: this.buyer_pwd
+        }).then((response) => {
+          let res = response.data
+          // 登录成功
+          if (res.status === 0) {
+            alert(res.msg)
+            sessionStorage.setItem('buyer_login_state', this.buyer_id) // 把用户名对应的值保存到sessionStorage
+            this.$router.push({
+              path: '/',
+              query: {
+                buyer_id: sessionStorage.getItem('buyer_login_state')
+              }
+            })
+          } else if (res.status === 1) {
+            // 用户名未被注册
+            alert(res.msg)
+            this.$router.push('/buyer/reg')
+          } else {
+            // 用户名或者密码错误
+            alert(res.msg)
+            this.buyer_id = ''
+            this.buyer_pwd = ''
+          }
+        })
+      }
     }
   }
 }

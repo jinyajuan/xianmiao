@@ -2,6 +2,7 @@ let express = require('express')
 // let mysql = require('mysql')
 let dbConfig = require('../db/dbConfig')
 let user = require('../db/userSQL')
+let md5 = require('md5-node')
 
 let router = express.Router()
 
@@ -10,9 +11,8 @@ let router = express.Router()
 // 注册
 router.post('/reg', function (req, res) {
   let params = req.body
-  console.log(params)
+
   dbConfig.query(user.buyer_queryById, [params.buyer_id], (err, result) => {
-    console.log(result)
     if (err) throw err
     else {
       // 从数据库查询该用户id是否是被注册
@@ -25,13 +25,12 @@ router.post('/reg', function (req, res) {
       } else if (result.length === 0) {
         let userInfo = [
           params.buyer_id,
-          params.buyer_pwd,
+          md5(params.buyer_pwd),
           params.buyer_name,
           params.buyer_phone,
           params.buyer_address
         ]
         dbConfig.query(user.buyerReg_insert, userInfo, (err, result) => {
-          console.log(result)
           if (err) throw err
           else {
             res.send({
@@ -61,7 +60,11 @@ router.post('/login', function (req, res) {
         })
         res.end()
       } else {
-        dbConfig.query(user.buyer_login_step2, [params.buyer_id, params.buyer_pwd], (err, result) => {
+        let loginInfo = [
+          params.buyer_id,
+          md5(params.buyer_pwd)
+        ]
+        dbConfig.query(user.buyer_login_step2, loginInfo, (err, result) => {
           if (err) throw err
           else {
             if (result.length === 0) {

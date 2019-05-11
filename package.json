@@ -12,8 +12,10 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "blueimp-md5": "^2.10.0",
     "express-generator": "^4.16.0",
     "fastclick": "^1.0.6",
+    "md5-node": "^1.0.1",
     "mysql": "^2.16.0",
     "vue": "^2.5.2",
     "vue-awesome-swiper": "^2.6.7",

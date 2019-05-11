@@ -2,6 +2,7 @@ let express = require('express')
 let mysql = require('mysql')
 let dbConfig = require('../db/dbConfig')
 let user = require('../db/userSQL')
+let md5 = require('md5-node')
 
 let router = express.Router()
 
@@ -22,7 +23,7 @@ router.post('/reg', function (req, res) {
       if( result.length !== 0) {
         res.send({
           status: 1,
-          msg: '该用户名已经被注册了'
+          msg: '该用户名已经被注册了,请重新注册~'
         })
         res.end()
       } else if (result.length === 0) {
@@ -36,7 +37,7 @@ router.post('/reg', function (req, res) {
           params.shop_address
         ];
         dbConfig.query(user.insert, userInfo, (err, result) => {
-          console.log(result);
+          // console.log(result);
           if(err) throw err
           else {
             res.send({
