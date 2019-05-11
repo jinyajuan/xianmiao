@@ -4,7 +4,7 @@
       <input class="header-input-search" type="text" placeholder="输入商品名称、店铺名称">
     </div>
     <div class="header-right">
-      <span>北京</span>
+      <span>{{this.city}}</span>
       <span class="iconfont">&#xe644;</span>
     </div>
   </div>
@@ -13,6 +13,14 @@
 <script>
 export default {
   name: 'HomeHeader',
+  data () {
+    return {
+      city: sessionStorage.getItem('getCityName').substring(0, sessionStorage.getItem('getCityName').length - 1)
+    }
+  },
+  // mounted () {
+  //   console.log(typeof sessionStorage.getItem('getCityName'))
+  // },
   methods: {
     handleSearch () {
       this.$router.push('/buyer/search')

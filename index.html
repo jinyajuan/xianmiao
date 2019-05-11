@@ -2,12 +2,29 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <!--<meta name="viewport" content="width=device-width,initial-scale=1.0">-->
     <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
     <title>鲜淼果蔬</title>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=b8ZVGiIMhrzuXpVdRUenR74Pocv8q2lu"></script>
+    <script type="text/javascript">
+      window.onload = function () {
+        var map = new BMap.Map("allmap");
+        var point = new BMap.Point(116.331398,39.897445);
+        map.centerAndZoom(point,12);
+
+        function myFun(result){
+          var cityName = result.name;
+          map.setCenter(cityName);
+          sessionStorage.setItem('getCityName', cityName)
+          // alert("当前定位城市:"+cityName);
+        }
+        var myCity = new BMap.LocalCity();
+        myCity.get(myFun);
+      }
+    </script>
   </head>
   <body>
     <div id="app"></div>
+    <div id="allmap"></div>
     <!-- built files will be auto injected -->
   </body>
 </html>

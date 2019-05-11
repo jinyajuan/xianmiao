@@ -97,7 +97,7 @@ export default {
       let res = response.data
       // console.log(res.status)
       if (res.status === 0) {
-        console.log(res.result)
+        // console.log(res.result)
         let length = res.result.length > 5 ? 5 : res.result.length
         for (var i = 0; i < length; i++) {
           this.swiperList.push(res.result[i])
