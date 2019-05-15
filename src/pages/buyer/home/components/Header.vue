@@ -20,9 +20,6 @@ export default {
       city: sessionStorage.getItem('getCityName')
     }
   },
-  mounted () {
-    console.log(sessionStorage.getItem('getCityName'))
-  },
   methods: {
     handleSearch () {
       this.$router.push('/buyer/search')
