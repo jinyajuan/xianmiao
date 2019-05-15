@@ -29,26 +29,23 @@ export default {
     }
   },
   methods: {
-    getCityInfo () {
-      axios.get('http://localhost:8080/static/mock/city.json')
-        .then(this.getCityInfoSucc)
-    },
-    getCityInfoSucc (res) {
-      res = res.data
+    handleLetterChange (letter) {
+      this.letter = letter
+      // console.log(letter)
+    }
+  },
+  mounted () {
+    axios.get('http://localhost:8080/static/mock/city.json', {
+
+    }).then((response) => {
+      let res = response.data
       if (res.ret && res.data) {
         const data = res.data
         this.hotCities = data.hotCities
         this.cities = data.cities
       }
-      console.log(res)
-    },
-    handleLetterChange (letter) {
-      this.letter = letter
-      console.log(letter)
-    }
-  },
-  mounted () {
-    this.getCityInfo()
+      // console.log(res)
+    })
   }
 }
 </script>

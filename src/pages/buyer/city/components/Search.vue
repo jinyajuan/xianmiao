@@ -4,7 +4,7 @@
       <input type="text" class="search-input" placeholder="请输入汉字或者拼音" v-model="keyword">
     </div>
     <div class="search-content" ref="search" v-if="keyword">
-      <ul>
+      <ul class="content">
         <li class="search-item border-bottom" v-for="item of this.list" :key="item.id">{{item.name}}</li>
         <li class="search-item has-no border-bottom" v-if="this.list.length === 0">没有找到匹配数据</li>
       </ul>
