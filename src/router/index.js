@@ -13,6 +13,7 @@ import BuyerPay from '@/pages/buyer/pay/Pay'
 import BuyerHistory from '@/pages/buyer/history/History'
 import BuyerOrderDetail from '@/pages/buyer/orderDetail/OrderDetail'
 import BuyerSearch from '@/pages/buyer/search/Search'
+import BuyerCity from '@/pages/buyer/city/City'
 import SellerLogin from '@/pages/seller/login/Login'
 import SellerReg from '@/pages/seller/reg/Reg'
 import SellerHome from '@/pages/seller/home/Home'
@@ -85,6 +86,10 @@ export default new Router({
       path: '/buyer/pay',
       name: 'BuyerPay',
       component: BuyerPay
+    }, {
+      path: '/buyer/city',
+      name: 'BuyerCity',
+      component: BuyerCity
     }, {
       path: '/seller/login',
       name: 'SellerLogin',

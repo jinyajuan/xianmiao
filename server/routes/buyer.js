@@ -116,7 +116,7 @@ router.post('/getMinimumPrice', function (req, res) {
   })
 })
 
-// 获取推荐商品（销量最高，评分最高，价钱最低）
+// 获取默认推荐商品（销量最高，评分最高，价钱最低）
 router.post('/getRecommondItem', function (req, res) {
   dbConfig.query(user.buyer_get_recommend, (err, result) => {
     if (err) throw err
@@ -129,6 +129,34 @@ router.post('/getRecommondItem', function (req, res) {
     }
   })
 })
+
+// 获取个性化推荐商品
+// router.post('/getUserRecommendItem', function (req, res) {
+//   let params = req.body
+//   let arr = []
+//   // 1.查找个人的历史搜索信息
+//   dbConfig.query(user.get_search_con, [params.buyer_id], (err, result) => {
+//     if (err) throw err
+//     else {
+//       // 获取模糊查询的关键字
+//       for (var i = 0; i < result.length; i++) {
+//         let search_item = '%'+ result[i].search_content + '%'
+//         // 模糊匹配数据库中的商品列表推荐部分
+//         dbConfig.query(user.search_item_to_recommend, [search_item], (err, result1) => {
+//           if (err) throw err
+//           else {
+//             console.log('------------------------')
+//             console.log(result1)
+//             result1 = arr
+//             arr.push(result1)
+//           }
+//         })
+//         console.log('******************************************')
+//         console.log(arr)
+//       }
+//     }
+//   })
+// })
 
 // 获取VIP商品（轮播组件）
 router.post('/getSwiper', function (req, res) {
@@ -506,5 +534,50 @@ router.post('/deteleSearch', function (req, res) {
     }
   })
 })
+
+
+// router.post('/hotCity', function (req, res) {
+//   let params = req.body
+//   console.log(params.hotCities)
+//   console.log(params.hotCities.length)
+//   for (var i=0;i<params.hotCities.length;i++) {
+//     dbConfig.query(user.addCity,[params.hotCities[i].id,params.hotCities[i].spell,params.hotCities[i].name],(err,result) => {
+//       if (err) throw err
+//       else {
+//         console.log(result)
+//         if (i === params.hotCities.length - 1) {
+//           res.send({
+//             status: 0,
+//             msg: '热门城市',
+//             result
+//           })
+//         }
+//       }
+//     })
+//   }
+// })
+
+// router.post('/allCity', function (req, res) {
+//   let params = req.body
+//   console.log(params.cities)
+//   console.log(params.cities.length)
+//   for (var i=0;i<params.cities.length;i++) {
+//     // console.log(params.cities."A")
+//     console.log(params.cities.[A])
+//     // dbConfig.query(user.addCity,[params.cities[i].id,params.cities[i].spell,params.cities[i].name],(err,result) => {
+//     //   if (err) throw err
+//     //   else {
+//     //     console.log(result)
+//     //     if (i === params.cities.length - 1) {
+//     //       res.send({
+//     //         status: 0,
+//     //         msg: '热门城市',
+//     //         result
+//     //       })
+//     //     }
+//     //   }
+//     // })
+//   }
+// })
 
 module.exports = router

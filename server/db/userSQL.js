@@ -32,6 +32,8 @@ var user = {
   count_add: 'update buyer_cart set goods_count=goods_count+1 where goods_id=? and buyer_id=?',
   count_minus: 'update buyer_cart set goods_count=goods_count-1 where goods_id=? and buyer_id=?',
   delete_goods: 'delete from buyer_cart where goods_id=? and buyer_id=?',
+  get_search_con: 'select search_content from buyer_search where buyer_id  = ?',
+  search_item_to_recommend: 'select * from seller_upload_goods where goods_name like ?',
 
   get_personal: 'select * from buyer_reg where buyer_id=?',
   set_personal: 'update buyer_reg set buyer_name=?,buyer_phone=?,buyer_address=? where buyer_id=?',
@@ -55,7 +57,9 @@ var user = {
   admin_login2: 'select * from admin_reg where admin_id=? and admin_pwd=?',
   admin_buyer_manage: 'select * from buyer_reg',
   admin_seller_manage: 'select * from seller_reg',
-  admin_order_manage: 'select * from order_copy'
+  admin_order_manage: 'select * from order_copy',
+
+  addCity: 'insert into hot_city (id,spell,name) values (?,?,?)'
 }
 
 module.exports = user

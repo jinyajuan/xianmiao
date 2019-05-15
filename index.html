@@ -14,6 +14,10 @@
         function myFun(result){
           var cityName = result.name;
           map.setCenter(cityName);
+          // 截掉后面的“市”
+          cityName = cityName.substring(0, cityName.length - 1)
+
+          // alert(cityName)
           sessionStorage.setItem('getCityName', cityName)
           // alert("当前定位城市:"+cityName);
         }
