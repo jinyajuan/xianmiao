@@ -10,7 +10,7 @@
     </div>
     <div class="recommond-content">
       <ul>
-        <li class="item border-bottom" v-for="item of RecommondItemList" :key="item.goods_id">
+        <li class="item border-bottom" v-for="item of RecommondGoodsItemList" :key="item.goods_id">
             <img class="item-img" :src="item.goods_img" alt="">
             <div class="item-info">
               <div class="item-desc">{{item.goods_name}}</div>
@@ -44,8 +44,13 @@
 <script>
 export default {
   name: 'HomeRecommond',
+  data () {
+    return {
+      goods_ids: []
+    }
+  },
   props: {
-    RecommondItemList: Array
+    RecommondGoodsItemList: Array
   }
 }
 </script>

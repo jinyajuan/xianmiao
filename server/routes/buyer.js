@@ -11,6 +11,7 @@ let router = express.Router()
 // 注册
 router.post('/reg', function (req, res) {
   let params = req.body
+  console.log(params)
 
   dbConfig.query(user.buyer_queryById, [params.buyer_id], (err, result) => {
     if (err) throw err
@@ -119,6 +120,7 @@ router.post('/getMinimumPrice', function (req, res) {
 // 获取默认推荐商品（销量最高，评分最高，价钱最低）
 router.post('/getRecommondItem', function (req, res) {
   dbConfig.query(user.buyer_get_recommend, (err, result) => {
+    console.log(result)
     if (err) throw err
     else {
       res.send({
@@ -130,33 +132,62 @@ router.post('/getRecommondItem', function (req, res) {
   })
 })
 
-// 获取个性化推荐商品
-// router.post('/getUserRecommendItem', function (req, res) {
-//   let params = req.body
-//   let arr = []
-//   // 1.查找个人的历史搜索信息
-//   dbConfig.query(user.get_search_con, [params.buyer_id], (err, result) => {
-//     if (err) throw err
-//     else {
-//       // 获取模糊查询的关键字
-//       for (var i = 0; i < result.length; i++) {
-//         let search_item = '%'+ result[i].search_content + '%'
-//         // 模糊匹配数据库中的商品列表推荐部分
-//         dbConfig.query(user.search_item_to_recommend, [search_item], (err, result1) => {
-//           if (err) throw err
-//           else {
-//             console.log('------------------------')
-//             console.log(result1)
-//             result1 = arr
-//             arr.push(result1)
-//           }
-//         })
-//         console.log('******************************************')
-//         console.log(arr)
-//       }
-//     }
-//   })
-// })
+// 获取个性化推荐商品ID 集合
+router.post('/getUserRecommendItem', function (req, res) {
+  let params = req.body
+  let arr = []
+  // 1.查找个人的历史搜索信息
+  dbConfig.query(user.get_search_con, [params.buyer_id], (err, result) => {
+    if (err) throw err
+    else {
+      // 获取模糊查询的关键字
+      for (let i = 0; i < result.length; i++) {
+        let search_item = '%'+ result[i].search_content + '%'
+        // 模糊匹配数据库中的商品列表推荐部分
+        dbConfig.query(user.search_item_to_recommend, [search_item], (err, result1) => {
+          if (err) throw err
+          else {
+            if (result1.length !== 0) {
+              for (var j = 0;j < result1.length;j++) {
+                arr.push(result1[j].goods_id)
+              }
+            }
+          }
+          if (i === result.length - 1) {
+            res.send({
+              arr,
+              status: 0,
+              msg: '读取成功'
+            })
+          }
+        })
+      }
+
+    }
+  })
+})
+
+// 获取个性化商品所有信息
+router.post('/getRecommendGoodsInfo', function (req, res) {
+  let params = req.body
+  let arr = []
+  for (let i = 0; i < params.goods_ids.length; i++) {
+    dbConfig.query(user.get_recommend_goods_info,[params.goods_ids[i]], (err, result) => {
+      arr.push(result[0])
+      // console.log(result[0])
+      if (err) throw err
+      else {
+        if (i === params.goods_ids.length - 1) {
+          res.send({
+            arr,
+            status: 0,
+            msg: '获取个性推荐商品信息'
+          })
+        }
+      }
+    })
+  }
+})
 
 // 获取VIP商品（轮播组件）
 router.post('/getSwiper', function (req, res) {
@@ -490,7 +521,7 @@ router.post('/searchGoods', function (req, res) {
 router.post('/searchRecommend', function (req, res) {
   let params = req.body
 
-  dbConfig.query(user.add_search,[params.search_id,params.search_content,params.buyer_id], (err, result) => {
+  dbConfig.query(user.add_search, [params.search_id, params.search_content, params.buyer_id], (err, result) => {
     if (err) throw err
     else {
       res.send({
@@ -502,7 +533,7 @@ router.post('/searchRecommend', function (req, res) {
   })
 })
 
-// 搜索属于自己的历史搜索记录（历史搜索内容显示在历史记录里面）
+// 搜索属于自己的历史搜索记录（搜索页面的历史搜索内容显示在历史记录里面）
 router.post('/searchHistory', function (req, res) {
   let params = req.body
 

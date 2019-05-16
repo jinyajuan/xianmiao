@@ -3,7 +3,7 @@
     <home-header></home-header>
     <home-swiper :swiperOption="swiperOption" :swiperList="swiperList"></home-swiper>
     <home-icons :IconsList="IconsList"></home-icons>
-    <home-recommond :RecommondItemList="RecommondItemList"></home-recommond>
+    <home-recommond :RecommondGoodsItemList="RecommondGoodsItemList"></home-recommond>
     <home-minimum :minimumPriceList="minimumPriceList"></home-minimum>
     <home-footer></home-footer>
   </div>
@@ -60,6 +60,7 @@ export default {
       },
       swiperList: [],
       minimumPriceList: [],
+      RecommondGoodsItemList: [],
       RecommondItemList: []
     }
   },
@@ -78,44 +79,73 @@ export default {
       }
     })
     // 获取推荐的商品
-    axios.post('/buyer/getRecommondItem', {
+    // axios.post('/buyer/getRecommondItem', {
+    // }).then((response) => {
+    //   let res = response.data
+    //   if (res.status === 0) {
+    //     // console.log(res.result)
+    //     let length = res.result.length > 5 ? 5 : res.result.length
+    //     for (var i = 0; i < length; i++) {
+    //       this.RecommondItemList.push(res.result[i])
+    //     }
+    //   }
+    // })
+
+    // 1.如果用户没有登录，则显示数据库的默认推荐（销量最高，价钱最低，评分最高）
+    // 2.如果用户已经登录，则根据历史搜索记录来推荐商品（使用模糊查询），后面拼接数据库的默认推荐，这是为了在用户第一次登录没有任何搜索记录的情况下进行推荐
+    axios.post('/buyer/getRecommondItem', { // 系统默认推荐
+
     }).then((response) => {
       let res = response.data
       if (res.status === 0) {
         // console.log(res.result)
-        let length = res.result.length > 5 ? 5 : res.result.length
-        for (var i = 0; i < length; i++) {
-          this.RecommondItemList.push(res.result[i])
+        let length1 = res.result.length > 8 ? 8 : res.result.length
+        for (var i = 0; i < length1; i++) {
+          this.RecommondItemList.push(res.result[i].goods_id)
+        }
+        // console.log(this.RecommondItemList)
+        // 如果已经登录，搜索关键字商品继续填入数组
+        if (sessionStorage.getItem('buyer_login_state') !== null) {
+          axios.post('/buyer/getUserRecommendItem', {
+            buyer_id: sessionStorage.getItem('buyer_login_state')
+          }).then((response) => {
+            let res = response.data
+            if (res.status === 0) {
+              // alert(res.msg)
+              // 不限制关键字商品数量
+              let length2 = res.arr.length
+              // let length2 = res.arr.length > 8 ? 8 : res.arr.length
+              for (var j = 0; j < length2; j++) {
+                this.RecommondItemList.unshift(res.arr[j])
+              }
+              this.RecommondItemList = Array.from(new Set(this.RecommondItemList))
+              // console.log(this.RecommondGoodsItemList)
+              // 使用去重之后的ID去查找对应的商品信息
+              axios.post('/buyer/getRecommendGoodsInfo', {
+                goods_ids: this.RecommondItemList
+              }).then((response) => {
+                let res = response.data
+                if (res.status === 0) {
+                  this.RecommondGoodsItemList = res.arr
+                }
+              })
+            }
+          })
+        } else {
+          // 如果没有登录就使用系统默认推荐
+          axios.post('/buyer/getRecommendGoodsInfo', {
+            goods_ids: this.RecommondItemList
+          }).then((response) => {
+            let res = response.data
+            if (res.status === 0) {
+              this.RecommondGoodsItemList = res.arr
+              // alert(res.msg)
+              // console.log(res.arr)
+            }
+          })
         }
       }
     })
-
-    // 1.如果用户没有登录，则显示数据库的默认推荐（销量最高，价钱最低，评分最高）
-    // 2.如果用户已经登录，则根据历史搜索记录来推荐商品（使用模糊查询），后面拼接数据库的默认推荐，这是为了在用户第一次登录没有任何搜索记录的情况下进行推荐
-    // if (sessionStorage.getItem('buyer_login_state') === null) {
-    //   axios.post('/buyer/getRecommondItem', {
-    //
-    //   }).then((response) => {
-    //     let res = response.data
-    //     if (res.status === 0) {
-    //       // console.log(res.result)
-    //       let length = res.result.length > 5 ? 5 : res.result.length
-    //       for (var i = 0; i < length; i++) {
-    //         this.RecommondItemList.push(res.result[i])
-    //       }
-    //     }
-    //   })
-    // } else {
-    //   axios.post('/buyer/getUserRecommendItem', {
-    //     buyer_id: sessionStorage.getItem('buyer_login_state')
-    //   }).then((response) => {
-    //     let res = response.data
-    //     if (res.status === 0) {
-    //       alert(res.msg)
-    //       console.log(res.result1)
-    //     }
-    //   })
-    // }
 
     // 获取轮播图的商品
     axios.post('/buyer/getSwiper', {

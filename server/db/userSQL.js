@@ -33,7 +33,8 @@ var user = {
   count_minus: 'update buyer_cart set goods_count=goods_count-1 where goods_id=? and buyer_id=?',
   delete_goods: 'delete from buyer_cart where goods_id=? and buyer_id=?',
   get_search_con: 'select search_content from buyer_search where buyer_id  = ?',
-  search_item_to_recommend: 'select * from seller_upload_goods where goods_name like ?',
+  search_item_to_recommend: 'select goods_id from seller_upload_goods where goods_name like ?',
+  get_recommend_goods_info: 'select * from seller_upload_goods where goods_id = ?',
 
   get_personal: 'select * from buyer_reg where buyer_id=?',
   set_personal: 'update buyer_reg set buyer_name=?,buyer_phone=?,buyer_address=? where buyer_id=?',

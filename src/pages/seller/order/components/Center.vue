@@ -11,7 +11,7 @@
       <ul class="all" style="display: block">
         <li class="order-item border-bottom" v-for="(item) in tabContents" :key="item.create_time">
           <router-link :to="{path:'/seller/detail',query: {user_id: item.user_id,create_time: item.create_time}}">
-            <span class="iconfont" v-if="!item.goods_checked">&#xe631;</span>
+            <span class="iconfont" v-if="item.goods_checked === false">&#xe631;</span>
             <span class="iconfont" v-else>&#xe625;</span>
             <span>订单编号:{{item.create_time}}</span>
             <span>商品名称:{{item.goods_name}}</span>
@@ -21,7 +21,7 @@
       <ul class="hasNoHandle" style="display: none">
         <li class="order-item border-bottom" v-for="(item) in tabContentsHasNo" :key="item.create_time">
           <router-link :to="{path:'/seller/detail',query: {user_id: item.user_id,create_time: item.create_time}}">
-            <span class="iconfont" v-if="!item.goods_checked">&#xe631;</span>
+            <span class="iconfont" v-if="item.goods_checked === false">&#xe631;</span>
             <span class="iconfont" v-else>&#xe625;</span>
             <span>订单编号:{{item.create_time}}</span>
             <span>商品名称:{{item.goods_name}}</span>
@@ -31,7 +31,7 @@
       <ul class="hasHandled" style="display: none">
           <li class="order-item border-bottom" v-for="(item) in tabContentsHasAlready" :key="item.create_time">
             <router-link :to="{path:'/seller/detail',query: {user_id: item.user_id,create_time: item.create_time}}">
-              <span class="iconfont" v-if="!item.goods_checked">&#xe631;</span>
+              <span class="iconfont" v-if="item.goods_checked === false">&#xe631;</span>
               <span class="iconfont" v-else>&#xe625;</span>
               <span>订单编号:{{item.create_time}}</span>
               <span>商品名称:{{item.goods_name}}</span>

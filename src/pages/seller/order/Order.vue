@@ -36,7 +36,7 @@ export default {
       if (res.status === 0) {
         this.tabContents = res.result
         for (let i = 0; i < this.tabContents.length; i++) {
-          if (this.tabContents[i].goods_checked === '0') { // 未接单
+          if (this.tabContents[i].goods_checked === 0) { // 未接单
             this.tabContents[i].goods_checked = false
             this.tabContentsHasNo.push(this.tabContents[i])
           } else { // 已接单
