@@ -61,7 +61,8 @@ export default {
       swiperList: [],
       minimumPriceList: [],
       RecommondGoodsItemList: [],
-      RecommondItemList: []
+      RecommondItemList: [],
+      RecommondGoodsItem2: []
     }
   },
   mounted () {
@@ -72,80 +73,88 @@ export default {
       let res = response.data
       if (res.status === 0) {
       // console.log(res.result)
-        let length = res.result.length > 6 ? 6 : res.result.length
-        for (var i = 0; i < length; i++) {
+        for (var i = 0; i < res.result.length; i++) {
           this.minimumPriceList.push(res.result[i])
         }
       }
     })
+
     // 获取推荐的商品
-    // axios.post('/buyer/getRecommondItem', {
-    // }).then((response) => {
-    //   let res = response.data
-    //   if (res.status === 0) {
-    //     // console.log(res.result)
-    //     let length = res.result.length > 5 ? 5 : res.result.length
-    //     for (var i = 0; i < length; i++) {
-    //       this.RecommondItemList.push(res.result[i])
-    //     }
-    //   }
-    // })
+    // 1.判断用户是否登录
+    //    1.1如果没有登录，使用系统默认推荐（销量最高，评分最高，价钱最低）
+    //    1.2如果已经登录，判断该用户的历史搜索记录是否为空
+    //       1.2.1如果该用户的历史搜索记录为空（即初次注册后登录）,使用系统默认推荐（销量最高，评分最高，价钱最低）
+    //       1.2.2如果该用户的历史搜索记录不为空
+    //         1.2.2.1 使用历史搜索记录取查找数据库的内容（ID），即匹配ID，unshift进数组A
+    //           1.2.2.1 使用用户身份查找数据库内默认推荐ID，push进数组A
+    //             1.2.2.1 A数组去重，然后使用新的ID数组取查找所有商品信息
+    if (sessionStorage.getItem('buyer_login_state') !== null) {
+      // 检查搜索记录
+      axios.post('/buyer/searchHistory', {
+        buyer_id: sessionStorage.getItem('buyer_login_state')
+      }).then((response) => {
+        let res = response.data
+        if (res.status === 0) {
+          // 判断历史记录是否为空，如果为空，使用默认推荐，如果不为空，推荐搜索记录的推荐商品信息
+          if (res.result.length === 0) {
+            axios.post('/buyer/getRecommondItem', {
 
-    // 1.如果用户没有登录，则显示数据库的默认推荐（销量最高，价钱最低，评分最高）
-    // 2.如果用户已经登录，则根据历史搜索记录来推荐商品（使用模糊查询），后面拼接数据库的默认推荐，这是为了在用户第一次登录没有任何搜索记录的情况下进行推荐
-    axios.post('/buyer/getRecommondItem', { // 系统默认推荐
-
-    }).then((response) => {
-      let res = response.data
-      if (res.status === 0) {
-        // console.log(res.result)
-        let length1 = res.result.length > 8 ? 8 : res.result.length
-        for (var i = 0; i < length1; i++) {
-          this.RecommondItemList.push(res.result[i].goods_id)
-        }
-        // console.log(this.RecommondItemList)
-        // 如果已经登录，搜索关键字商品继续填入数组
-        if (sessionStorage.getItem('buyer_login_state') !== null) {
-          axios.post('/buyer/getUserRecommendItem', {
-            buyer_id: sessionStorage.getItem('buyer_login_state')
-          }).then((response) => {
-            let res = response.data
-            if (res.status === 0) {
-              // alert(res.msg)
-              // 不限制关键字商品数量
-              let length2 = res.arr.length
-              // let length2 = res.arr.length > 8 ? 8 : res.arr.length
-              for (var j = 0; j < length2; j++) {
-                this.RecommondItemList.unshift(res.arr[j])
+            }).then((response) => {
+              let res = response.data
+              if (res.status === 0) {
+                this.RecommondGoodsItemList = res.result
               }
-              this.RecommondItemList = Array.from(new Set(this.RecommondItemList))
-              // console.log(this.RecommondGoodsItemList)
-              // 使用去重之后的ID去查找对应的商品信息
-              axios.post('/buyer/getRecommendGoodsInfo', {
-                goods_ids: this.RecommondItemList
-              }).then((response) => {
-                let res = response.data
-                if (res.status === 0) {
-                  this.RecommondGoodsItemList = res.arr
+            })
+          } else {
+            axios.post('/buyer/getUserRecommendItem', {
+              buyer_id: sessionStorage.getItem('buyer_login_state')
+            }).then((response) => {
+              let res = response.data
+              if (res.status === 0) {
+                // console.log(res.arr)
+                for (let i = 0; i < res.arr.length; i++) {
+                  this.RecommondItemList.unshift(res.arr[i])
                 }
-              })
-            }
-          })
-        } else {
-          // 如果没有登录就使用系统默认推荐
-          axios.post('/buyer/getRecommendGoodsInfo', {
-            goods_ids: this.RecommondItemList
-          }).then((response) => {
-            let res = response.data
-            if (res.status === 0) {
-              this.RecommondGoodsItemList = res.arr
-              // alert(res.msg)
-              // console.log(res.arr)
-            }
-          })
+                // 查找所有商品ID
+                axios.post('/buyer/getRecommondItemID', {
+
+                }).then((response) => {
+                  let res = response.data
+                  if (res.status === 0) {
+                    // console.log(res.result)
+                    for (let j = 0; j < res.result.length; j++) {
+                      this.RecommondItemList.push(res.result[j].goods_id)
+                      // console.log(res.result[j].goods_id)
+                    }
+                    // ID 数组去重
+                    this.RecommondGoodsItem2 = Array.from(new Set(this.RecommondItemList))
+                    // console.log(this.RecommondGoodsItem2)
+                    axios.post('/buyer/getRecommendGoodsInfo', {
+                      goods_ids: this.RecommondGoodsItem2
+                    }).then((response) => {
+                      let res = response.data
+                      if (res.status === 0) {
+                        this.RecommondGoodsItemList = res.arr
+                      }
+                      // console.log(this.RecommondGoodsItemList)
+                    })
+                  }
+                })
+              }
+            })
+          }
         }
-      }
-    })
+      })
+    } else { // 没有登录,直接取默认的系统推荐
+      axios.post('/buyer/getRecommondItem', {
+
+      }).then((response) => {
+        let res = response.data
+        if (res.status === 0) {
+          this.RecommondGoodsItemList = res.result
+        }
+      })
+    }
 
     // 获取轮播图的商品
     axios.post('/buyer/getSwiper', {
@@ -162,7 +171,6 @@ export default {
       }
     })
 
-    console.log(sessionStorage.getItem('buyer_login_state'))
   }
 }
 </script>

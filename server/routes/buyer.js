@@ -120,13 +120,28 @@ router.post('/getMinimumPrice', function (req, res) {
 // 获取默认推荐商品（销量最高，评分最高，价钱最低）
 router.post('/getRecommondItem', function (req, res) {
   dbConfig.query(user.buyer_get_recommend, (err, result) => {
-    console.log(result)
+    // console.log(result)
     if (err) throw err
     else {
       res.send({
         status: 0,
         result,
         msg: '获取所有推荐商品！'
+      })
+    }
+  })
+})
+
+// 获取默认推荐商品（销量最高，评分最高，价钱最低）ID 集合
+router.post('/getRecommondItemID', function (req, res) {
+  dbConfig.query(user.buyer_get_recommend_id, (err, result) => {
+    console.log(result)
+    if (err) throw err
+    else {
+      res.send({
+        status: 0,
+        result,
+        msg: '获取所有推荐商品ID！'
       })
     }
   })
@@ -148,7 +163,7 @@ router.post('/getUserRecommendItem', function (req, res) {
           if (err) throw err
           else {
             if (result1.length !== 0) {
-              for (var j = 0;j < result1.length;j++) {
+              for (var j = 0; j < result1.length;j++) {
                 arr.push(result1[j].goods_id)
               }
             }
@@ -157,12 +172,11 @@ router.post('/getUserRecommendItem', function (req, res) {
             res.send({
               arr,
               status: 0,
-              msg: '读取成功'
+              msg: '历史记录读取成功'
             })
           }
         })
       }
-
     }
   })
 })
@@ -170,9 +184,10 @@ router.post('/getUserRecommendItem', function (req, res) {
 // 获取个性化商品所有信息
 router.post('/getRecommendGoodsInfo', function (req, res) {
   let params = req.body
+  console.log(params)
   let arr = []
   for (let i = 0; i < params.goods_ids.length; i++) {
-    dbConfig.query(user.get_recommend_goods_info,[params.goods_ids[i]], (err, result) => {
+    dbConfig.query(user.get_recommend_goods_info, [params.goods_ids[i]], (err, result) => {
       arr.push(result[0])
       // console.log(result[0])
       if (err) throw err

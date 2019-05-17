@@ -22,6 +22,7 @@ var user = {
   buyer_get_all_goods: 'select * from seller_upload_goods',
   buyer_get_minimum_price: 'select * from seller_upload_goods order by goods_price',
   buyer_get_recommend: 'select * from seller_upload_goods order by goods_sale desc,goods_score desc,goods_price asc',
+  buyer_get_recommend_id: 'select goods_id from seller_upload_goods order by goods_sale desc,goods_score desc,goods_price asc',
   buyer_get_swiper: 'select * from seller_goods_vip',
   selectAllGoods: 'select * from seller_upload_goods where goods_id=?',
   select_from_cart: 'select * from buyer_cart where goods_id=? and buyer_id=?',
@@ -52,7 +53,8 @@ var user = {
   // search_item: 'select * from seller_upload_goods where goods_name like \'%\'?\'%\'',
   add_search: 'insert into buyer_search (search_id,search_content,buyer_id) values (?,?,?)',
   search_history: 'select * from buyer_search where buyer_id = ?',
-  delete_history: 'delete from buyer_search where buyer_id=?',
+  // delete_history: 'delete from buyer_search where buyer_id=?',
+  delete_history: 'update buyer_search set search_delete = 0 where buyer_id=?',
 
   admin_login1: 'select * from admin_reg where admin_id=?',
   admin_login2: 'select * from admin_reg where admin_id=? and admin_pwd=?',

@@ -10,7 +10,7 @@
     </div>
     <div class="recommond-content">
       <ul>
-        <li class="item border-bottom" v-for="item of RecommondGoodsItemList" :key="item.goods_id">
+        <li class="item border-bottom" v-for="item of RecommondGoodsItemList.slice(0,10)" :key="item.goods_id">
             <img class="item-img" :src="item.goods_img" alt="">
             <div class="item-info">
               <div class="item-desc">{{item.goods_name}}</div>

@@ -10,7 +10,7 @@
     </div>
     <div class="minimum-content">
       <ul>
-        <li class="item border-bottom border-right" v-for="item of minimumPriceList" :key="item.goods_id">
+        <li class="item border-bottom border-right" v-for="item of minimumPriceList.slice(0,9)" :key="item.goods_id">
           <router-link :to="{path:'/buyer/detail',
                   query: {goods_id: item.goods_id,
                   goods_img: item.goods_img,
