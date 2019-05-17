@@ -37,7 +37,7 @@
         <p class="iconfont" style="float: right;" @click="delateSearchHistory">&#xe619;</p>
       </div>
       <div>
-        <span class="content" v-for="item in historyItem" :key="item.search_id">{{item.search_content}}</span>
+        <span class="content" v-for="item in historyItem" :key="item.search_id" @click="search">{{item.search_content}}</span>
       </div>
     </div>
   </div>
@@ -70,6 +70,21 @@ export default {
         let res = response.data
         if (res.status === 0) {
           alert(res.msg)
+          this.historyItem = res.result
+        }
+      })
+    },
+    search (e) {
+      axios.post('/buyer/searchGoods', {
+        search_content: e.target.innerText
+      }).then((response) => {
+        let res = response.data
+        if (res.status === 0) {
+          // console.log(res.result)
+          this.$store.state.searchGoodsList = res.result
+          this.$store.state.historyOrSearch = true
+          // console.log(this.$store.state.searchGoodsList)
+          // alert(res.msg)
         }
       })
     }

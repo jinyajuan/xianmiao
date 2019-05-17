@@ -147,7 +147,7 @@ router.post('/getRecommondItemID', function (req, res) {
   })
 })
 
-// 获取个性化推荐商品ID 集合
+// 获取个性化推荐商品ID 集合（根据历史搜索记录）
 router.post('/getUserRecommendItem', function (req, res) {
   let params = req.body
   let arr = []
@@ -157,7 +157,7 @@ router.post('/getUserRecommendItem', function (req, res) {
     else {
       // 获取模糊查询的关键字
       for (let i = 0; i < result.length; i++) {
-        let search_item = '%'+ result[i].search_content + '%'
+        let search_item = '%' + result[i].search_content + '%'
         // 模糊匹配数据库中的商品列表推荐部分
         dbConfig.query(user.search_item_to_recommend, [search_item], (err, result1) => {
           if (err) throw err
@@ -552,6 +552,23 @@ router.post('/searchRecommend', function (req, res) {
 router.post('/searchHistory', function (req, res) {
   let params = req.body
 
+  dbConfig.query(user.select_search_history, [params.buyer_id], (err, result) => {
+    if (err) throw err
+    else {
+      res.send({
+        status: 0,
+        msg: '显示在历史搜索记录',
+        result
+      })
+      res.end()
+    }
+  })
+})
+
+// 推荐页面需要使用的搜索内容
+router.post('/searchHistoryToRecommend', function (req, res) {
+  let params = req.body
+
   dbConfig.query(user.search_history, [params.buyer_id], (err, result) => {
     if (err) throw err
     else {
@@ -572,16 +589,20 @@ router.post('/deteleSearch', function (req, res) {
   dbConfig.query(user.delete_history, [params.buyer_id], (err, result) => {
     if (err) throw err
     else {
-      res.send({
-        status: 0,
-        msg: '删除成功',
-        result
+      dbConfig.query(user.select_search_history, [params.buyer_id], (err, result) => {
+        if (err) throw err
+        else {
+          res.send({
+            msg: '历史记录删除成功！',
+            status: 0,
+            result
+          })
+          res.end()
+        }
       })
     }
   })
 })
-
-
 // router.post('/hotCity', function (req, res) {
 //   let params = req.body
 //   console.log(params.hotCities)
@@ -602,7 +623,6 @@ router.post('/deteleSearch', function (req, res) {
 //     })
 //   }
 // })
-
 // router.post('/allCity', function (req, res) {
 //   let params = req.body
 //   console.log(params.cities)

@@ -52,10 +52,10 @@ var user = {
   // search_item: 'select * from seller_upload_goods where goods_name like \'%?%\'',
   // search_item: 'select * from seller_upload_goods where goods_name like \'%\'?\'%\'',
   add_search: 'insert into buyer_search (search_id,search_content,buyer_id) values (?,?,?)',
-  search_history: 'select * from buyer_search where buyer_id = ?',
+  search_history: 'select * from buyer_search where buyer_id = ?', // 推荐列表
+  select_search_history: 'select * from buyer_search where buyer_id = ? and search_delete = 1', // 搜索页面展示
   // delete_history: 'delete from buyer_search where buyer_id=?',
   delete_history: 'update buyer_search set search_delete = 0 where buyer_id=?',
-
   admin_login1: 'select * from admin_reg where admin_id=?',
   admin_login2: 'select * from admin_reg where admin_id=? and admin_pwd=?',
   admin_buyer_manage: 'select * from buyer_reg',

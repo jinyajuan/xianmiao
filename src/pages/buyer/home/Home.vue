@@ -90,7 +90,7 @@ export default {
     //             1.2.2.1 A数组去重，然后使用新的ID数组取查找所有商品信息
     if (sessionStorage.getItem('buyer_login_state') !== null) {
       // 检查搜索记录
-      axios.post('/buyer/searchHistory', {
+      axios.post('/buyer/searchHistoryToRecommend', {
         buyer_id: sessionStorage.getItem('buyer_login_state')
       }).then((response) => {
         let res = response.data
@@ -170,7 +170,6 @@ export default {
         }
       }
     })
-
   }
 }
 </script>
